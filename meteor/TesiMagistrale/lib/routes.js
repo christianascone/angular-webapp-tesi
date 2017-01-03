@@ -1,15 +1,18 @@
 Router.configure({
-    layoutTemplate: 'main'
+	layoutTemplate: 'main'
 });
 
-Router.route('/', function () {
-  this.render('demo');
+Router.route('/', {
+	name: 'demo',
+	template: 'demo'
 });
 
-Router.route('/hello', function () {
-  this.render('hello');
+Router.route('/hello', {
+	name: 'hello',
+	template: 'hello'
 });
 
-Router.route('/leaderboard', function () {
-  this.render('leaderboard');
+Router.route('/leaderboard', {
+	name: 'leaderboard',
+	template: 'leaderboard'
 });
