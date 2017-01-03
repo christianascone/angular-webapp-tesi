@@ -1,5 +1,9 @@
+Router.configure({
+    layoutTemplate: 'main'
+});
+
 Router.route('/', function () {
-  this.render('Home');
+  this.render('demo');
 });
 
 Router.route('/hello', function () {
