@@ -213,3 +213,8 @@ _:-ms-input-placeholder, :root .demo-graph {
       -ms-flex-align: center;
           align-items: center;
 }
+
+.demo-list-action {
+  width: 80%;
+  margin: 0 auto;
+}
