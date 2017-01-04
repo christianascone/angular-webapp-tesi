@@ -28,8 +28,9 @@
     <header class="demo-drawer-header">
       <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="demo-avatar">
       <div class="demo-avatar-dropdown">
-        <span>hello@example.com</span>
+        <span>{{loggedUserEmail}}</span>
         <div class="mdl-layout-spacer"></div>
+        {{#if false}}
         <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
         <i class="material-icons" role="presentation">arrow_drop_down</i>
         <span class="visuallyhidden">Accounts</span>
@@ -39,6 +40,7 @@
           <li class="mdl-menu__item">info@example.com</li>
           <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
         </ul>
+        {{/if}}
       </div>
     </header>
     <nav class="mdl-navigation">
