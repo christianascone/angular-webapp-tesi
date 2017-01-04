@@ -219,6 +219,7 @@ _:-ms-input-placeholder, :root .demo-graph {
   margin: 0 auto;
 }
 
-form.register div{
+form.register div,
+form.login div{
   display: block;
 }

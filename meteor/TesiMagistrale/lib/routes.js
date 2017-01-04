@@ -15,6 +15,13 @@ Router.route('/register', {
 	layoutTemplate: 'none'
 });
 
+Router.route('/login', {
+	name: 'login',
+	template: 'login',
+	// None template for login page
+	layoutTemplate: 'none'
+});
+
 Router.route('/hello', {
 	name: 'hello',
 	template: 'hello'
