@@ -1,3 +1,4 @@
+// Default layout template for logged user
 Router.configure({
 	layoutTemplate: 'main'
 });
@@ -5,6 +6,13 @@ Router.configure({
 Router.route('/', {
 	name: 'demo',
 	template: 'demo'
+});
+
+Router.route('/register', {
+	name: 'register',
+	template: 'register',
+	// None template for login page
+	layoutTemplate: 'none'
 });
 
 Router.route('/hello', {
