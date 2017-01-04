@@ -6,11 +6,12 @@ Template.register.events({
     var email = $('[name=email]').val();
     var password = $('[name=password]').val();
     // Save user with email and password
-    Accounts.createUser({
-      email: email,
-      password: password
+    Accounts.createUser(email, password, function(error) {
+      if (error) {
+        console.log(error);
+      } else {
+        Router.go('demo');
+      }
     });
-    // TODO: Error handling
-    Router.go('demo');
   }
 });

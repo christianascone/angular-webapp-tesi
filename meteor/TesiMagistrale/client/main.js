@@ -7,10 +7,10 @@ import {
 
 import './main.html';
 
-Template.main.events({
-	'click .logout': function(event) {
-		event.preventDefault();
-		Meteor.logout();
-		Router.go('demo');
-	}
+Template.logout.events({
+  'click .logout'(event, instance) {
+    event.preventDefault();
+    Meteor.logout();
+    Router.go('login');
+  }
 });
