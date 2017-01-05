@@ -234,10 +234,12 @@ form.login div{
 
 .leaderboard-rank-image-2 {
   width: 60px;
+  padding: 0 10px;
 }
 
 .leaderboard-rank-image-3 {
   width: 40px;
+  padding: 0 20px;
 }
 
 .leaderboard-rank-counter {
