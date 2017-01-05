@@ -7,35 +7,6 @@ import {
 
 import './main.html';
 
-Template.main.rendered = function() {
-	user = Meteor.user();
-	if (!user) {
-		return;
-	}
-	userId = user._id;
-	// Search player with user id
-	loggedPlayer = Players.findOne().byUserId(userId);
-
-	// Read email from logged user
-	email = null;
-	if (user && user.emails) {
-		email = user.emails[0];
-	}
-
-	// If no players with given userId are found, a new one is created
-	if (loggedPlayer.length == 0) {
-		result = Players.insert({
-			"email": email,
-			"name": email,
-			"userId": userId
-		});
-		console.log(result);
-	} else {
-		console.log("Existing player with userId: " + userId);
-	}
-
-}
-
 // Helpers for logout template
 Template.main.helpers({
 	loggedUserEmail() {
@@ -44,6 +15,30 @@ Template.main.helpers({
 			return null;
 		}
 		return user.emails[0].address;
+	},
+	afterLoad() {
+		user = Meteor.user();
+		if (!user) {
+			console.log("No logged user found.");
+			return;
+		}
+		userId = user._id;
+		// Search player with user id
+		loggedPlayer = Players.findOne().byUserId(userId);
+
+		// Read email from logged user
+		email = null;
+		if (user && user.emails) {
+			email = user.emails[0];
+		}
+
+		// If no players with given userId are found, a new one is created
+		if (!loggedPlayer) {
+			result = Players.createPlayer(email, email, userId);
+			console.log(result);
+		} else {
+			console.log("Existing player with userId: " + userId);
+		}
 	}
 });
 
