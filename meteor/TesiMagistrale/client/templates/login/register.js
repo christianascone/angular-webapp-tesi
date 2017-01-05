@@ -1,3 +1,17 @@
+Template.register.helpers({
+  /**
+   * Function to execute after register template done loading
+   * @return {void}
+   */
+  afterLoad() {
+    user = Meteor.user();
+    if (user) {
+      console.log("Logged user found.");
+      Router.go('demo');
+    }
+  }
+});
+
 // Events for register template
 Template.register.events({
   // submit action on form element

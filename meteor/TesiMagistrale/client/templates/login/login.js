@@ -1,3 +1,17 @@
+Template.login.helpers({
+  /**
+   * Function to execute after login template done loading
+   * @return {void}
+   */
+  afterLoad() {
+    user = Meteor.user();
+    if (user) {
+      console.log("Logged user found.");
+      Router.go('demo');
+    }
+  }
+});
+
 // Events for login template
 Template.login.events({
 	// submit action on form element

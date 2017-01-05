@@ -9,13 +9,10 @@ import './main.html';
 
 // Helpers for logout template
 Template.main.helpers({
-	loggedUserEmail() {
-		var user = Meteor.user();
-		if (!user || !user.emails) {
-			return null;
-		}
-		return user.emails[0].address;
-	},
+	/**
+	 * Function to execute after main template done loading
+	 * @return {void}
+	 */
 	afterLoad() {
 		user = Meteor.user();
 		if (!user) {
@@ -39,6 +36,17 @@ Template.main.helpers({
 		} else {
 			console.log("Existing player with userId: " + userId);
 		}
+	},
+	/**
+	 * Gets first email address of logged user
+	 * @return {String} Email address of logged user
+	 */
+	loggedUserEmail() {
+		var user = Meteor.user();
+		if (!user || !user.emails) {
+			return null;
+		}
+		return user.emails[0].address;
 	}
 });
 
