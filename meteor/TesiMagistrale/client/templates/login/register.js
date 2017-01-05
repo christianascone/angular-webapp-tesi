@@ -6,7 +6,10 @@ Template.register.events({
     var email = $('[name=email]').val();
     var password = $('[name=password]').val();
     // Save user with email and password
-    Accounts.createUser(email, password, function(error) {
+    Accounts.createUser({
+      email,
+      password
+    }, function(error) {
       if (error) {
         console.log(error);
       } else {
