@@ -228,6 +228,18 @@ form.login div{
   display: block;
 }
 
-.leaderboard-rank-image {
+.leaderboard-rank-image-1 {
+  width: 80px;
+}
+
+.leaderboard-rank-image-2 {
   width: 60px;
+}
+
+.leaderboard-rank-image-3 {
+  width: 40px;
+}
+
+.leaderboard-rank-counter {
+  margin-right: 20px;
 }

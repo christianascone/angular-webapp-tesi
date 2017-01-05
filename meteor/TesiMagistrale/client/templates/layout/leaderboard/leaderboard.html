@@ -4,12 +4,12 @@
 	{{#each players}}
 	<div class="mdl-list__item demo-cards mdl-shadow--2dp">
 		<span class="mdl-list__item-primary-content">
-		<span class="mdl-typography--title">{{incremented @index}}</span>
+		<span class="mdl-typography--title leaderboard-rank-counter">{{incremented @index}}</span>
 			<i class="material-icons mdl-list__item-avatar">person</i>
 			<span>{{name}}</span>
 		</span>
 		{{#if polePosition @index}}
-		<img class="leaderboard-rank-image" src="/images/pole-{{incremented @index}}.svg" />
+		<img class="leaderboard-rank-image-{{incremented @index}}" src="/images/pole-{{incremented @index}}.svg" />
 		{{/if}}
 		<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
 	</div>
