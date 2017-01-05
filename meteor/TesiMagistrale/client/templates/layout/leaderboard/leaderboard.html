@@ -4,7 +4,7 @@
 	{{#each players}}
 	<div class="mdl-list__item demo-cards mdl-shadow--2dp">
 		<span class="mdl-list__item-primary-content">
-		<span class="mdl-typography--title leaderboard-rank-counter">{{incremented @index}}</span>
+		<span class="mdl-typography--title leaderboard-rank-counter leaderboard-rank-counter-{{incremented @index}}">{{incremented @index}}</span>
 			<i class="material-icons mdl-list__item-avatar">person</i>
 			<span>{{name}}</span>
 		</span>

@@ -246,3 +246,15 @@ form.login div{
   padding-right: 20px;
   width: 20px;
 }
+
+.leaderboard-rank-counter-1 {
+  color: #ffc107 !important;
+}
+
+.leaderboard-rank-counter-2 {
+  color: #bdbdbd !important;
+}
+
+.leaderboard-rank-counter-3 {
+  color: #d84315 !important;
+}
