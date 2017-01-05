@@ -219,7 +219,15 @@ _:-ms-input-placeholder, :root .demo-graph {
   margin: 0 auto;
 }
 
+/**
+ * My editing
+ */
+
 form.register div,
 form.login div{
   display: block;
+}
+
+.leaderboard-rank-image {
+  width: 60px;
 }
