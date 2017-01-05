@@ -1,0 +1,17 @@
+<template name="leaderboard">
+<!-- List items with avatar and action -->
+<div class="demo-list-action mdl-list">
+	{{#each players}}
+	<div class="mdl-list__item demo-cards mdl-shadow--2dp">
+		<span class="mdl-list__item-primary-content">
+		<span class="mdl-typography--title">{{incremented @index}}</span>
+			<i class="material-icons mdl-list__item-avatar">person</i>
+			<span>{{name}}</span>
+		</span>
+		<img src="/images/first.svg" />
+		<a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+	</div>
+	<div class="demo-separator mdl-cell--1-col"></div>
+	{{/each}}
+</div>
+</template>

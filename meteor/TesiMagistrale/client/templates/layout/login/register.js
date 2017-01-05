@@ -26,6 +26,7 @@ Template.register.events({
     }, function(error) {
       if (error) {
         console.log(error);
+        Blaze._globalHelpers.showToast("Register failed");
       } else {
         Router.go('demo');
       }

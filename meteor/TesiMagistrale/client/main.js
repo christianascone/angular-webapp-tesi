@@ -17,6 +17,7 @@ Template.main.helpers({
 		user = Meteor.user();
 		if (!user) {
 			console.log("No logged user found.");
+			Router.go('login');
 			return;
 		}
 		userId = user._id;
@@ -53,7 +54,8 @@ Template.main.helpers({
 Template.logout.events({
 	'click .logout' (event, instance) {
 		event.preventDefault();
-		Meteor.logout();
-		Router.go('login');
+		Meteor.logout(function(err) {
+			Router.go('login');
+		});
 	}
 });
