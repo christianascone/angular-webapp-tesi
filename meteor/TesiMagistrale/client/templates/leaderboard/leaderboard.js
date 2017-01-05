@@ -2,6 +2,6 @@
 Template.leaderboard.helpers({
   players() {
     console.log("player list");
-  	return PlayersList.find();
+  	return Players.find();
   }
 });

@@ -14,7 +14,7 @@ Template.main.rendered = function() {
 	}
 	userId = user._id;
 	// Search player with user id
-	loggedPlayer = PlayersList.findOne().byUserId(userId);
+	loggedPlayer = Players.findOne().byUserId(userId);
 
 	// Read email from logged user
 	email = null;
@@ -24,7 +24,7 @@ Template.main.rendered = function() {
 
 	// If no players with given userId are found, a new one is created
 	if (loggedPlayer.length == 0) {
-		result = PlayersList.insert({
+		result = Players.insert({
 			"email": email,
 			"name": email,
 			"userId": userId

@@ -10,7 +10,7 @@ Template.hello.helpers({
     return Template.instance().counter.get();
   },
   players() {
-  	return PlayersList.find();
+  	return Players.find();
   }
 });
 
@@ -20,12 +20,12 @@ Template.hello.events({
   'click button'(event, instance) {
     // increment the counter when button is clicked
     instance.counter.set(instance.counter.get() + 1);
-    console.log(PlayersList.insert({
+    console.log(Players.insert({
 		"name": "Gino",
 		"age": 15
 	}));
-    console.log(PlayersList);
-    console.log(PlayersList.find().fetch());
+    console.log(Players);
+    console.log(Players.find().fetch());
 
   },
 });
