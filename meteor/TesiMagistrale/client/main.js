@@ -14,9 +14,7 @@ Template.main.rendered = function() {
 	}
 	userId = user._id;
 	// Search player with user id
-	loggedPlayer = PlayersList.find({
-		userId: userId
-	}, {}).fetch();
+	loggedPlayer = PlayersList.findOne().byUserId(userId);
 
 	// Read email from logged user
 	email = null;
@@ -28,6 +26,7 @@ Template.main.rendered = function() {
 	if (loggedPlayer.length == 0) {
 		result = PlayersList.insert({
 			"email": email,
+			"name": email,
 			"userId": userId
 		});
 		console.log(result);
