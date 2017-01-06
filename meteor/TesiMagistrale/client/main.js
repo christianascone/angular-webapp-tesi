@@ -22,7 +22,10 @@ Template.main.helpers({
 		}
 		userId = user._id;
 		// Search player with user id
-		loggedPlayer = Players.findOne().byUserId(userId);
+		loggedPlayer = undefined;
+		if(Players.findOne()){
+			loggedPlayer = Players.findOne().byUserId(userId);
+		}
 
 		// Read email from logged user
 		email = null;

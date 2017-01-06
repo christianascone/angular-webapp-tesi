@@ -6,7 +6,8 @@ Template.leaderboard.helpers({
 	 */
 	players() {
 		console.log("player list");
-		return Players.find();
+		list = Players.find();
+		return list;
 	},
 	/**
 	 * Increment the given num by 1

@@ -1,12 +1,12 @@
 <template name="leaderboard">
 <!-- List items with avatar and action -->
 <div class="demo-list-action mdl-list">
-	{{#each players}}
+	{{#each player in players}}
 	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card leaderboard-card">
 		<span class="mdl-list__item-primary-content leaderboard-rank">
 			<span class="mdl-typography--title leaderboard-rank-counter leaderboard-rank-counter-{{incremented @index}}">{{incremented @index}}</span>
 			<i class="material-icons mdl-list__item-avatar">person</i>
-			<span>{{name}}</span>
+			<span>{{player.name.address}}</span>
 		</span>
 		{{#if polePosition @index}}
 		<img class="leaderboard-rank-image-{{incremented @index}}" src="/images/pole-{{incremented @index}}.svg" />
