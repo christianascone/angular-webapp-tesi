@@ -1,0 +1,4 @@
+form.register div.mdl-textfield,
+form.login div.mdl-textfield{
+  display: block;
+}

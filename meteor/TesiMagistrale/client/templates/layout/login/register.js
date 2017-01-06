@@ -31,5 +31,16 @@ Template.register.events({
         Router.go('demo');
       }
     });
+  },
+  /**
+   * Click event for login button.
+   * Goes to login page
+   * 
+   * @param  {Event} event Click event
+   * @return {void}       
+   */
+  'click #login-button': function(event) {
+    event.preventDefault();
+    Router.go("login");
   }
 });
