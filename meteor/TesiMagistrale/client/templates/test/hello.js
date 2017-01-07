@@ -20,6 +20,7 @@ Template.hello.helpers({
 Template.hello.events({
 	// click is the event type and button is the selector
   'click button'(event, instance) {
+    $('#test-animation-id').fadeToggle('slow');
     var user = Meteor.user();
     if (!user) {
       console.log("No logged user found.");
