@@ -223,17 +223,3 @@ _:-ms-input-placeholder, :root .demo-graph {
     float: none;
     margin: 0 auto;
 }
-
-.svg-coin {
-  padding: 0 10px;
-  width: 30px;
-  height: 30px;
-}
-
-.svg-coin path {
-  fill: #FBC02D;
-}
-
-.coin-points {
-  width: 30px;
-}

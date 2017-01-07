@@ -7,12 +7,6 @@ import {
 
 import './main.html';
 
-// Called when the main template is rendered
-Template.main.onRendered(function () {
-	// Make inline svg for filling with color
-	Blaze._globalHelpers.inlineSvg();
-});
-
 // Helpers for logout template
 Template.main.helpers({
 	/**
@@ -57,6 +51,22 @@ Template.main.helpers({
 			return null;
 		}
 		return user.emails[0].address;
+	},
+	currentPlayer() {
+		var user = Meteor.user();
+		if (!user) {
+			console.log("No logged user found.");
+			Router.go('login');
+			return;
+		}
+		var userId = user._id;
+		// Search player with user id
+		var loggedPlayer = undefined;
+		if(Players.findOne()){
+			loggedPlayer = Players.findOne().byUserId(userId);
+		}
+
+		return loggedPlayer;
 	}
 });
 
@@ -66,27 +76,5 @@ Template.logout.events({
 		Meteor.logout(function(err) {
 			Router.go('login');
 		});
-	}
-});
-
-// Helpers functions for my points template
-Template.myPoints.helpers({
-	/**
-	 * Gets total score for player with current user id
-	 * 
-	 * @return {Int} Current points
-	 */
-	myCurrentPoints() {
-		var user = Meteor.user();
-		if (!user) {
-			return;
-		}
-		var userId = user._id;
-		// Search player with user id
-		var loggedPlayer = undefined;
-		if(Players.findOne()){
-			loggedPlayer = Players.findOne().byUserId(userId);
-		}
-		return loggedPlayer.totalScore();
 	}
 });

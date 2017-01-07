@@ -8,6 +8,9 @@
 			<i class="material-icons mdl-list__item-avatar">person</i>
 			<span>{{player.name.address}}</span>
 		</span>
+		<div class="leaderboard-rank">
+			{{> my_points player=player}}
+		</div>
 		{{#if polePosition @index}}
 		<img class="leaderboard-rank-image-{{incremented @index}}" src="/images/pole-{{incremented @index}}.svg" />
 		{{/if}}
