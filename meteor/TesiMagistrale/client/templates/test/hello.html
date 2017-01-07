@@ -1,6 +1,24 @@
 <template name="hello">
-<button>Click Me</button>
-<p>You've pressed the button {{counter}} times.</p>
+<div>
+	<button>Click Me</button>
+	<p>You've pressed the button {{counter}} times.</p>
+	<br>
+	{{#each player in players}}
+	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card" style="display: block">
+		<h5>{{player.name.address}}</h5>
+		<h6>Total Score: {{player.totalScore}}</h6>
+		<p>
+			{{#each score in player.scores}}
+			<hr>
+			<p>Score:{{score.score}}</p>
+			<p>Description:{{score.description}}</p>
+			<p>Player:{{score.playerId}}</p>
+			{{/each}}
+		</p>
+	</div>
+	<br>
+	{{/each}}
+</div>
 <!-- {{#each players}}
 <p>{{name}}</p>
 {{/each}} -->

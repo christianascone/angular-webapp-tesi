@@ -10,7 +10,9 @@ Template.hello.helpers({
     return Template.instance().counter.get();
   },
   players() {
-  	return Players.find();
+  	console.log("player list");
+    list = Players.find();
+    return list;
   }
 });
 
@@ -18,14 +20,19 @@ Template.hello.helpers({
 Template.hello.events({
 	// click is the event type and button is the selector
   'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-    console.log(Players.insert({
-		"name": "Gino",
-		"age": 15
-	}));
-    console.log(Players);
-    console.log(Players.find().fetch());
+    user = Meteor.user();
+    if (!user) {
+      console.log("No logged user found.");
+      Router.go('login');
+      return;
+    }
+    userId = user._id;
+    // Search player with user id
+    loggedPlayer = undefined;
+    if(Players.findOne()){
+      loggedPlayer = Players.findOne().byUserId(userId);
+    }
 
+    Scores.createScore(5, "test", loggedPlayer._id);
   },
 });

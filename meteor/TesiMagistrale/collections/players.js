@@ -11,6 +11,17 @@ Players.helpers({
 		return Players.findOne({
 			userId: userId
 		});
+	},
+	scores() {
+		return Scores.find({playerId: this._id});
+	},
+	totalScore() {
+		var total = 0;
+		// Map function to sum scores
+		var scores = this.scores().map(function(doc){
+			total += doc.score;
+		});
+		return total;
 	}
 });
 
