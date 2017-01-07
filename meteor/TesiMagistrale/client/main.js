@@ -7,6 +7,12 @@ import {
 
 import './main.html';
 
+// Called when the main template is rendered
+Template.main.onRendered(function () {
+	// Make inline svg for filling with color
+	Blaze._globalHelpers.inlineSvg();
+});
+
 // Helpers for logout template
 Template.main.helpers({
 	/**
