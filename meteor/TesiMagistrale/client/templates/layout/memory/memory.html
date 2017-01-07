@@ -1,4 +1,5 @@
 <template name="memory">
+<h1>Memory Game</h1>
 <div class="mdl-grid">
   {{#each card in getArray}}
   <div class="demo-card-image mdl-card mdl-shadow--2dp">
@@ -7,7 +8,7 @@
       <img class="card-image card-image-{{@index}}" src="/images/memory/unknown.png" style="
       width: 100;" data-value="{{@index}}">
       <!-- Hidden image (revealed card) -->
-      <img class="card-image card-image-{{@index}}" src="https://s-media-cache-ak0.pinimg.com/736x/98/2c/d8/982cd88ff2d4285eb3596073b14272ad.jpg" style="
+      <img class="card-image card-image-{{@index}}" src="/images/memory/{{@index}}.jpg" style="
       width: 100%; display: none;
       " data-value="{{@index}}">
     </div>

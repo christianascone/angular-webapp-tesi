@@ -6,7 +6,7 @@ Template.memory.helpers({
 	 */
 	getArray() {
 		var array = [];
-		var lenght = 10;
+		var lenght = 16;
 		for (var i = 0; i < lenght; i++) {
 			array[i] = i;
 		}
