@@ -2,7 +2,7 @@
 <!-- List items with avatar and action -->
 <div class="demo-list-action mdl-list">
 	{{#each player in players}}
-	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card leaderboard-card {{#if isCurrentPlayer player}}leaderboard-rank-current{{/if}}">
+	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card leaderboard-card {{#if isCurrentPlayer player}}mdl-color--grey-200{{/if}}">
 		<span class="mdl-list__item-primary-content leaderboard-rank">
 			<span class="mdl-typography--title leaderboard-rank-counter leaderboard-rank-counter-{{incremented @index}}">{{incremented @index}}</span>
 			<i class="material-icons mdl-list__item-avatar">person</i>
