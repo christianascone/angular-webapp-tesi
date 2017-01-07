@@ -12,9 +12,20 @@ Players.helpers({
 			userId: userId
 		});
 	},
+	/**
+	 * Find list of scores for this player
+	 * 
+	 * @return {[Scores]}
+	 */
 	scores() {
 		return Scores.find({playerId: this._id});
 	},
+	/**
+	 * Find and sum the scores of this player.
+	 * Finally, it returns the total score
+	 * 
+	 * @return {Int} Sum of player scores
+	 */
 	totalScore() {
 		var total = 0;
 		// Map function to sum scores
