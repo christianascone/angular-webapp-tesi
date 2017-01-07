@@ -25,4 +25,16 @@ Template.leaderboard.helpers({
 	polePosition(index) {
 		return index < 3;
 	},
+	isCurrentPlayer(player) {
+		if(!player){
+			return false;
+		}
+
+		var user = Meteor.user();
+		if(user._id == player.userId){
+			return true;
+		}else{
+			return false;
+		}
+	}
 });

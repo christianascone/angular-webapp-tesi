@@ -33,6 +33,15 @@ Players.helpers({
 			total += doc.score;
 		});
 		return total;
+	},
+	/**
+	 * Gets the user in relation with this player using
+	 * the userId saved as field
+	 * 
+	 * @return {User} User in relation with this player
+	 */
+	user() {
+		return Meteor.users.findOne(this.userId);
 	}
 });
 

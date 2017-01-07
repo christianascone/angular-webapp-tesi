@@ -39,3 +39,7 @@
 .leaderboard-rank {
   margin: auto;
 }
+
+.leaderboard-rank-current {
+  background: red !important;
+}
