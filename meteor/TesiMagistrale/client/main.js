@@ -14,28 +14,28 @@ Template.main.helpers({
 	 * @return {void}
 	 */
 	afterLoad() {
-		user = Meteor.user();
+		var user = Meteor.user();
 		if (!user) {
 			console.log("No logged user found.");
 			Router.go('login');
 			return;
 		}
-		userId = user._id;
+		var userId = user._id;
 		// Search player with user id
-		loggedPlayer = undefined;
+		var loggedPlayer = undefined;
 		if(Players.findOne()){
 			loggedPlayer = Players.findOne().byUserId(userId);
 		}
 
 		// Read email from logged user
-		email = null;
+		var email = null;
 		if (user && user.emails) {
 			email = user.emails[0];
 		}
 
 		// If no players with given userId are found, a new one is created
 		if (!loggedPlayer) {
-			result = Players.createPlayer(email, email, userId);
+			var result = Players.createPlayer(email, email, userId);
 			console.log(result);
 		} else {
 			console.log("Existing player with userId: " + userId);

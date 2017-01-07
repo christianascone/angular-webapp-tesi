@@ -36,6 +36,21 @@ Players.helpers({
 	}
 });
 
+Players.findSortByTotalScore = function(order) {
+	var list = Players.find({},{sort:{totalScore : -1}}).fetch();
+	list.sort(function(a,b) {
+		if (a.totalScore() < b.totalScore()) {
+			return 1;
+		}
+		if (a.totalScore() > b.totalScore()) {
+			return -1;
+		}
+		return 0;
+	});
+	
+	return list;
+};
+
 /**
  * Create and insert a new Players object with given parameters.
  * Direct insert() should be avoided, because this function
@@ -46,7 +61,7 @@ Players.helpers({
  * @return {String}        id of newly created user
  */
 Players.createPlayer = function(email, name, userId) {
-	playerData = {
+	var playerData = {
 		email: email,
 		name: name,
 		userId: userId

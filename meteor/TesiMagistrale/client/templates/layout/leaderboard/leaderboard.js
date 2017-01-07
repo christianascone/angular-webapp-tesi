@@ -6,7 +6,7 @@ Template.leaderboard.helpers({
 	 */
 	players() {
 		console.log("player list");
-		list = Players.find();
+		var list = Players.findSortByTotalScore();
 		return list;
 	},
 	/**

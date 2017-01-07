@@ -4,7 +4,7 @@ Template.login.helpers({
 	 * @return {void}
 	 */
 	afterLoad() {
-		user = Meteor.user();
+		var user = Meteor.user();
 		if (user) {
 			console.log("Logged user found.");
 			Router.go('demo');

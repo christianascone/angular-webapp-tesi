@@ -11,7 +11,7 @@ Template.hello.helpers({
   },
   players() {
   	console.log("player list");
-    list = Players.find();
+    var list = Players.find();
     return list;
   }
 });
@@ -20,15 +20,15 @@ Template.hello.helpers({
 Template.hello.events({
 	// click is the event type and button is the selector
   'click button'(event, instance) {
-    user = Meteor.user();
+    var user = Meteor.user();
     if (!user) {
       console.log("No logged user found.");
       Router.go('login');
       return;
     }
-    userId = user._id;
+    var userId = user._id;
     // Search player with user id
-    loggedPlayer = undefined;
+    var loggedPlayer = undefined;
     if(Players.findOne()){
       loggedPlayer = Players.findOne().byUserId(userId);
     }

@@ -10,7 +10,7 @@ console.log("Init scores");
  * @return {Scores} Final created object
  */
 Scores.createScore = function(score, description, playerId) {
-	scoreData = {
+	var scoreData = {
 		score: score,
 		description: description,
 		playerId: playerId
