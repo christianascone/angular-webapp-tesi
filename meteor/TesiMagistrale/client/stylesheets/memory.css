@@ -1,0 +1,23 @@
+.demo-card-image.mdl-card {
+	margin: 10px;
+ 	width: 150px;
+ 	height: 150px;
+  	/*background: url('https://s-media-cache-ak0.pinimg.com/736x/98/2c/d8/982cd88ff2d4285eb3596073b14272ad.jpg') center / cover;*/
+  	min-height: 150px;
+}
+.demo-card-image > .mdl-card__actions {
+	height: 52px;
+	padding: 16px;
+	background: rgba(0, 0, 0, 0.2);
+}
+.demo-card-image__filename {
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.card-image {
+	width: 100%;
+	position: absolute;
+    left: 0;
+}

@@ -31,3 +31,8 @@ Router.route('/leaderboard', {
 	name: 'leaderboard',
 	template: 'leaderboard'
 });
+
+Router.route('/memory', {
+	name: 'memory',
+	template: 'memory'
+});

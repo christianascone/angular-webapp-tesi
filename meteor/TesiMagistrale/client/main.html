@@ -17,6 +17,7 @@
         <a class="mdl-navigation__link" href="{{pathFor route='demo'}}">Home</a>
         <a class="mdl-navigation__link" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
         <a class="mdl-navigation__link" href="{{pathFor route='hello'}}">hello</a>
+        <a class="mdl-navigation__link" href="{{pathFor route='memory'}}">memory</a>
         <!-- If user is logged, show logout template (logout button) -->
         {{#if currentUser}}
           {{> logout}}
@@ -37,6 +38,7 @@
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='demo'}}">Home</a>
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='hello'}}">hello</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='memory'}}">memory</a>
       {{#if currentUser}}
       <a class="mdl-navigation__link mdl-color-text--white logout" href="#">Logout</a>
       {{/if}}
