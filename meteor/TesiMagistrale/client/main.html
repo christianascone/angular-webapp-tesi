@@ -30,17 +30,7 @@
       <div class="demo-avatar-dropdown">
         <span>{{loggedUserEmail}}</span>
         <div class="mdl-layout-spacer"></div>
-        {{#if false}}
-        <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">arrow_drop_down</i>
-        <span class="visuallyhidden">Accounts</span>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-          <li class="mdl-menu__item">hello@example.com</li>
-          <li class="mdl-menu__item">info@example.com</li>
-          <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
-        </ul>
-        {{/if}}
+        {{> myPoints}}
       </div>
     </header>
     <nav class="mdl-navigation mdl-color--blue-grey-800">
@@ -64,4 +54,10 @@
 <!-- Template for logout button -->
 <template name="logout">
 <a class="mdl-navigation__link logout" href="#">Logout</a>
+</template>
+
+<!-- Template for showing current points and coin image -->
+<template name="myPoints">
+  <img class="svg-coin" src="/images/coin-money-9.svg" />
+        <span class="coin-points">{{myCurrentPoints}}</span>
 </template>

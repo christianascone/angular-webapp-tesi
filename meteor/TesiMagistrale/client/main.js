@@ -68,3 +68,25 @@ Template.logout.events({
 		});
 	}
 });
+
+// Helpers functions for my points template
+Template.myPoints.helpers({
+	/**
+	 * Gets total score for player with current user id
+	 * 
+	 * @return {Int} Current points
+	 */
+	myCurrentPoints() {
+		var user = Meteor.user();
+		if (!user) {
+			return;
+		}
+		var userId = user._id;
+		// Search player with user id
+		var loggedPlayer = undefined;
+		if(Players.findOne()){
+			loggedPlayer = Players.findOne().byUserId(userId);
+		}
+		return loggedPlayer.totalScore();
+	}
+});
