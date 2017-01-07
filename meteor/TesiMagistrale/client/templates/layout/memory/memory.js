@@ -5,7 +5,11 @@ Template.memory.helpers({
 	 * @return {Array} mock array
 	 */
 	getArray() {
-		var array = [1,2,3,4,5,6,7,8,9,10];
+		var array = [];
+		var lenght = 10;
+		for (var i = 0; i < lenght; i++) {
+			array[i] = i;
+		}
 		return array;
 	}
 });
@@ -16,6 +20,6 @@ Template.memory.events({
   	// Get index from selected item
   	var index = $(event.target).data("value");
   	// Fade in and out for images
-    $(".card-image-"+index).fadeToggle("fast");
+    $(".card-image-"+index).fadeToggle("slow");
   },
 });
