@@ -39,3 +39,7 @@
 .leaderboard-rank {
   margin: auto;
 }
+
+.coin-row {
+  display: block !important;
+}

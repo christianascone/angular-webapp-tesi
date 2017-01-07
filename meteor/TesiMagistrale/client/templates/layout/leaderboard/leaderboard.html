@@ -2,15 +2,19 @@
 <!-- List items with avatar and action -->
 <div class="demo-list-action mdl-list">
 	{{#each player in players}}
-	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card leaderboard-card {{#if isCurrentPlayer player}}mdl-color--grey-200{{/if}}">
+	<div class="mdl-list__item demo-cards {{#if isCurrentPlayer player}}mdl-color--grey-200 mdl-shadow--16dp{{else}}mdl-shadow--2dp{{/if}} mdl-card leaderboard-card">
 		<span class="mdl-list__item-primary-content leaderboard-rank">
 			<span class="mdl-typography--title leaderboard-rank-counter leaderboard-rank-counter-{{incremented @index}}">{{incremented @index}}</span>
 			<i class="material-icons mdl-list__item-avatar">person</i>
-			<span>{{player.name.address}}</span>
+			<div class="mdl-list__item--two-line">
+				<span class="mdl-list__item-primary-content">
+					<span>{{player.name.address}}</span>
+				</span>
+				<span class="mdl-list__item-secondary-content coin-row">
+					{{> my_points player=player}}
+				</span>
+			</div>
 		</span>
-		<div class="leaderboard-rank">
-			{{> my_points player=player}}
-		</div>
 		{{#if polePosition @index}}
 		<img class="leaderboard-rank-image-{{incremented @index}}" src="/images/pole-{{incremented @index}}.svg" />
 		{{/if}}

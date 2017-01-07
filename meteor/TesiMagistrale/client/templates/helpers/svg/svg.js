@@ -4,7 +4,7 @@
  * Transform every rendered svg in inline svg
  */
 Template.registerHelper('inlineSvg', (message) => {
-    $('img[src$=".svg"]').each(function() {
+    $('img.svg').each(function() {
         var $img = jQuery(this);
         var imgURL = $img.attr('src');
         var attributes = $img.prop("attributes");
