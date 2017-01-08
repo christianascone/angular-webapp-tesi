@@ -2,13 +2,13 @@
 <h1>Memory Game</h1>
 <div class="mdl-grid">
   {{#each card in getArray}}
-  <div class="demo-card-image mdl-card mdl-shadow--2dp">
+  <div class="demo-card-image mdl-card mdl-shadow--2dp" style="{{#if card.removed}}visibility: hidden;{{/if}}">
     <div class="mdl-card__title mdl-card--expand">
       <!-- Placeholder image for hidden card -->
-      <img class="card-image card-image-{{@index}}" src="/images/memory/unknown.png" style="
+      <img class="card-image card-image-{{@index}} placeholder-card" src="/images/memory/unknown.png" style="
       width: 100;" data-value="{{@index}}">
       <!-- Hidden image (revealed card) -->
-      <img class="card-image card-image-{{@index}}" src="/images/memory/{{card.image_index}}.jpg" style="
+      <img class="card-image card-image-{{@index}} real-card" src="/images/memory/{{card.image_index}}.jpg" style="
       width: 100%; display: none;
       " data-value="{{@index}}">
     </div>
