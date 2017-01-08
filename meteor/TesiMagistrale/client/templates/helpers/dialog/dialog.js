@@ -7,23 +7,44 @@ Template.dialog.onRendered(function dialogOnRendered() {
   }
 });
 
-// Events for dialog template
-Template.dialog.events({
-  'click .close-dialog' (event, instance) {
-    Blaze._globalHelpers.closeDialog();
-  },
-});
-
 // Global template helper for Dialog
-Template.registerHelper('showDialog', (message) => {
-  var dialog = document.querySelector('dialog');
-  if (message) {
-    $('#dialog-message').text(message);
+Template.registerHelper('showDialog', (id, message) => {
+  var dialog = null;
+  // Use id if provided
+  if (id) {
+    dialog = document.querySelector('#' + id);
+  } else {
+    dialog = document.querySelector('dialog');
   }
-  dialog.showModal();
+
+  // If message, use it in dialog body
+  if (message) {
+    // Use id if provided
+    if (id) {
+      $('#' + id + ' #dialog-message').text(message);
+    } else {
+      $('#dialog-message').text(message);
+    }
+  }
+
+  try {
+    dialog.showModal();
+  } catch (error) {
+    // Possible error in first render
+  }
 });
 
-Template.registerHelper('closeDialog', () => {
-  var dialog = document.querySelector('dialog');
-  dialog.close();
+Template.registerHelper('closeDialog', (id) => {
+  var dialog = null;
+  // Use id if provided
+  if (id) {
+    dialog = document.querySelector('#' + id);
+  } else {
+    dialog = document.querySelector('dialog');
+  }
+  try {
+    dialog.close();
+  } catch (error) {
+    // Possible error in first render
+  }
 });

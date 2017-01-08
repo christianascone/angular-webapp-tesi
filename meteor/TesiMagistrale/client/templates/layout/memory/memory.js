@@ -1,5 +1,9 @@
 var PREVIOUS_CARD_INDEX = "previousCardIndex";
 var CARD_EVENT_ALLOWED = "cardEventAllowed";
+var GAME_TYPE = "gameType";
+
+var CONGRATULATION_DIALOG_ID = "congratulation_dialog";
+var GAME_TYPE_DIALOG_ID = "game_type_dialog";
 
 /**
  * Returns a random int value between min and max
@@ -146,7 +150,7 @@ Template.memory.helpers({
 			}
 		}
 		if (remainingCards == 0) {
-			Blaze._globalHelpers.showDialog("You won with " + Template.instance().moves_counter.get() + " moves.");
+			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + Template.instance().moves_counter.get() + " moves.");
 			return true;
 		} else {
 			return false;
@@ -157,10 +161,39 @@ Template.memory.helpers({
 // Events for memory template
 Template.memory.events({
 	/**
+	 * Ok button of game type dialog clicked
+	 */
+	'click #game_type_ok_button' (event, instance) {
+		console.log("Game type ok button");
+		Session.set(GAME_TYPE, "MOCK_VALUE");
+		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
+		setupNewMemoryGame(instance, Session);
+	},
+	/**
+	 * Close button of game type dialog clicked
+	 */
+	'click #game_type_close_button' (event, instance) {
+		console.log("Game type close button");
+		Session.set(GAME_TYPE, "MOCK_VALUE");
+		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
+		setupNewMemoryGame(instance, Session);
+	},
+	/**
+	 * Close button of congratulation dialog clicked
+	 */
+	'click #congratulation_close_button' (event, instance) {
+		Blaze._globalHelpers.closeDialog(CONGRATULATION_DIALOG_ID);
+	},
+	/**
 	 * Play button click event.
 	 * Restart the game
 	 */
 	'click #new-game-button' (event, instance) {
+		var game_type = Session.get(GAME_TYPE);
+		if(!game_type){
+			Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, "Select game type");
+			return;
+		}
 		setupNewMemoryGame(instance, Session);
 	},
 	// TODO: Refactor function

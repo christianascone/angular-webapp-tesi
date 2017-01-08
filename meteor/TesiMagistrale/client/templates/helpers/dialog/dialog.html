@@ -1,5 +1,15 @@
+<!-- Optional parameters -->
+<!-- {{dialog_id}} dialog id-->
+<!-- {{title}} dialog title-->
+<!-- {{dialog_message}} message to use -->
+<!-- {{ok_button_id}} dialog ok button id -->
+<!-- {{close_button_id}} dialog close button id -->
+<!-- {{hide_ok_button}} boolean. Hide or show ok button -->
+<!-- {{hide_close_button}} boolean. Hide or show close button -->
+<!-- {{ok_message}} Text for ok button -->
+<!-- {{close_message}} Text for close button -->
 <template name="dialog">
-  <dialog class="mdl-dialog">
+  <dialog id="{{dialog_id}}" class="mdl-dialog">
     <h4 class="mdl-dialog__title">{{title}}</h4>
     <div class="mdl-dialog__content">
       <p id="dialog-message">
@@ -7,8 +17,8 @@
       </p>
     </div>
     <div class="mdl-dialog__actions">
-      <button type="button" class="mdl-button ok-dialog" style="{{#if hideOkButton}}display: none;{{/if}}">{{ok_message}}</button>
-      <button type="button" class="mdl-button close-dialog" style="{{#if hideCloseButton}}display: none;{{/if}}">{{close_message}}</button>
+      <button id="{{ok_button_id}}" type="button" class="mdl-button ok-dialog" style="{{#if hide_ok_button}}display: none;{{/if}}">{{ok_message}}</button>
+      <button id="{{close_button_id}}" type="button" class="mdl-button close-dialog" style="{{#if hide_close_button}}display: none;{{/if}}">{{close_message}}</button>
     </div>
   </dialog>
 </template>

@@ -26,5 +26,8 @@
   </div>
   {{/each}}
 </div>
-{{> dialog title="Congratulation!" hideOkButton="true" close_message="Close"}}
+<!-- Game type selection dialog -->
+{{> dialog dialog_id="game_type_dialog" title="Game type" close_button_id="game_type_close_button" ok_button_id="game_type_ok_button" ok_message="1" close_message="2"}}
+<!-- Congratulation dialog -->
+{{> dialog dialog_id="congratulation_dialog" close_button_id="congratulation_close_button" title="Congratulation!" hide_ok_button="true" close_message="Close"}}
 </template>
