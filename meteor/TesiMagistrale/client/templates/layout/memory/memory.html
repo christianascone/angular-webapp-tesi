@@ -2,6 +2,12 @@
 <div class="mdl-grid memory-title">
   <h1>Memory Game</h1>
   <h4>Moves: {{counter}}</h4>
+  <!-- If this game is won, shows the Play button, able to restart the game -->
+  {{#if won}}
+  <button id="new-game-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Play
+  </button>
+  {{/if}}
 </div>
 <div class="mdl-grid">
   {{#each card in getArray}}

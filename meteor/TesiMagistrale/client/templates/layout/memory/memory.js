@@ -68,10 +68,21 @@ function createMemoryCardsArrayWithIndexes(possible_indexes) {
 	return cards;
 }
 
-// When template is created, the array is initialized
-Template.memory.onCreated(function memoryOnCreated() {
+/**
+ * Setup a new on board game.
+ * - Reset moves counter to 0
+ * - Set previous card as undefined
+ * - Set card event allowed
+ * - Create the random cards deck
+ * - Save cards in session
+ * 
+ * @param  {Blaze.TemplateInstance} instance Instance of memory template
+ * @param  {ReactiveDict} session  Meteor session
+ * @return {void}
+ */
+function setupNewMemoryGame(instance, session) {
 	// Setup move counter
-	this.counter = new ReactiveVar(0);
+	instance.moves_counter.set(0);
 
 	// Initial setup for card events
 	Session.set(PREVIOUS_CARD_INDEX, undefined);
@@ -87,7 +98,14 @@ Template.memory.onCreated(function memoryOnCreated() {
 	var cards = createMemoryCardsArrayWithIndexes(possible_indexes);
 	// Save cards array in Session, so changing it, the getArray()
 	// function in helpers will be recalled
-	Session.set('cardsArray', cards);
+	session.set('cardsArray', cards);
+}
+
+// When template is created, the array is initialized
+Template.memory.onCreated(function memoryOnCreated() {
+	// Set the new reactive var for moves counter
+	this.moves_counter = new ReactiveVar(0);
+	setupNewMemoryGame(this, Session);
 });
 
 // Helpers for memory template
@@ -98,7 +116,7 @@ Template.memory.helpers({
 	 * @return {Int} Move counter
 	 */
 	counter() {
-		return Template.instance().counter.get();
+		return Template.instance().moves_counter.get();
 	},
 	/**
 	 * Gets the cards array saved in Session.
@@ -107,6 +125,14 @@ Template.memory.helpers({
 	 * @return {Array} Cards array
 	 */
 	getArray() {
+		var cards = Session.get('cardsArray');
+		return cards;
+	},
+	/**
+	 * Check if this game is won or not
+	 * @return {Boolean} True if the game is won, false otherwise
+	 */
+	won() {
 		var cards = Session.get('cardsArray');
 
 		// Check remaining cards for Win check
@@ -119,13 +145,22 @@ Template.memory.helpers({
 		}
 		if (remainingCards == 0) {
 			Blaze._globalHelpers.showToast("You won!");
+			return true;
+		} else {
+			return false;
 		}
-		return cards;
 	}
 });
 
 // Events for memory template
 Template.memory.events({
+	/**
+	 * Play button click event.
+	 * Restart the game
+	 */
+	'click #new-game-button' (event, instance) {
+		setupNewMemoryGame(instance, Session);
+	},
 	// TODO: Refactor function
 	'click .card-image' (event, instance) {
 		// If another card event is running, this one is prevented
@@ -148,7 +183,7 @@ Template.memory.events({
 		}
 
 		// Increment move counter
-		instance.counter.set(instance.counter.get() + 1);
+		instance.moves_counter.set(instance.moves_counter.get() + 1);
 
 		console.log("Flipped: " + index);
 		console.log("Previously flipped: " + previous_selected_index);
@@ -180,10 +215,10 @@ Template.memory.events({
 				} else {
 					// Clear saved index
 					Session.set(PREVIOUS_CARD_INDEX, undefined);
-					// Reset cards
-					$(".card-image-" + previous_selected_index).fadeToggle(ANIMATION_SPEED_FAST);
-					$(".card-image-" + index).fadeToggle(ANIMATION_SPEED_FAST);
 				}
+				// Reset cards
+				$(".card-image-" + previous_selected_index).fadeToggle(ANIMATION_SPEED_FAST);
+				$(".card-image-" + index).fadeToggle(ANIMATION_SPEED_FAST);
 				Session.set(CARD_EVENT_ALLOWED, true);
 			});
 
