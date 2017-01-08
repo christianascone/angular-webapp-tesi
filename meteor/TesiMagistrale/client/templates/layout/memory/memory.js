@@ -144,7 +144,7 @@ Template.memory.helpers({
 			}
 		}
 		if (remainingCards == 0) {
-			Blaze._globalHelpers.showToast("You won!");
+			Blaze._globalHelpers.showDialog("You won with " + Template.instance().moves_counter.get() + " moves.");
 			return true;
 		} else {
 			return false;

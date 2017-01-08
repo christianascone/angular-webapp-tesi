@@ -7,9 +7,19 @@ Template.dialog.onRendered(function dialogOnRendered() {
   }
 });
 
+// Events for dialog template
+Template.dialog.events({
+  'click .close-dialog' (event, instance) {
+    Blaze._globalHelpers.closeDialog();
+  },
+});
+
 // Global template helper for Dialog
-Template.registerHelper('showDialog', () => {
+Template.registerHelper('showDialog', (message) => {
   var dialog = document.querySelector('dialog');
+  if (message) {
+    $('#dialog-message').text(message);
+  }
   dialog.showModal();
 });
 
