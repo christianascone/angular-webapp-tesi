@@ -26,7 +26,7 @@ Template.main.helpers({
 		var userId = user._id;
 		// Search player with user id
 		var loggedPlayer = undefined;
-		if(Players.findOne()){
+		if (Players.findOne()) {
 			loggedPlayer = Players.findOne().byUserId(userId);
 		}
 
@@ -65,7 +65,7 @@ Template.main.helpers({
 		var userId = user._id;
 		// Search player with user id
 		var loggedPlayer = undefined;
-		if(Players.findOne()){
+		if (Players.findOne()) {
 			loggedPlayer = Players.findOne().byUserId(userId);
 		}
 
