@@ -6,11 +6,23 @@
   </div>
   <img class="leaderboard-rank-image-2 svg-coin" src="/images/coin-money-9.svg" />
   <!-- Accent-colored raised button with ripple -->
-  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-  Button
+  <button id="show-dialog" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Show dialog
   </button>
 </div>
 <div>
   {{> cards}}
 </div>
+<dialog class="mdl-dialog">
+    <h4 class="mdl-dialog__title">Allow data collection?</h4>
+    <div class="mdl-dialog__content">
+      <p>
+        Allowing us to collect data will let us get you the information you want faster.
+      </p>
+    </div>
+    <div class="mdl-dialog__actions">
+      <button type="button" class="mdl-button">Agree</button>
+      <button type="button" class="mdl-button close">Disagree</button>
+    </div>
+  </dialog>
 </template>
