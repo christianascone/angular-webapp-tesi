@@ -105,7 +105,6 @@ function setupNewMemoryGame(instance, session) {
 Template.memory.onCreated(function memoryOnCreated() {
 	// Set the new reactive var for moves counter
 	this.moves_counter = new ReactiveVar(0);
-	setupNewMemoryGame(this, Session);
 });
 
 // Helpers for memory template
@@ -134,6 +133,9 @@ Template.memory.helpers({
 	 */
 	won() {
 		var cards = Session.get('cardsArray');
+		if(!cards){
+			return true;
+		}
 
 		// Check remaining cards for Win check
 		var remainingCards = 0;

@@ -7,8 +7,8 @@
       </p>
     </div>
     <div class="mdl-dialog__actions">
-      <button type="button" class="mdl-button ok-dialog">{{ok_message}}</button>
-      <button type="button" class="mdl-button close-dialog">{{close_message}}</button>
+      <button type="button" class="mdl-button ok-dialog" style="{{#if hideOkButton}}display: none;{{/if}}">{{ok_message}}</button>
+      <button type="button" class="mdl-button close-dialog" style="{{#if hideCloseButton}}display: none;{{/if}}">{{close_message}}</button>
     </div>
   </dialog>
 </template>
