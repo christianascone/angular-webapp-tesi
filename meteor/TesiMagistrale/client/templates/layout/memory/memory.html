@@ -1,7 +1,12 @@
 <template name="memory">
-<h1>Memory Game</h1>
+<div class="mdl-grid memory-title">
+  <h1>Memory Game</h1>
+  <h4>Moves: {{counter}}</h4>
+</div>
 <div class="mdl-grid">
   {{#each card in getArray}}
+  <!-- Card container -->
+  <!-- If the card is removed, the visibility is hidden -->
   <div class="demo-card-image mdl-card mdl-shadow--2dp" style="{{#if card.removed}}visibility: hidden;{{/if}}">
     <div class="mdl-card__title mdl-card--expand">
       <!-- Placeholder image for hidden card -->

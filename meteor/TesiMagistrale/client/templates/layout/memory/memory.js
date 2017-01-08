@@ -134,8 +134,8 @@ Template.memory.events({
 		}
 		// Block other click events
 		Session.set(CARD_EVENT_ALLOWED, false);
-		var ANIMATION_SPEED_PLACEHOLDER = "fast";
-		var ANIMATION_SPEED_CARD = "slow";
+		var ANIMATION_SPEED_FAST = "fast";
+		var ANIMATION_SPEED_SLOW = "slow";
 		// Get index from selected item
 		var index = $(event.target).data("value");
 		// Gets the previously saved (if exists) index of selected card
@@ -153,9 +153,9 @@ Template.memory.events({
 		console.log("Flipped: " + index);
 		console.log("Previously flipped: " + previous_selected_index);
 		// Fade in/out placeholder
-		$(".placeholder-card.card-image-" + index).fadeToggle(ANIMATION_SPEED_PLACEHOLDER, function() {
+		$(".placeholder-card.card-image-" + index).fadeToggle(ANIMATION_SPEED_FAST, function() {
 			// Fade in/out image
-			$(".real-card.card-image-" + index).fadeToggle(ANIMATION_SPEED_CARD, function() {
+			$(".real-card.card-image-" + index).fadeToggle(ANIMATION_SPEED_SLOW, function() {
 				// If no index is found, save the currently selected index
 				if (previous_selected_index == undefined) {
 					console.log("No previous index");
@@ -181,8 +181,8 @@ Template.memory.events({
 					// Clear saved index
 					Session.set(PREVIOUS_CARD_INDEX, undefined);
 					// Reset cards
-					$(".card-image-" + previous_selected_index).fadeToggle(ANIMATION_SPEED_PLACEHOLDER);
-					$(".card-image-" + index).fadeToggle(ANIMATION_SPEED_PLACEHOLDER);
+					$(".card-image-" + previous_selected_index).fadeToggle(ANIMATION_SPEED_FAST);
+					$(".card-image-" + index).fadeToggle(ANIMATION_SPEED_FAST);
 				}
 				Session.set(CARD_EVENT_ALLOWED, true);
 			});
