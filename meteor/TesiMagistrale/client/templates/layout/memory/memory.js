@@ -70,6 +70,10 @@ function createMemoryCardsArrayWithIndexes(possible_indexes) {
 
 // When template is created, the array is initialized
 Template.memory.onCreated(function memoryOnCreated() {
+	// Setup move counter
+	this.counter = new ReactiveVar(0);
+
+	// Initial setup for card events
 	Session.set(PREVIOUS_CARD_INDEX, undefined);
 	Session.set(CARD_EVENT_ALLOWED, true);
 
@@ -89,6 +93,14 @@ Template.memory.onCreated(function memoryOnCreated() {
 // Helpers for memory template
 Template.memory.helpers({
 	/**
+	 * Gets move counter
+	 * 
+	 * @return {Int} Move counter
+	 */
+	counter() {
+		return Template.instance().counter.get();
+	},
+	/**
 	 * Gets the cards array saved in Session.
 	 * It is called every time a new object with key 'cardsArray'
 	 * is saved in Session
@@ -100,12 +112,12 @@ Template.memory.helpers({
 		// Check remaining cards for Win check
 		var remainingCards = 0;
 		for (var i = 0; i < cards.length; i++) {
-			if(cards[i].removed == false){
+			if (cards[i].removed == false) {
 				remainingCards++;
 				break;
 			}
 		}
-		if(remainingCards == 0){
+		if (remainingCards == 0) {
 			Blaze._globalHelpers.showToast("You won!");
 		}
 		return cards;
@@ -114,7 +126,8 @@ Template.memory.helpers({
 
 // Events for memory template
 Template.memory.events({
-	'click .card-image' (event, t) {
+	// TODO: Refactor function
+	'click .card-image' (event, instance) {
 		// If another card event is running, this one is prevented
 		if (!Session.get(CARD_EVENT_ALLOWED)) {
 			return;
@@ -133,6 +146,10 @@ Template.memory.events({
 			Session.set(CARD_EVENT_ALLOWED, true);
 			return;
 		}
+
+		// Increment move counter
+		instance.counter.set(instance.counter.get() + 1);
+
 		console.log("Flipped: " + index);
 		console.log("Previously flipped: " + previous_selected_index);
 		// Fade in/out placeholder
