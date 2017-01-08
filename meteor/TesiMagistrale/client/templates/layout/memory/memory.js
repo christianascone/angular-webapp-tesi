@@ -59,7 +59,6 @@ function createMemoryCardsArrayWithIndexes(possible_indexes) {
 		// New card
 		cards[i] = {
 			image_index: possible_indexes[randomIdx],
-			flipped: false,
 			removed: false
 		};
 		// Remove used index from possible_indexes
@@ -74,7 +73,7 @@ Template.memory.onCreated(function memoryOnCreated() {
 	Session.set(PREVIOUS_CARD_INDEX, undefined);
 	Session.set(CARD_EVENT_ALLOWED, true);
 
-	var length = 16;
+	var length = 2;
 	if (length % 2 != 0) {
 		console.error("Not even value for memory game.");
 		return;
@@ -96,7 +95,20 @@ Template.memory.helpers({
 	 * @return {Array} Cards array
 	 */
 	getArray() {
-		return Session.get('cardsArray');
+		var cards = Session.get('cardsArray');
+
+		// Check remaining cards for Win check
+		var remainingCards = 0;
+		for (var i = 0; i < cards.length; i++) {
+			if(cards[i].removed == false){
+				remainingCards++;
+				break;
+			}
+		}
+		if(remainingCards == 0){
+			Blaze._globalHelpers.showToast("You won!");
+		}
+		return cards;
 	}
 });
 
