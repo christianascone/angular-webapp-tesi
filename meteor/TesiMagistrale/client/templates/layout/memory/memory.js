@@ -160,7 +160,6 @@ Template.memory.helpers({
 			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.");
 			// Gets the scoreSeries object and scores list
 			var scoreSeriesId = Session.get(SCORE_SERIES_ID);
-			var newScoreId = Scores.createScore(moves_counter, "", scoreSeriesId);
 
 			var scoreSeries = ScoreSeries.findOne(scoreSeriesId);
 			// scoreSeries is undefined when this function is recalled due to Session
@@ -168,6 +167,7 @@ Template.memory.helpers({
 			if(!scoreSeries){
 				return true;
 			}
+			var newScoreId = Scores.createScore(moves_counter, "", scoreSeriesId);
 			var scores = scoreSeries.scores().fetch();
 			// If scores length is greater than max game, the score series is closed
 			if(scores.length >= MAX_GAME){
