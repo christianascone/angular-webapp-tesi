@@ -20,6 +20,13 @@ Players.helpers({
 		return ScoreSeries.find({playerId: this._id});
 	},
 	/**
+	 * Find a list of closed score series for this player
+	 * @return {[ScoreSeries]}
+	 */
+	closedScoreSeries() {
+		return ScoreSeries.find({playerId: this._id, state: "CLOSED"});
+	},
+	/**
 	 * Find list of scores for this player
 	 * 
 	 * @return {[Scores]}
@@ -27,7 +34,7 @@ Players.helpers({
 	scores() {
 		var scores = [];
 		// Map function to sum scores
-		var scoreSeries = this.scoreSeries().map(function(doc){
+		var closedScoreSeries = this.closedScoreSeries().map(function(doc){
 			var innerScores = doc.scores().fetch();
 			if(innerScores.length > 0){
 				scores = scores.concat(innerScores);

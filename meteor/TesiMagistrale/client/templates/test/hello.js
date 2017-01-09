@@ -1,7 +1,7 @@
 Template.hello.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
-  
+
 });
 
 // Helpers for hello template
@@ -10,7 +10,7 @@ Template.hello.helpers({
     return Template.instance().counter.get();
   },
   players() {
-  	console.log("player list");
+    console.log("player list");
     var list = Players.find();
     return list;
   }
@@ -18,8 +18,8 @@ Template.hello.helpers({
 
 // Events for hello template
 Template.hello.events({
-	// click is the event type and button is the selector
-  'click button'(event, instance) {
+  // click is the event type and button is the selector
+  'click button' (event, instance) {
     $('#test-animation-id').fadeToggle('slow');
     var user = Meteor.user();
     if (!user) {
@@ -30,11 +30,19 @@ Template.hello.events({
     var userId = user._id;
     // Search player with user id
     var loggedPlayer = undefined;
-    if(Players.findOne()){
+    if (Players.findOne()) {
       loggedPlayer = Players.findOne().byUserId(userId);
     }
-    
+
     var createdScoreSeriesId = ScoreSeries.createScoreSeries(loggedPlayer._id, "TEST_GAME");
     Scores.createScore(5, "test", createdScoreSeriesId);
+    var scoreSeries = ScoreSeries.findOne(createdScoreSeriesId);
+    console.log("Open");
+    console.log(scoreSeries);
+    scoreSeries.close(function() {
+      console.log("Closed");
+      console.log(ScoreSeries.findOne(createdScoreSeriesId));
+    });
+    scoreSeries.close();
   },
 });

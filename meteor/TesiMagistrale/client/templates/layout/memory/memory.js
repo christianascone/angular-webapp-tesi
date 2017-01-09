@@ -5,6 +5,10 @@ var GAME_TYPE = "gameType";
 var CONGRATULATION_DIALOG_ID = "congratulation_dialog";
 var GAME_TYPE_DIALOG_ID = "game_type_dialog";
 
+var LINEAR = "LINEAR";
+var INCREMENTAL = "INCREMENTAL";
+var SCORE_SERIES_ID = "SCORE_SERIES_ID";
+
 /**
  * Returns a random int value between min and max
  * values (included)
@@ -137,7 +141,7 @@ Template.memory.helpers({
 	 */
 	won() {
 		var cards = Session.get('cardsArray');
-		if(!cards){
+		if (!cards) {
 			return true;
 		}
 
@@ -164,18 +168,48 @@ Template.memory.events({
 	 * Ok button of game type dialog clicked
 	 */
 	'click #game_type_ok_button' (event, instance) {
-		console.log("Game type ok button");
-		Session.set(GAME_TYPE, "MOCK_VALUE");
+		console.log("Game type ok button -> " + INCREMENTAL);
+		Session.set(GAME_TYPE, INCREMENTAL);
 		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
+		var user = Meteor.user();
+		if (!user) {
+			console.log("No logged user found.");
+			Router.go('login');
+			return;
+		}
+		var userId = user._id;
+		var loggedPlayer = undefined;
+		if (Players.findOne()) {
+			loggedPlayer = Players.findOne().byUserId(userId);
+		}
+
+		var createdScoreSeriesId = ScoreSeries.createScoreSeriesIncremental(loggedPlayer._id);
+		Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
+		console.log("Created ScoreSeries Incremental with id: " + createdScoreSeriesId);
 		setupNewMemoryGame(instance, Session);
 	},
 	/**
 	 * Close button of game type dialog clicked
 	 */
 	'click #game_type_close_button' (event, instance) {
-		console.log("Game type close button");
-		Session.set(GAME_TYPE, "MOCK_VALUE");
+		console.log("Game type close button -> " + LINEAR);
+		Session.set(GAME_TYPE, LINEAR);
 		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
+		var user = Meteor.user();
+		if (!user) {
+			console.log("No logged user found.");
+			Router.go('login');
+			return;
+		}
+		var userId = user._id;
+		var loggedPlayer = undefined;
+		if (Players.findOne()) {
+			loggedPlayer = Players.findOne().byUserId(userId);
+		}
+
+		var createdScoreSeriesId = ScoreSeries.createScoreSeriesLinear(loggedPlayer._id);
+		Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
+		console.log("Created ScoreSeries Linear with id: " + createdScoreSeriesId);
 		setupNewMemoryGame(instance, Session);
 	},
 	/**
@@ -190,7 +224,7 @@ Template.memory.events({
 	 */
 	'click #new-game-button' (event, instance) {
 		var game_type = Session.get(GAME_TYPE);
-		if(!game_type){
+		if (!game_type) {
 			Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, "Select game type");
 			return;
 		}
