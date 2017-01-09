@@ -9,7 +9,11 @@ var LINEAR = "LINEAR";
 var INCREMENTAL = "INCREMENTAL";
 var SCORE_SERIES_ID = "SCORE_SERIES_ID";
 
+var LINEAR_REWARD_KEY = "LINEAR_REWARD_KEY";
+var INCREMENTAL_REWARD_KEY = "INCREMENTAL_REWARD_KEY";
+
 var MAX_GAME = 5;
+var MAX_REWARD = 750;
 
 /**
  * Returns a random int value between min and max
@@ -31,7 +35,7 @@ function randomIntFromInterval(min, max) {
  * @param  {Int} length Max value to use
  * @return {[Int]}        Filled array
  */
-function fillPossibleIndexesWithLenght(length) {
+function fillPossibleIndexesWithLength(length) {
 	// Empty array which will contains the possible
 	// image indexes
 	var possible_indexes = [];
@@ -50,6 +54,36 @@ function fillPossibleIndexesWithLenght(length) {
 	}
 
 	return possible_indexes;
+}
+
+/**
+ * Creates the rewards array
+ * 
+ * @param  {Session} session Meteor Session
+ * @return {void}         
+ */
+function createRewards(session) {
+	var LINEAR_REWARD = [];
+	var INCREMENTAL_REWARD = [];
+	
+	// Sum total segments for incremental rewards
+	var incremental_total_segments = 0;
+	for (var i = 0; i < MAX_GAME; i++) {
+		incremental_total_segments += (i+1);
+	}
+
+	for (var i = 0; i < MAX_GAME; i++) {
+		// Simple division for linear reward
+		var linear = MAX_REWARD / MAX_GAME;
+		// Gets the i-th segment of reward
+		var incremental = MAX_REWARD / incremental_total_segments * (i+1);
+
+		LINEAR_REWARD.push(linear);
+		INCREMENTAL_REWARD.push(incremental);
+	}
+
+	session.set(LINEAR_REWARD_KEY, LINEAR_REWARD);
+	session.set(INCREMENTAL_REWARD_KEY, INCREMENTAL_REWARD);
 }
 
 /**
@@ -103,9 +137,10 @@ function setupNewMemoryGame(instance, session) {
 		console.error("Not even value for memory game.");
 		return;
 	}
-	var possible_indexes = fillPossibleIndexesWithLenght(length);
+	var possible_indexes = fillPossibleIndexesWithLength(length);
 
 	var cards = createMemoryCardsArrayWithIndexes(possible_indexes);
+	createRewards(session);
 	// Save cards array in Session, so changing it, the getArray()
 	// function in helpers will be recalled
 	session.set('cardsArray', cards);
@@ -160,7 +195,6 @@ Template.memory.helpers({
 			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.");
 			// Gets the scoreSeries object and scores list
 			var scoreSeriesId = Session.get(SCORE_SERIES_ID);
-
 			var scoreSeries = ScoreSeries.findOne(scoreSeriesId);
 			// scoreSeries is undefined when this function is recalled due to Session
 			// values update
