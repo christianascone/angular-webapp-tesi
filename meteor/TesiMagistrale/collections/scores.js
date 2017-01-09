@@ -6,14 +6,14 @@ console.log("Init scores");
  * 
  * @param  {Int} Score value
  * @param  {String} Description String
- * @param  {Int} Id of playing player
- * @return {Scores} Final created object
+ * @param  {Int} Id of father series
+ * @return {Int} Final created object id
  */
-Scores.createScore = function(score, description, playerId) {
+Scores.createScore = function(score, description, scoreSeriesId) {
 	var scoreData = {
 		score: score,
 		description: description,
-		playerId: playerId
+		scoreSeriesId: scoreSeriesId
 	};
 	return Scores.insert(scoreData);
 };

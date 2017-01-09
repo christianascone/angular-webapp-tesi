@@ -33,7 +33,8 @@ Template.hello.events({
     if(Players.findOne()){
       loggedPlayer = Players.findOne().byUserId(userId);
     }
-
-    Scores.createScore(5, "test", loggedPlayer._id);
+    
+    var createdScoreSeriesId = ScoreSeries.createScoreSeries(loggedPlayer._id, "TEST_GAME");
+    Scores.createScore(5, "test", createdScoreSeriesId);
   },
 });
