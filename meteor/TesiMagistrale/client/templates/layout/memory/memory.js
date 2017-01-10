@@ -4,6 +4,7 @@ var GAME_TYPE = "gameType";
 
 var CONGRATULATION_DIALOG_ID = "congratulation_dialog";
 var GAME_TYPE_DIALOG_ID = "game_type_dialog";
+var FINAL_DIALOG_ID = "final_dialog";
 
 var LINEAR = "LINEAR";
 var INCREMENTAL = "INCREMENTAL";
@@ -13,6 +14,7 @@ var LINEAR_REWARD_KEY = "LINEAR_REWARD_KEY";
 var INCREMENTAL_REWARD_KEY = "INCREMENTAL_REWARD_KEY";
 
 var PLAYING = "PLAYING";
+var END_GAME = "END_GAME";
 
 var MAX_GAME = 5;
 var MAX_REWARD = 750;
@@ -226,6 +228,7 @@ Template.memory.helpers({
 				scoreSeries.close();
 				Session.set(SCORE_SERIES_ID, undefined);
 				Session.set(GAME_TYPE, undefined);
+				Session.set(END_GAME, true);
 			}
 			return true;
 		} else {
@@ -289,6 +292,17 @@ Template.memory.events({
 	 */
 	'click #congratulation_close_button' (event, instance) {
 		Blaze._globalHelpers.closeDialog(CONGRATULATION_DIALOG_ID);
+		if(Session.get(END_GAME)){
+			Session.set(END_GAME, false);
+			Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
+		}
+	},
+	/**
+	 * Close button of final task dialog clicked
+	 */
+	'click #final_close_button' (event, instance) {
+		Blaze._globalHelpers.closeDialog(FINAL_DIALOG_ID);
+		Router.go("demo");
 	},
 	/**
 	 * Play button click event.
