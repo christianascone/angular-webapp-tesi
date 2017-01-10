@@ -1,5 +1,6 @@
 <!-- Template for showing current points and coin image -->
 <template name="my_points">
   <img class="svg svg-coin" src="/images/coin-money-9.svg" />
-        <span class="coin-points">{{playerPoints player}}</span>
+        <span class="my_points_counter_{{player._id}} coin-points"></span>
+        {{playerPoints player animate}}
 </template>
