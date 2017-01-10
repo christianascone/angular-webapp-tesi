@@ -221,6 +221,10 @@ Template.memory.helpers({
 			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.", scoreValue+" points achieved!");
 
 			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
+			// Play sound
+			var coinSound = new buzz.sound('/sounds/coin.mp3');
+			coinSound.play();
+
 			scores = scoreSeries.scores().fetch();
 			Session.set(PLAYING, false);
 			// If scores length is greater than max game, the score series is closed
