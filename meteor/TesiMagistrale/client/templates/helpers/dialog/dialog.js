@@ -8,7 +8,7 @@ Template.dialog.onRendered(function dialogOnRendered() {
 });
 
 // Global template helper for Dialog
-Template.registerHelper('showDialog', (id, message) => {
+Template.registerHelper('showDialog', (id, message, title) => {
   var dialog = null;
   // Use id if provided
   if (id) {
@@ -24,6 +24,16 @@ Template.registerHelper('showDialog', (id, message) => {
       $('#' + id + ' #dialog-message').text(message);
     } else {
       $('#dialog-message').text(message);
+    }
+  }
+
+  // If title, use it in dialog body
+  if (title) {
+    // Use id if provided
+    if (id) {
+      $('#' + id + ' #dialog-title').text(title);
+    } else {
+      $('#dialog-title').text(title);
     }
   }
 

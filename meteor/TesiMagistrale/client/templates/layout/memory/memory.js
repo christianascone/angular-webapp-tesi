@@ -136,7 +136,7 @@ function setupNewMemoryGame(instance, session) {
 	Session.set(PREVIOUS_CARD_INDEX, undefined);
 	Session.set(CARD_EVENT_ALLOWED, true);
 
-	var length = 16;
+	var length = 2;
 	if (length % 2 != 0) {
 		console.error("Not even value for memory game.");
 		return;
@@ -202,7 +202,6 @@ Template.memory.helpers({
 		}
 		if (remainingCards == 0) {
 			var moves_counter = Template.instance().moves_counter.get();
-			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.");
 			// Gets the scoreSeries object and scores list
 			var scoreSeriesId = Session.get(SCORE_SERIES_ID);
 			var scoreSeries = ScoreSeries.findOne(scoreSeriesId);
@@ -219,6 +218,7 @@ Template.memory.helpers({
 			}else{
 				scoreValue = Session.get(INCREMENTAL_REWARD_KEY)[scores.length];
 			}
+			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.", scoreValue+" points achieved!");
 
 			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
 			scores = scoreSeries.scores().fetch();

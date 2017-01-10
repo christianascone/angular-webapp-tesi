@@ -34,7 +34,8 @@ Players.helpers({
 	scores() {
 		var scores = [];
 		// Map function to sum scores
-		var closedScoreSeries = this.closedScoreSeries().map(function(doc){
+		// WARNING: USE ALL SCORE SERIES (NOT ONLY THE CLOSED ONES)
+		var scoreSeries = this.scoreSeries().map(function(doc){
 			var innerScores = doc.scores().fetch();
 			if(innerScores.length > 0){
 				scores = scores.concat(innerScores);
@@ -52,7 +53,9 @@ Players.helpers({
 		var total = 0;
 		// Map function to sum scores
 		var scores = this.scores().map(function(doc){
-			total += doc.score;
+			if(!isNaN(doc.score)){
+				total += doc.score;
+			}
 		});
 		return total;
 	},
