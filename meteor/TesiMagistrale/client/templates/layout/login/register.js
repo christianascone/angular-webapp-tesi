@@ -22,11 +22,12 @@ Template.register.events({
     // Save user with email and password
     Accounts.createUser({
       email,
+      email,
       password
     }, function(error) {
       if (error) {
         console.log(error);
-        Blaze._globalHelpers.showToast("Register failed");
+        Blaze._globalHelpers.showToast("Register failed: " + error.reason);
       } else {
         Router.go('demo');
       }

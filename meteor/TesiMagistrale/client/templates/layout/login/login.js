@@ -23,7 +23,7 @@ Template.login.events({
 		Meteor.loginWithPassword(email, password, function(error) {
 			if (error) {
 				console.log(error);
-				Blaze._globalHelpers.showToast("Login failed");
+				Blaze._globalHelpers.showToast("Login failed: " + error.reason);
 			} else {
 				Router.go('demo');
 			}
