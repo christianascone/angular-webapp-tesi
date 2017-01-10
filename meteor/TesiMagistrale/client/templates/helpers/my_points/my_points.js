@@ -3,6 +3,11 @@ var POINTS_READY = "POINTS_READY";
 Template.my_points.created = function () {
     // Setup ready var for this template INSTANCE
     this.ready = new ReactiveVar(false);
+    // Setup counter to 0. This counter is used
+    // to store the last animated value, in case of points
+    // change, the animation will continue from current points and it
+    // won't restart from 0
+    this.counter = new ReactiveVar(0);
   };
 
 // Called when the my_points template is rendered
@@ -32,7 +37,10 @@ Template.my_points.helpers({
 			return;
 		}
 
+		// Gets old counter and save new value
+		var oldCounter = Template.instance().counter.get();
 		var totalScore = player.totalScore();
+		Template.instance().counter.set(totalScore);
 
 		// If animate is false or not defined, simply setup points text value
 		// with jquery
@@ -45,7 +53,8 @@ Template.my_points.helpers({
 
 		// Otherwise, use a great animation
 		$('.my_points_counter_' + player._id).each(function() {
-			$(this).prop('Counter', 0).animate({
+			// Use oldCounter as start value, so it won't start everytime from 0
+			$(this).prop('Counter', oldCounter).animate({
 				Counter: totalScore
 			}, {
 				duration: 4000,
