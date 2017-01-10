@@ -1,27 +1,24 @@
 <template name="hello">
 <div>
-	<button>Click Me</button>
-	<p id="test-animation-id" class="">You've pressed the button {{counter}} times.</p>
+	<div class="mdl-grid">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			<input id="points_input" class="mdl-textfield__input" type="text" name="points">
+			<label class="mdl-textfield__label" for="text">User points</label>
+		</div>
+		<!-- Raised button with ripple -->
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect center-block">
+		Create new mock data
+		</button>
+	</div>
 	<br>
 	{{#each player in players}}
 	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card" style="display: block">
 		<h5>{{player.name.address}}</h5>
 		<h6>Total Score: {{player.totalScore}}</h6>
-		<p>
-			{{#each score in player.scores}}
-			<hr>
-			<p>Score:{{score.score}}</p>
-			<p>Description:{{score.description}}</p>
-			<p>Player:{{score.playerId}}</p>
-			{{/each}}
-		</p>
 	</div>
 	<br>
 	{{/each}}
 </div>
-<!-- {{#each players}}
-<p>{{name}}</p>
-{{/each}} -->
 </template>
 <template name="info">
 <h2>Learn Meteor!</h2>
