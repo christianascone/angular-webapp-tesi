@@ -222,8 +222,7 @@ Template.memory.helpers({
 
 			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
 			// Play sound
-			var coinSound = new buzz.sound('/sounds/coin.mp3');
-			coinSound.play();
+			Blaze._globalHelpers.playCoinSound();
 
 			scores = scoreSeries.scores().fetch();
 			Session.set(PLAYING, false);
