@@ -136,7 +136,7 @@ function setupNewMemoryGame(instance, session) {
 	Session.set(PREVIOUS_CARD_INDEX, undefined);
 	Session.set(CARD_EVENT_ALLOWED, true);
 
-	var length = 2;
+	var length = 16;
 	if (length % 2 != 0) {
 		console.error("Not even value for memory game.");
 		return;
