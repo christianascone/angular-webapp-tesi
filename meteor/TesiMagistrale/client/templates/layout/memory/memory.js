@@ -12,6 +12,8 @@ var SCORE_SERIES_ID = "SCORE_SERIES_ID";
 var LINEAR_REWARD_KEY = "LINEAR_REWARD_KEY";
 var INCREMENTAL_REWARD_KEY = "INCREMENTAL_REWARD_KEY";
 
+var PLAYING = "PLAYING";
+
 var MAX_GAME = 5;
 var MAX_REWARD = 750;
 
@@ -140,16 +142,17 @@ function setupNewMemoryGame(instance, session) {
 	var possible_indexes = fillPossibleIndexesWithLength(length);
 
 	var cards = createMemoryCardsArrayWithIndexes(possible_indexes);
-	createRewards(session);
 	// Save cards array in Session, so changing it, the getArray()
 	// function in helpers will be recalled
 	session.set('cardsArray', cards);
+	session.set(PLAYING, true);
 }
 
 // When template is created, the array is initialized
 Template.memory.onCreated(function memoryOnCreated() {
 	// Set the new reactive var for moves counter
 	this.moves_counter = new ReactiveVar(0);
+	createRewards(Session);
 });
 
 // Helpers for memory template
@@ -177,8 +180,13 @@ Template.memory.helpers({
 	 * @return {Boolean} True if the game is won, false otherwise
 	 */
 	won() {
+		// If cards are not initialized, won is true
 		var cards = Session.get('cardsArray');
 		if (!cards) {
+			return true;
+		}
+		// If not playing, won is true
+		if(!Session.get(PLAYING)){
 			return true;
 		}
 
@@ -199,10 +207,20 @@ Template.memory.helpers({
 			// scoreSeries is undefined when this function is recalled due to Session
 			// values update
 			if(!scoreSeries){
+				Session.set(PLAYING, false);
 				return true;
 			}
-			var newScoreId = Scores.createScore(moves_counter, "", scoreSeriesId);
 			var scores = scoreSeries.scores().fetch();
+			var scoreValue = 0;
+			if(Session.get(GAME_TYPE) == LINEAR){
+				scoreValue = Session.get(LINEAR_REWARD_KEY)[scores.length];
+			}else{
+				scoreValue = Session.get(INCREMENTAL_REWARD_KEY)[scores.length];
+			}
+
+			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
+			scores = scoreSeries.scores().fetch();
+			Session.set(PLAYING, false);
 			// If scores length is greater than max game, the score series is closed
 			if(scores.length >= MAX_GAME){
 				scoreSeries.close();
