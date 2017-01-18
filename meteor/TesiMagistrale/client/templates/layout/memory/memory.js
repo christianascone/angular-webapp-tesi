@@ -8,10 +8,12 @@ var FINAL_DIALOG_ID = "final_dialog";
 
 var LINEAR = "LINEAR";
 var INCREMENTAL = "INCREMENTAL";
+var DECREMENTAL = "DECREMENTAL";
 var SCORE_SERIES_ID = "SCORE_SERIES_ID";
 
 var LINEAR_REWARD_KEY = "LINEAR_REWARD_KEY";
 var INCREMENTAL_REWARD_KEY = "INCREMENTAL_REWARD_KEY";
+var DECREMENTAL_REWARD_KEY = "DECREMENTAL_REWARD_KEY";
 
 var PLAYING = "PLAYING";
 var END_GAME = "END_GAME";
@@ -69,6 +71,7 @@ function fillPossibleIndexesWithLength(length) {
 function createRewards(session) {
 	var LINEAR_REWARD = [];
 	var INCREMENTAL_REWARD = [];
+	var DECREMENTAL_REWARD = [];
 	
 	// Sum total segments for incremental rewards
 	var incremental_total_segments = 0;
@@ -79,15 +82,19 @@ function createRewards(session) {
 	for (var i = 0; i < MAX_GAME; i++) {
 		// Simple division for linear reward
 		var linear = MAX_REWARD / MAX_GAME;
-		// Gets the i-th segment of reward
+		// Gets the i-th segment of reward (0,1,2,3,...)
 		var incremental = MAX_REWARD / incremental_total_segments * (i+1);
+		// Gets the (MAX_GAME-i)-th segment of reward (MAX_GAME, MAX_GAME-1,...,1,0)
+		var decremental = MAX_REWARD / incremental_total_segments * (MAX_GAME-i);
 
 		LINEAR_REWARD.push(linear);
 		INCREMENTAL_REWARD.push(incremental);
+		DECREMENTAL_REWARD.push(decremental);
 	}
 
 	session.set(LINEAR_REWARD_KEY, LINEAR_REWARD);
 	session.set(INCREMENTAL_REWARD_KEY, INCREMENTAL_REWARD);
+	session.set(DECREMENTAL_REWARD_KEY, DECREMENTAL_REWARD);
 }
 
 /**
@@ -215,8 +222,10 @@ Template.memory.helpers({
 			var scoreValue = 0;
 			if(Session.get(GAME_TYPE) == LINEAR){
 				scoreValue = Session.get(LINEAR_REWARD_KEY)[scores.length];
-			}else{
+			}else if(Session.get(GAME_TYPE) == INCREMENTAL){
 				scoreValue = Session.get(INCREMENTAL_REWARD_KEY)[scores.length];
+			}else if(Session.get(GAME_TYPE) == DECREMENTAL){
+				scoreValue = Session.get(DECREMENTAL_REWARD_KEY)[scores.length];
 			}
 			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.", scoreValue+" points achieved!");
 
@@ -270,7 +279,31 @@ Template.memory.events({
 	 * Close button of game type dialog clicked
 	 */
 	'click #game_type_close_button' (event, instance) {
-		console.log("Game type close button -> " + LINEAR);
+		console.log("Game type close button -> " + DECREMENTAL);
+		Session.set(GAME_TYPE, DECREMENTAL);
+		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
+		var user = Meteor.user();
+		if (!user) {
+			console.log("No logged user found.");
+			Router.go('login');
+			return;
+		}
+		var userId = user._id;
+		var loggedPlayer = undefined;
+		if (Players.findOne()) {
+			loggedPlayer = Players.findOne().byUserId(userId);
+		}
+
+		var createdScoreSeriesId = ScoreSeries.createScoreSeriesDecremental(loggedPlayer._id);
+		Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
+		console.log("Created ScoreSeries Decremental with id: " + createdScoreSeriesId);
+		setupNewMemoryGame(instance, Session);
+	},
+	/**
+	 * Linear button of game type dialog clicked (UNUSED)
+	 */
+	'click #game_type_linear_button' (event, instance) {
+		console.log("Game type linear button -> " + LINEAR);
 		Session.set(GAME_TYPE, LINEAR);
 		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
 		var user = Meteor.user();

@@ -3,6 +3,7 @@ console.log("Init scoreSeries");
 
 var LINEAR = "LINEAR";
 var INCREMENTAL = "INCREMENTAL";
+var DECREMENTAL = "DECREMENTAL";
 
 ScoreSeries.helpers({
 	/**
@@ -43,6 +44,15 @@ ScoreSeries.createScoreSeriesLinear = function(playerId) {
  */
 ScoreSeries.createScoreSeriesIncremental = function(playerId) {
 	return ScoreSeries.createScoreSeries(playerId, INCREMENTAL);
+};
+
+/**
+ * Create a new ScoreSeries for a player with a DECREMENTAL game type
+ * @param  {Int} playerId Id of player
+ * @return {Int}          The created object id
+ */
+ScoreSeries.createScoreSeriesDecremental = function(playerId) {
+	return ScoreSeries.createScoreSeries(playerId, DECREMENTAL);
 };
 
 /**
