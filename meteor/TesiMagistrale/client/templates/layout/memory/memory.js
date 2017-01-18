@@ -249,6 +249,29 @@ Template.memory.helpers({
 	}
 });
 
+/**
+ * Close the game type selection dialog and gets the player 
+ * object by currently logged user
+ * 
+ * @return {Players} Player object in relation with logged user
+ */
+function closeDialogAndGetPlayer() {
+	Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
+	var user = Meteor.user();
+	if (!user) {
+		console.log("No logged user found.");
+		Router.go('login');
+		return;
+	}
+	var userId = user._id;
+	var loggedPlayer = undefined;
+	if (Players.findOne()) {
+		loggedPlayer = Players.findOne().byUserId(userId);
+	}
+
+	return loggedPlayer;
+}
+
 // Events for memory template
 Template.memory.events({
 	/**
@@ -257,17 +280,9 @@ Template.memory.events({
 	'click #game_type_ok_button' (event, instance) {
 		console.log("Game type ok button -> " + INCREMENTAL);
 		Session.set(GAME_TYPE, INCREMENTAL);
-		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
-		var user = Meteor.user();
-		if (!user) {
-			console.log("No logged user found.");
-			Router.go('login');
+		var loggedPlayer = closeDialogAndGetPlayer();
+		if(!loggedPlayer){
 			return;
-		}
-		var userId = user._id;
-		var loggedPlayer = undefined;
-		if (Players.findOne()) {
-			loggedPlayer = Players.findOne().byUserId(userId);
 		}
 
 		var createdScoreSeriesId = ScoreSeries.createScoreSeriesIncremental(loggedPlayer._id);
@@ -281,17 +296,9 @@ Template.memory.events({
 	'click #game_type_close_button' (event, instance) {
 		console.log("Game type close button -> " + DECREMENTAL);
 		Session.set(GAME_TYPE, DECREMENTAL);
-		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
-		var user = Meteor.user();
-		if (!user) {
-			console.log("No logged user found.");
-			Router.go('login');
+		var loggedPlayer = closeDialogAndGetPlayer();
+		if(!loggedPlayer){
 			return;
-		}
-		var userId = user._id;
-		var loggedPlayer = undefined;
-		if (Players.findOne()) {
-			loggedPlayer = Players.findOne().byUserId(userId);
 		}
 
 		var createdScoreSeriesId = ScoreSeries.createScoreSeriesDecremental(loggedPlayer._id);
@@ -305,17 +312,9 @@ Template.memory.events({
 	'click #game_type_linear_button' (event, instance) {
 		console.log("Game type linear button -> " + LINEAR);
 		Session.set(GAME_TYPE, LINEAR);
-		Blaze._globalHelpers.closeDialog(GAME_TYPE_DIALOG_ID);
-		var user = Meteor.user();
-		if (!user) {
-			console.log("No logged user found.");
-			Router.go('login');
+		var loggedPlayer = closeDialogAndGetPlayer();
+		if(!loggedPlayer){
 			return;
-		}
-		var userId = user._id;
-		var loggedPlayer = undefined;
-		if (Players.findOne()) {
-			loggedPlayer = Players.findOne().byUserId(userId);
 		}
 
 		var createdScoreSeriesId = ScoreSeries.createScoreSeriesLinear(loggedPlayer._id);
