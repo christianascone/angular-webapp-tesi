@@ -72,6 +72,7 @@ Players.helpers({
 
 Players.findSortByTotalScore = function(order) {
 	var list = Players.find({},{sort:{totalScore : -1}}).fetch();
+	// Sort players by score
 	list.sort(function(a,b) {
 		if (a.totalScore() < b.totalScore()) {
 			return 1;
@@ -81,8 +82,18 @@ Players.findSortByTotalScore = function(order) {
 		}
 		return 0;
 	});
+
+	var result = [];
+	// Players are added to list only if they are mocked user (no userId found)
+	// or if it's the currently logged user's player
+	for(var i = 0; i < list.length; i++) {
+		var element = list[i];
+		if(!element.userId || element.userId == Meteor.user()._id){
+			result.push(element);
+		}
+	}
 	
-	return list;
+	return result;
 };
 
 /**
