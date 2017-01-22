@@ -1,9 +1,9 @@
-Template.hello.onCreated(function helloOnCreated() {
+Template.setup.onCreated(function setupOnCreated() {
 
 });
 
-// Helpers for hello template
-Template.hello.helpers({
+// Helpers for setup template
+Template.setup.helpers({
   players() {
     console.log("player list");
     // TODO: Gets only user without userId and add current user
@@ -12,8 +12,8 @@ Template.hello.helpers({
   }
 });
 
-// Events for hello template
-Template.hello.events({
+// Events for setup template
+Template.setup.events({
   // click is the event type and button is the selector
   'click button' (event, instance) {
     var user = Meteor.user();
@@ -27,7 +27,7 @@ Template.hello.events({
     var points = $("#points_input").val();
 
     // Create new mock user
-    var result1 = Players.createPlayer("max.rey@gmail.com", {address: "max.rey@gmail.com"});
+    var result1 = Players.createPlayer("max.rinaldi@gmail.com", {address: "max.rinaldi@gmail.com"});
     var result2 = Players.createPlayer("elisasoverini@gmail.com", {address: "elisasoverini@gmail.com"});
     var result3 = Players.createPlayer("selmi.stefano91@hotmail.it", {address: "selmi.stefano91@hotmail.it"});
     var result4 = Players.createPlayer("anna.marin@yahoo.it", {address: "anna.marin@yahoo.it"});
@@ -35,9 +35,10 @@ Template.hello.events({
     var result6 = Players.createPlayer("lorenzo.ligregni@studio.unibo.it", {address: "lorenzo.ligregni@studio.unibo.it"});
     var result7 = Players.createPlayer("giuseppe.orizzonte@studio.unibo.it", {address: "giuseppe.orizzonte@studio.unibo.it"});
     var result8 = Players.createPlayer("bernardi.n@hotmail.it", {address: "bernardi.n@hotmail.it"});
+    var result9 = Players.createPlayer("ilaria_serra@gmail.com", {address: "ilaria_serra@gmail.com"});
 
     // Create a new series and score for every player
-    var playersArray = [result1, result2, result3, result4, result5, result6, result7, result8];
+    var playersArray = [result1, result2, result3, result4, result5, result6, result7, result8, result9];
     for (var i = 0; i < playersArray.length; i++) {
       var playerId = playersArray[i];
       // Divisor is 0+1 in order to prevent a 0 division

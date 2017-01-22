@@ -22,9 +22,9 @@ Router.route('/login', {
 	layoutTemplate: 'none'
 });
 
-Router.route('/hello', {
-	name: 'hello',
-	template: 'hello'
+Router.route('/setup', {
+	name: 'setup',
+	template: 'setup'
 });
 
 Router.route('/leaderboard', {
