@@ -1,3 +1,5 @@
+var FINAL_USER_POSITION = 3;
+
 Template.setup.onCreated(function setupOnCreated() {
 
 });
@@ -14,8 +16,8 @@ Template.setup.helpers({
 
 // Events for setup template
 Template.setup.events({
-  // click is the event type and button is the selector
-  'click button' (event, instance) {
+  // Click event for "create mock user" button
+  'click #create-button' (event, instance) {
     var user = Meteor.user();
     if (!user) {
       console.log("No logged user found.");
@@ -43,10 +45,12 @@ Template.setup.events({
       var playerId = playersArray[i];
       // Divisor is 0+1 in order to prevent a 0 division
       var divisor = i+1;
+      var userPosition = FINAL_USER_POSITION;
+      var multiplier = userPosition - 1 + 0.2;
       
       // Points for player are the maximum real user points (gets from input)
       // * 1.2 (so, one player will be first) and divided by divisor
-      var playerPoints = points * 1.2 / divisor;
+      var playerPoints = points * multiplier / divisor;
       // Add score series and score for player
       console.log("Add mock data for user: " + playerId);
       var createdScoreSeriesId = ScoreSeries.createScoreSeries(playerId, "TEST_GAME");
@@ -55,4 +59,8 @@ Template.setup.events({
       scoreSeries.close();
     }
   },
+  // Click event for "clear mock users" button
+  'click #clear-button' (event, instance) {
+    Players.clearMockUsers();
+  }
 });

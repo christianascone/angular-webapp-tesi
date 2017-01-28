@@ -70,7 +70,7 @@ Players.helpers({
 	}
 });
 
-Players.findSortByTotalScore = function(order) {
+Players.findSortByTotalScore = function() {
 	var list = Players.find({},{sort:{totalScore : -1}}).fetch();
 	// Sort players by score
 	list.sort(function(a,b) {
@@ -94,6 +94,20 @@ Players.findSortByTotalScore = function(order) {
 	}
 	
 	return result;
+};
+
+/**
+ * Remove from database all mocked users (no userId)
+ * 
+ * @return {void}
+ */
+Players.clearMockUsers = function() {
+	// Select and remove players with userId == null
+	var toRemoveList = Players.find({userId: null}).fetch();
+	// WARNING: Due to untrusted client, it MUST remove every item by id
+	for (var i = 0; i < toRemoveList.length; i++) {
+		Players.remove(toRemoveList[i]._id);
+	}
 };
 
 /**
