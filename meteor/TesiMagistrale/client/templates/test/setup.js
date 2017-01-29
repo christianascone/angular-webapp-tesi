@@ -29,15 +29,15 @@ Template.setup.events({
     var points = $("#points_input").val();
 
     // Create new mock user
-    var result1 = Players.createPlayer("max.rinaldi@gmail.com", {address: "max.rinaldi@gmail.com"});
-    var result2 = Players.createPlayer("elisasoverini@gmail.com", {address: "elisasoverini@gmail.com"});
-    var result3 = Players.createPlayer("selmi.stefano91@hotmail.it", {address: "selmi.stefano91@hotmail.it"});
-    var result4 = Players.createPlayer("anna.marin@yahoo.it", {address: "anna.marin@yahoo.it"});
-    var result5 = Players.createPlayer("scarletti@gmail.com", {address: "scarletti@gmail.com"});
-    var result6 = Players.createPlayer("lorenzo.ligregni@studio.unibo.it", {address: "lorenzo.ligregni@studio.unibo.it"});
-    var result7 = Players.createPlayer("giuseppe.orizzonte@studio.unibo.it", {address: "giuseppe.orizzonte@studio.unibo.it"});
-    var result8 = Players.createPlayer("bernardi.n@hotmail.it", {address: "bernardi.n@hotmail.it"});
-    var result9 = Players.createPlayer("ilaria_serra@gmail.com", {address: "ilaria_serra@gmail.com"});
+    var result1 = Players.createPlayer({address: "max.rinaldi@gmail.com"});
+    var result2 = Players.createPlayer({address: "elisasoverini@gmail.com"});
+    var result3 = Players.createPlayer({address: "selmi.stefano91@hotmail.it"});
+    var result4 = Players.createPlayer({address: "anna.marin@yahoo.it"});
+    var result5 = Players.createPlayer({address: "scarletti@gmail.com"});
+    var result6 = Players.createPlayer({address: "lorenzo.ligregni@studio.unibo.it"});
+    var result7 = Players.createPlayer({address: "giuseppe.orizzonte@studio.unibo.it"});
+    var result8 = Players.createPlayer({address: "bernardi.n@hotmail.it"});
+    var result9 = Players.createPlayer({address: "ilaria_serra@gmail.com"});
 
     // Create a new series and score for every player
     var playersArray = [result1, result2, result3, result4, result5, result6, result7, result8, result9];

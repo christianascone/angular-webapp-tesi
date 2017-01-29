@@ -38,7 +38,7 @@ Template.main.helpers({
 
 		// If no players with given userId are found, a new one is created
 		if (!loggedPlayer) {
-			var result = Players.createPlayer(email, email, userId);
+			var result = Players.createPlayer(email, userId);
 			console.log(result);
 		} else {
 			console.log("Existing player with userId: " + userId);
