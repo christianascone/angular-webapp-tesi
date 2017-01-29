@@ -1,1 +1,4 @@
-{ "hello": "Ciao" }
+{
+  "title": "Progetto di Tesi",
+  "hello": "Ciao"
+}
