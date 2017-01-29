@@ -1,0 +1,37 @@
+<head>
+  <title>TesiMagistrale2</title>
+</head>
+<body>
+</body>
+<template name="home">
+<!-- Always shows a header, even in smaller screens. -->
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title Icon -->
+      <span class="mdl-layout-title">
+        <img class="header-logo" src="/images/logo.svg" />
+      </span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="{{pathFor route='login'}}">Home</a>
+        <a class="mdl-navigation__link" href="{{pathFor route='about'}}">About</a>
+      </nav>
+    </div>
+  </header>
+  <main class="mdl-color--grey-100">
+  <div class="mdl-grid demo-content">
+    {{afterLoad}}
+    <div style="display: inline-block; margin: 0 auto;">
+      <div class="home-logo-container">
+        <img src="/images/logo.svg" class="home-logo" />
+      </div>
+      {{> yield}}
+    </div>
+    {{> toast}}
+  </div>
+  </main>
+</div>
+</template>

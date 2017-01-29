@@ -3,36 +3,45 @@ Router.configure({
 	layoutTemplate: 'main'
 });
 
+// Layout template for login/register pages
+Router.configure({
+	layoutTemplate: 'home'
+});
+
 Router.route('/', {
 	name: 'demo',
-	template: 'demo'
+	template: 'demo',
+	layoutTemplate: 'main'
 });
 
 Router.route('/register', {
 	name: 'register',
 	template: 'register',
 	// None template for login page
-	layoutTemplate: 'none'
+	layoutTemplate: 'home'
 });
 
 Router.route('/login', {
 	name: 'login',
 	template: 'login',
 	// None template for login page
-	layoutTemplate: 'none'
+	layoutTemplate: 'home'
 });
 
 Router.route('/setup', {
 	name: 'setup',
-	template: 'setup'
+	template: 'setup',
+	layoutTemplate: 'main'
 });
 
 Router.route('/leaderboard', {
 	name: 'leaderboard',
-	template: 'leaderboard'
+	template: 'leaderboard',
+	layoutTemplate: 'main'
 });
 
 Router.route('/memory', {
 	name: 'memory',
-	template: 'memory'
+	template: 'memory',
+	layoutTemplate: 'main'
 });
