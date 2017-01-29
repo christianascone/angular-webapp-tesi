@@ -6,7 +6,11 @@ import {
 } from 'meteor/reactive-var';
 import {
 	Session
-} from 'meteor/session'
+} from 'meteor/session';
+import {
+	TAPi18n
+} from 'meteor/tap:i18n';
+
 
 import './main.html';
 
