@@ -6,7 +6,7 @@
 <template name="main">
 <!-- Always shows a header, even in smaller screens. -->
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
+  <header class="mdl-layout__header mdl-color--blue-700">
     <div class="mdl-layout__header-row">
       <!-- Title Icon -->
       <span class="mdl-layout-title">
@@ -17,7 +17,7 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="{{pathFor route='demo'}}">Home</a>
+        <a class="mdl-navigation__link" href="{{pathFor route='welcome'}}">Home</a>
         <a class="mdl-navigation__link" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
         <a class="mdl-navigation__link" href="{{pathFor route='setup'}}">Setup</a>
         <a class="mdl-navigation__link" href="{{pathFor route='memory'}}">Memory</a>
@@ -38,7 +38,7 @@
       </div>
     </header>
     <nav class="mdl-navigation mdl-color--blue-grey-800">
-      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='demo'}}">Home</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='welcome'}}">Home</a>
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='setup'}}">Setup</a>
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='memory'}}">Memory</a>

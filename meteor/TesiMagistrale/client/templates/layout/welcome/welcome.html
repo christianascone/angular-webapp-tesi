@@ -1,0 +1,12 @@
+<template name="welcome">
+<div>
+  <h1>Welcome to my dissertation project!</h1>
+  <!-- Accent-colored raised button with ripple -->
+  <button id="show-dialog" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color-text--blue-grey-50">
+  Show dialog
+  </button>
+</div>
+<div>
+</div>
+{{> dialog title="Titolo Test" message="Messaggio test" ok_message="Ok" close_message="Close"}}
+</template>

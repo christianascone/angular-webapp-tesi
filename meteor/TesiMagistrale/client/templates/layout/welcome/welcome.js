@@ -1,5 +1,5 @@
 // Events for dialog template
-Template.demo.events({
+Template.welcome.events({
   'click .ok-dialog' (event, instance) {
     console.log("ok dialog");
     Blaze._globalHelpers.closeDialog();

@@ -9,8 +9,8 @@ Router.configure({
 });
 
 Router.route('/', {
-	name: 'demo',
-	template: 'demo',
+	name: 'welcome',
+	template: 'welcome',
 	layoutTemplate: 'main'
 });
 

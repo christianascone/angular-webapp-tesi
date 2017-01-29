@@ -7,7 +7,7 @@ Template.register.helpers({
     var user = Meteor.user();
     if (user) {
       console.log("Logged user found.");
-      Router.go('demo');
+      Router.go('welcome');
     }
   }
 });
@@ -29,7 +29,7 @@ Template.register.events({
         console.log(error);
         Blaze._globalHelpers.showToast("Register failed: " + error.reason);
       } else {
-        Router.go('demo');
+        Router.go('welcome');
       }
     });
   },

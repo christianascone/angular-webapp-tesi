@@ -337,7 +337,7 @@ Template.memory.events({
 	 */
 	'click #final_close_button' (event, instance) {
 		Blaze._globalHelpers.closeDialog(FINAL_DIALOG_ID);
-		Router.go("demo");
+		Router.go('welcome');
 	},
 	/**
 	 * Play button click event.

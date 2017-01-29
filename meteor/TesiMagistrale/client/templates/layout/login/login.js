@@ -7,7 +7,7 @@ Template.login.helpers({
 		var user = Meteor.user();
 		if (user) {
 			console.log("Logged user found.");
-			Router.go('demo');
+			Router.go('welcome');
 		}
 	}
 });
@@ -25,7 +25,7 @@ Template.login.events({
 				console.log(error);
 				Blaze._globalHelpers.showToast("Login failed: " + error.reason);
 			} else {
-				Router.go('demo');
+				Router.go('welcome');
 			}
 		});
 	},
