@@ -7,6 +7,8 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 > - [MeteorJS](https://www.meteor.com)
 
+> - [BlazeJS](http://blazejs.org)
+
 ## Meteor Plugins
 
 > - [Zodiase](https://github.com/Zodiase/meteor-mdl) and [Material Design Lite](https://getmdl.io/index.html)
@@ -21,11 +23,11 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 ## Credits
 
-[Main logo](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/logo.svg) by [Aybigeaya](https://thenounproject.com/aybigeaya/) is licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/). [Original file](https://thenounproject.com/term/screen-game/616239/)
+[Main logo](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/logo.svg) by [Aybigeaya](https://thenounproject.com/aybigeaya/) is licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/). ([Original file](https://thenounproject.com/term/screen-game/616239/))
 
 Edited with [Android Material Shadow Generator](https://android-material-icon-generator.bitdroid.de/) licensed under [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/)
 
-Leaderboard images ([1](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/pole-1.svg), [2](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/pole-2.svg), [3](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/pole-3.svg)) by [YouToDesign](http://www.youtodesign.com) is licensed under [Creative Commons Attribution](https://creativecommons.org/licenses/by/4.0/). [Original file](http://www.youtodesign.com/Vector/LogosIcons/2014/0729/2765.html)
+Leaderboard images ([1](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/pole-1.svg), [2](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/pole-2.svg), [3](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/pole-3.svg)) by [YouToDesign](http://www.youtodesign.com) is licensed under [Creative Commons Attribution](https://creativecommons.org/licenses/by/4.0/). ([Original file](http://www.youtodesign.com/Vector/LogosIcons/2014/0729/2765.html))
 
 Memory cards images:
 > - [Howl's moving castle](http://i.imgur.com/HzFbUWC.jpg)
@@ -37,3 +39,7 @@ Memory cards images:
 > - [Laputa's Castle](http://img00.deviantart.net/839e/i/2015/182/0/d/laputa__castle_in_the_sky_over_achensee___wp_by_fantasio-d8zco4i.jpg) by DeviantArt
 > - [Pikachu in Charizard Costume](https://s-media-cache-ak0.pinimg.com/originals/98/2c/d8/982cd88ff2d4285eb3596073b14272ad.jpg)
 > - [Unknown symbol](http://destiny.wikia.com/wiki/File:Unknown_License.png) by [T3CHNOCIDE](http://destiny.wikia.com/wiki/User:T3CHNOCIDE) licensed under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
+
+## License
+
+Released under the [MIT License](http://www.opensource.org/licenses/MIT).
