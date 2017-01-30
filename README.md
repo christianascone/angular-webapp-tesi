@@ -1,6 +1,9 @@
-# meteor-webapp-tesi
+meteor-webapp-tesi
+==================
 
 Academic Dissertation Project for my final exam in [University of Bologna](http://www.unibo.it/en/homepage).
+
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/christianascone/angular-points-path/blob/master/LICENSE)
 
 > - [MeteorJS](https://www.meteor.com)
 
