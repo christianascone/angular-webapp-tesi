@@ -3,7 +3,7 @@ meteor-webapp-tesi
 
 Academic Dissertation Project for my final exam in [University of Bologna](http://www.unibo.it/en/homepage).
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/christianascone/angular-points-path/blob/master/LICENSE)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/christianascone/meteor-webapp-tesi/blob/master/LICENSE)
 
 > - [MeteorJS](https://www.meteor.com)
 
@@ -20,6 +20,26 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 > - [msavin/Mongol](https://github.com/msavin/Mongol) Enable it with ctrl+M (ctrl is also valid for Mac)
 
 > - [tap-i18n](https://github.com/TAPevents/tap-i18n) Internationalization package
+
+
+## Getting Started
+
+### Installing
+
+```
+meteor run
+```
+
+Dependencies will be downloaded.
+
+### Setup
+
+Register a new user in homepage.
+Click on **setup tab**, insert the preferred total score and click **Create new mock data**.
+
+Mock users will be created and added to leaderboard, using the given score.
+It is possible to clear users with **Clear mock data** button.
+
 
 ## Credits
 
