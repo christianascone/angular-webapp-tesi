@@ -17,9 +17,9 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 > - [Iron-router](https://github.com/iron-meteor/iron-router)
 
-> - [msavin/Mongol](https://github.com/msavin/Mongol) Enable it with ctrl+M (ctrl is also valid for Mac)
+> - [msavin/Mongol](https://github.com/msavin/Mongol)
 
-> - [tap-i18n](https://github.com/TAPevents/tap-i18n) Internationalization package
+> - [tap-i18n](https://github.com/TAPevents/tap-i18n)
 
 
 ## Getting Started
