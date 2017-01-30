@@ -58,10 +58,10 @@ Pay attention: special characters (for example @ and /), must be escaped with he
 
 ### Setup
 
-> - Register a new user in homepage and login.
-> - Click on **setup tab**
-> - Insert the preferred total score
-> - Click **Create new mock data**
+1. Register a new user in homepage and login.
+2. Click on **setup tab**
+3. Insert the preferred total score
+4. Click **Create new mock data**
 
 Mock users will be created and added to leaderboard, using the given score.
 It is possible to clear users with **Clear mock data** button.
