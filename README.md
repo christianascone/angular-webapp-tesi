@@ -32,7 +32,7 @@ meteor run
 ```
 Dependencies will be downloaded.
 
-This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) for sending some data but it is not necessary.
+This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) to send some data but it is not necessary.
 If you want to configure it, the MAIL_URL environment variable must be set.
 
 ```
