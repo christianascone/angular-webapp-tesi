@@ -26,6 +26,7 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 ### Installing
 
+Move inside meteor directory and run:
 ```
 meteor run
 ```
