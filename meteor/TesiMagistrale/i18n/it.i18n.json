@@ -1,5 +1,25 @@
 {
   "title": "Progetto di Tesi",
   "register": "Registrati",
-  "hello": "Ciao"
+  "hello": "Ciao",
+  "memory": {
+    "name": "Gioco Memory",
+    "moves": "Mosse",
+    "game_type_dialog": {
+      "title": "Tipo di gioco",
+      "message": "Seleziona il tipo di gioco",
+      "incremental": "Incrementale",
+      "decremental": "Decrementale"
+    },
+    "congratulation_dialog": {
+      "title": "__points__ punti guadagnati!",
+      "message": "Hai vinto con __moves__ mosse.",
+      "close": "Chiudi"
+    },
+    "final_dialog": {
+      "title": "Task completati",
+      "message": "Tutti i task sono stati completati. Grazie.",
+      "close": "Chiudi"
+    }
+  }
 }

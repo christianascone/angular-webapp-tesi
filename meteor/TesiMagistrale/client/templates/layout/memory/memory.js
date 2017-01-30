@@ -227,7 +227,7 @@ Template.memory.helpers({
 			}else if(Session.get(GAME_TYPE) == DECREMENTAL){
 				scoreValue = Session.get(DECREMENTAL_REWARD_KEY)[scores.length];
 			}
-			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, "You won with " + moves_counter + " moves.", scoreValue+" points achieved!");
+			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, TAPi18n.__("memory.congratulation_dialog.message", {moves: moves_counter}), TAPi18n.__("memory.congratulation_dialog.title", {points: scoreValue}));
 
 			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
 			// Play sound
@@ -246,6 +246,30 @@ Template.memory.helpers({
 		} else {
 			return false;
 		}
+	},
+	/*
+	** Dialog translation helper functions
+	*/
+	memoryGameTypeDialogTitle() {
+		return TAPi18n.__("memory.game_type_dialog.title");
+	},
+	memoryGameTypeDialogIncremental() {
+		return TAPi18n.__("memory.game_type_dialog.incremental");
+	},
+	memoryGameTypeDialogDecremental() {
+		return TAPi18n.__("memory.game_type_dialog.decremental");
+	},
+	memoryCongratulationDialogClose() {
+		return TAPi18n.__("memory.congratulation_dialog.close");
+	},
+	memoryFinalDialogTitle() {
+		return TAPi18n.__("memory.final_dialog.title");
+	},
+	memoryFinalDialogMessage() {
+		return TAPi18n.__("memory.final_dialog.message");
+	},
+	memoryFinalDialogClose() {
+		return TAPi18n.__("memory.final_dialog.close");
 	}
 });
 
@@ -346,7 +370,7 @@ Template.memory.events({
 	'click #new-game-button' (event, instance) {
 		var game_type = Session.get(GAME_TYPE);
 		if (!game_type) {
-			Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, "Select game type");
+			Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, TAPi18n.__("memory.game_type_dialog.message"));
 			return;
 		}
 		setupNewMemoryGame(instance, Session);

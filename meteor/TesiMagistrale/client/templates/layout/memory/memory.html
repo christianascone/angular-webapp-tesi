@@ -1,11 +1,12 @@
 <template name="memory">
 <div class="mdl-grid memory-title">
-  <h1>Memory Game</h1>
-  <h4>Moves: {{counter}}</h4>
+  <h1>{{_ "memory.name"}}</h1>
+  <h4>{{_ "memory.moves"}}: {{counter}}</h4>
   <!-- If this game is won, shows the Play button, able to restart the game -->
   {{#if won}}
-  <button id="new-game-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
-  Play
+  <!-- Colored FAB button with ripple -->
+  <button id="new-game-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">play_arrow</i>
   </button>
   {{/if}}
 </div>
@@ -27,9 +28,9 @@
   {{/each}}
 </div>
 <!-- Game type selection dialog -->
-{{> dialog dialog_id="game_type_dialog" title="Game type" close_button_id="game_type_close_button" ok_button_id="game_type_ok_button" ok_message="Incremental" close_message="Decremental"}}
+{{> dialog dialog_id="game_type_dialog" title=memoryGameTypeDialogTitle close_button_id="game_type_close_button" ok_button_id="game_type_ok_button" ok_message=memoryGameTypeDialogIncremental close_message=memoryGameTypeDialogDecremental}}
 <!-- Congratulation dialog -->
-{{> dialog dialog_id="congratulation_dialog" close_button_id="congratulation_close_button" title="Congratulation!" hide_ok_button="true" close_message="Close"}}
+{{> dialog dialog_id="congratulation_dialog" close_button_id="congratulation_close_button" title="Congratulation!" hide_ok_button="true" close_message=memoryCongratulationDialogClose}}
 
-{{> dialog dialog_id="final_dialog" close_button_id="final_close_button" title="Task completed" hide_ok_button="true" message="All tasks are completed. Thank you." close_message="Close"}}
+{{> dialog dialog_id="final_dialog" close_button_id="final_close_button" title=memoryFinalDialogTitle hide_ok_button="true" message=memoryFinalDialogMessage close_message=memoryFinalDialogClose}}
 </template>
