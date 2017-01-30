@@ -3,10 +3,16 @@ import {
 } from 'meteor/meteor';
 
 Meteor.startup(() => {
-	// code to run on server at startup
+	// Check MAIL_URL
 	var email_env = process.env.MAIL_URL;
 	if (!email_env) {
-		console.warn("No MAIL_URL environment variable found.");
+		// Try to read MAIL_URL from private settings in json
+		var PRIVATE_SETTINGS = Meteor.settings.private;
+		if (PRIVATE_SETTINGS && PRIVATE_SETTINGS.MAIL_URL) {
+			process.env.MAIL_URL = PRIVATE_SETTINGS.MAIL_URL;
+		} else {
+			console.warn("No MAIL_URL environment variable found.");
+		}
 	}
 });
 

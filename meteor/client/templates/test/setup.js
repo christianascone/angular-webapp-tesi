@@ -16,6 +16,13 @@ Template.setup.helpers({
 
 // Events for setup template
 Template.setup.events({
+  // Click event to send a test email
+  'click #send-mail-button' (event, instance) {
+    var publicSettings = Meteor.settings.public;
+    var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
+    var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
+    Meteor.call("sendEmail", recipientAddress, senderAddress, "Test", "Body");
+  },
   // Click event for "create mock user" button
   'click #create-button' (event, instance) {
     var user = Meteor.user();

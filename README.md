@@ -33,11 +33,26 @@ meteor run
 Dependencies will be downloaded.
 
 This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) to send some data but it is not necessary.
-If you want to configure it, the MAIL_URL environment variable must be set.
+If you want to configure it, the MAIL_URL environment variable can be set in a json file with the email address of recipient who will receive messages.
 
+Place a `settings.json` in meteor directory.
+
+```javascript
+{
+  "public": {
+    "RECIPIENT_MAIL_ADDRESS": "recipient@domain.com",
+    "SENDER_MAIL_ADDRESS": "sender@domain.com"
+  },
+  "private": {
+    "MAIL_URL": "smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/"
+  }
+}
 ```
-MAIL_URL="smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/" meteor run
+Run
 ```
+meteor --settings settings.json
+```
+
 Pay attention: special characters (for example @ and /), must be escaped with hex code to be valid.
 
 
