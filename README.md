@@ -28,7 +28,7 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 Move inside meteor directory and run:
 ```
-meteor run
+meteor
 ```
 Dependencies will be downloaded.
 
