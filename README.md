@@ -30,8 +30,16 @@ Move inside meteor directory and run:
 ```
 meteor run
 ```
-
 Dependencies will be downloaded.
+
+This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) for sending some data but it is not necessary.
+If you want to configure it, the MAIL_URL environment variable must be set.
+
+```
+MAIL_URL="smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/" meteor run
+```
+Pay attention: special characters (for example @ and /), must be escaped with hex code to be valid.
+
 
 ### Setup
 
