@@ -8,7 +8,7 @@ Template.welcome.events({
     Blaze._globalHelpers.closeDialog();
   },
   // click is the event type and button is the selector
-  'click #show-dialog' (event, instance) {
-    Blaze._globalHelpers.showDialog();
+  'click #start-test' (event, instance) {
+    Router.go('memory');
   },
 });

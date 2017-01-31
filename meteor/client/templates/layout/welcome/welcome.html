@@ -1,12 +1,7 @@
 <template name="welcome">
 <div>
-  <h1>{{_ "welcome.title"}}</h1>
-  <!-- Accent-colored raised button with ripple -->
-  <button id="show-dialog" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-  i18n {{_ "hello"}}
-  </button>
+	<h1>{{_ "welcome.title"}}</h1>
+	<!-- Accent-colored raised button with ripple -->
+	<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">{{_ "welcome.button"}}</button>
 </div>
-<div>
-</div>
-{{> dialog title="Titolo Test" message="Messaggio test" ok_message="Ok" close_message="Close"}}
 </template>

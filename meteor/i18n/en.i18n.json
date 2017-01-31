@@ -1,9 +1,9 @@
 {
   "title": "Dissertation Project",
   "register": "Register",
-  "hello": "Hey there",
   "welcome": {
-    "title": "Welcome to my dissertation project!"
+    "title": "Welcome to my dissertation project!",
+    "button": "Start test"
   },
   "memory": {
     "name": "Memory Game",
