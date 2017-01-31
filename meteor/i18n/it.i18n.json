@@ -2,6 +2,9 @@
   "title": "Progetto di Tesi",
   "register": "Registrati",
   "hello": "Ciao",
+  "welcome": {
+    "title": "Benvenuto nel mio progetto di tesi!"
+  },
   "memory": {
     "name": "Gioco Memory",
     "moves": "Mosse",
