@@ -1,0 +1,11 @@
+.dialogPolyfill {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(0, -50%);
+  background: #fafafa;
+}
+
+.dialogPolyfill:not([open]) {
+	display: none;
+}

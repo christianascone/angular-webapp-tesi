@@ -9,7 +9,8 @@
 <!-- {{ok_message}} Text for ok button -->
 <!-- {{close_message}} Text for close button -->
 <template name="dialog">
-  <dialog id="{{dialog_id}}" class="mdl-dialog">
+  <dialog id="{{dialog_id}}" class="mdl-dialog {{#if isUsingDialogPolyfill}}dialogPolyfill{{/if}}">
+    {{setup dialog_id}}
     <h4 id="dialog-title" class="mdl-dialog__title">{{title}}</h4>
     <div class="mdl-dialog__content">
       <p id="dialog-message">
