@@ -11,6 +11,7 @@ import {
 	TAPi18n
 } from 'meteor/tap:i18n';
 
+dialogPolyfill = require('dialog-polyfill');
 
 import './main.html';
 
