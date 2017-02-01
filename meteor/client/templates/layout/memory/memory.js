@@ -368,12 +368,32 @@ Template.memory.events({
 	 * Restart the game
 	 */
 	'click #new-game-button' (event, instance) {
-		var game_type = Session.get(GAME_TYPE);
-		if (!game_type) {
-			Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, TAPi18n.__("memory.game_type_dialog.message"));
-			return;
+		var user = Meteor.user();
+		var userId = user._id;
+		var loggedPlayer = undefined;
+		if (Players.findOne()) {
+			loggedPlayer = Players.findOne().byUserId(userId);
 		}
-		setupNewMemoryGame(instance, Session);
+
+		// Check if is in debug
+		Meteor.call("isDebug", function(err, response){
+			// Find all closed series for logged player
+			var closedSeries = loggedPlayer.closedScoreSeries().fetch();
+			// If player has closed at least one score series and it's not in debug,
+			// show final dialog and prevent from playing
+			if(closedSeries.length > 0 && !response){
+				Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
+				return;
+			}
+			// Otherwise, in case of production environment or no closed series found
+			// for this player, continue with regular game
+			var game_type = Session.get(GAME_TYPE);
+			if (!game_type) {
+				Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, TAPi18n.__("memory.game_type_dialog.message"));
+				return;
+			}
+			setupNewMemoryGame(instance, Session);
+		});
 	},
 	// TODO: Refactor function
 	'click .card-image' (event, instance) {

@@ -39,5 +39,18 @@ Meteor.methods({
 			subject: subject,
 			text: text
 		});
+	},
+	/**
+	 * Check if it's running in debug
+	 * @return {Boolean} Is in debug
+	 */
+	isDebug: function() {
+		var PRIVATE_SETTINGS = Meteor.settings.private;
+		if(!PRIVATE_SETTINGS || !PRIVATE_SETTINGS.DEBUG){
+			console.log("Debug: false");
+			return false;
+		}
+		console.log("Debug: true");
+		return true;
 	}
 });

@@ -44,10 +44,13 @@ Place a `settings.json` in meteor directory.
     "SENDER_MAIL_ADDRESS": "sender@domain.com"
   },
   "private": {
+  	"DEBUG": false, // true or false, for debug environment
     "MAIL_URL": "smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/"
   }
 }
 ```
+In production (DEBUG absent or equals to false), a user can play only one series.
+
 Run
 ```
 meteor --settings settings.json
