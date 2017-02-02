@@ -47,10 +47,8 @@ Meteor.methods({
 	isDebug: function() {
 		var PRIVATE_SETTINGS = Meteor.settings.private;
 		if(!PRIVATE_SETTINGS || !PRIVATE_SETTINGS.DEBUG){
-			console.log("Debug: false");
 			return false;
 		}
-		console.log("Debug: true");
 		return true;
 	}
 });
