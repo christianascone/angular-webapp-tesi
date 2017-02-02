@@ -26,7 +26,7 @@ Template.dialog.helpers({
     var dialog = document.querySelector('#' + id);
     // Id showModal() function is undefined, use dialogPolyfill
     // for registering the object
-    if (!dialog.showModal) {
+    if (dialog && !dialog.showModal) {
       dialogPolyfill.registerDialog(dialog);
       // Update reactive var. This dialog template IS USING dialog polyfill
       Template.instance().using_dialog_polyfill.set(true);

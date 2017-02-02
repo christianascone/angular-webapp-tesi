@@ -9,3 +9,11 @@
 .dialogPolyfill:not([open]) {
 	display: none;
 }
+
+.dialog-actions-row {
+	padding: 0 !important;
+}
+
+.dialog-large{
+	width: 300px !important;
+}
