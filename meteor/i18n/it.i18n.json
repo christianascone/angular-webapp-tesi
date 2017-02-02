@@ -8,6 +8,12 @@
   "memory": {
     "name": "Gioco Memory",
     "moves": "Mosse",
+    "instructions": {
+      "1": "Avvia una nuova partita con il tasto play.",
+      "2": "Scegli due carte da scoprire.",
+      "3": "Se le due carte sono uguali, saranno rimosse, altrimenti saranno coperte nuovamente.",
+      "4": "Cerca di completare il gioco con il minor numero possibile di mosse."
+    },
     "game_type_dialog": {
       "title": "Tipo di gioco",
       "message": "Seleziona il tipo di gioco",

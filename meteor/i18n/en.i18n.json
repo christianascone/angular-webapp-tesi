@@ -8,6 +8,12 @@
   "memory": {
     "name": "Memory Game",
     "moves": "Moves",
+    "instructions": {
+      "1": "Start a new game with play button.",
+      "2": "Turn over any two cards.",
+      "3": "If the two cards match, they will be removed, else they will turn back over.",
+      "4": "Try to solve the game with as few moves as possible."
+    },
     "game_type_dialog": {
       "title": "Game type",
       "message": "Select game type",
