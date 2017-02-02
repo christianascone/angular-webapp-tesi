@@ -41,26 +41,6 @@ Template.main.helpers({
 			Router.go('login');
 			return;
 		}
-		var userId = user._id;
-		// Search player with user id
-		var loggedPlayer = undefined;
-		if (Players.findOne()) {
-			loggedPlayer = Players.findOne().byUserId(userId);
-		}
-
-		// Read email from logged user
-		var email = null;
-		if (user && user.emails) {
-			email = user.emails[0];
-		}
-
-		// If no players with given userId are found, a new one is created
-		if (!loggedPlayer) {
-			var result = Players.createPlayer(email, userId);
-			console.log(result);
-		} else {
-			console.log("Existing player with userId: " + userId);
-		}
 	},
 	/**
 	 * Gets first email address of logged user

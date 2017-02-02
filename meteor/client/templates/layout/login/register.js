@@ -25,10 +25,33 @@ Template.register.events({
       email,
       password
     }, function(error) {
+      // If error, show error toast
       if (error) {
         console.log(error);
         Blaze._globalHelpers.showToast("Register failed: " + error.reason);
       } else {
+        // Retrieve currently logged user (just registered)
+        var user = Meteor.user();
+        var userId = user._id;
+        // Search player with user id
+        var loggedPlayer = undefined;
+        if (Players.findOne()) {
+          loggedPlayer = Players.findOne().byUserId(userId);
+        }
+
+        // Read email from logged user
+        var email = null;
+        if (user && user.emails) {
+          email = user.emails[0];
+        }
+
+        // If no players with given userId are found, a new one is created
+        if (!loggedPlayer) {
+          var result = Players.createPlayer(email, userId);
+          console.log(result);
+        } else {
+          console.warn("Existing player with userId: " + userId);
+        }
         Router.go('welcome');
       }
     });
