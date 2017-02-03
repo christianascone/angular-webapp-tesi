@@ -4,9 +4,14 @@
   <h4>{{_ "memory.moves"}}: {{counter}}</h4>
   <!-- If this game is won, shows the Play button, able to restart the game -->
   {{#if won}}
+  <ol class="mdl-typography--headline">
+    <li><span>{{_ "memory.instructions.1"}}</span></li>
+    <li><span>{{_ "memory.instructions.2"}}<div>{{_ "memory.instructions.3"}}</div></span></li>
+    <li><span>{{_ "memory.instructions.4"}}</span></li>
+  </ol>
   <!-- Colored FAB button with ripple -->
   <button id="new-game-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-    <i class="material-icons">play_arrow</i>
+  <i class="material-icons">play_arrow</i>
   </button>
   {{/if}}
 </div>
@@ -31,6 +36,5 @@
 {{> dialog dialog_id="game_type_dialog" title=memoryGameTypeDialogTitle close_button_id="game_type_close_button" ok_button_id="game_type_ok_button" ok_message=memoryGameTypeDialogIncremental close_message=memoryGameTypeDialogDecremental}}
 <!-- Congratulation dialog -->
 {{> dialog dialog_id="congratulation_dialog" close_button_id="congratulation_close_button" title="Congratulation!" hide_ok_button="true" close_message=memoryCongratulationDialogClose}}
-
 {{> dialog dialog_id="final_dialog" close_button_id="final_close_button" title=memoryFinalDialogTitle hide_ok_button="true" message=memoryFinalDialogMessage close_message=memoryFinalDialogClose}}
 </template>

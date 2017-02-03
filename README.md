@@ -41,7 +41,9 @@ Place a `settings.json` in meteor directory.
 {
   "public": {
     "RECIPIENT_MAIL_ADDRESS": "recipient@domain.com",
-    "SENDER_MAIL_ADDRESS": "sender@domain.com"
+    "SENDER_MAIL_ADDRESS": "sender@domain.com",
+    "MAX_GAME": 5,
+    "CARDS_NUMBER": 16
   },
   "private": {
   	"DEBUG": false, // true or false, for debug environment
@@ -50,6 +52,8 @@ Place a `settings.json` in meteor directory.
 }
 ```
 In production (DEBUG absent or equals to false), a user can play only one series.
+MAX_GAME is the number of task for each series (5 is default value).
+CARDS_NUMBER is the (even) number of cards for memory game (16 is default value).
 
 Run
 ```
