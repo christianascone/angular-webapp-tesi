@@ -18,7 +18,8 @@ var DECREMENTAL_REWARD_KEY = "DECREMENTAL_REWARD_KEY";
 var PLAYING = "PLAYING";
 var END_GAME = "END_GAME";
 
-var MAX_GAME = 5;
+var MAX_GAME = 5; // Default value
+var CARDS_NUMBER = 16; // Default value
 var MAX_REWARD = 750;
 
 /**
@@ -143,7 +144,7 @@ function setupNewMemoryGame(instance, session) {
 	Session.set(PREVIOUS_CARD_INDEX, undefined);
 	Session.set(CARD_EVENT_ALLOWED, true);
 
-	var length = 16;
+	var length = CARDS_NUMBER;
 	if (length % 2 != 0) {
 		console.error("Not even value for memory game.");
 		return;
@@ -159,6 +160,19 @@ function setupNewMemoryGame(instance, session) {
 
 // When template is created, the array is initialized
 Template.memory.onCreated(function memoryOnCreated() {
+	var publicSettings = Meteor.settings.public;
+
+	// If present, try to read values from settings
+	if(publicSettings){
+		// Read number of task in series
+		if(publicSettings.MAX_GAME){
+			MAX_GAME = publicSettings.MAX_GAME;
+		}
+		// Read number of cards for game
+		if(publicSettings.CARDS_NUMBER){
+			CARDS_NUMBER = publicSettings.CARDS_NUMBER;
+		}
+	}
 	// Set the new reactive var for moves counter
 	this.moves_counter = new ReactiveVar(0);
 	createRewards(Session);
