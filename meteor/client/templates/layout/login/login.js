@@ -25,6 +25,7 @@ Template.login.events({
 				console.log(error);
 				Blaze._globalHelpers.showToast("Login failed: " + error.reason);
 			} else {
+				Logs.log("Logged in");
 				Router.go('welcome');
 			}
 		});

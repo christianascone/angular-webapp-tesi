@@ -1,3 +1,6 @@
+Template.welcome.onRendered(function onRendered() {
+  Logs.log("Open Welcome");
+});
 // Events for dialog template
 Template.welcome.events({
   'click .ok-dialog' (event, instance) {
@@ -9,6 +12,7 @@ Template.welcome.events({
   },
   // click is the event type and button is the selector
   'click #start-test' (event, instance) {
+    Logs.log("Clicked Start Test button");
     Router.go('memory');
   },
 });

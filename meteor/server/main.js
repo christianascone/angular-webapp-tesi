@@ -50,5 +50,16 @@ Meteor.methods({
 			return false;
 		}
 		return true;
+	},
+	/**
+	 * Check if logs are enabled
+	 * @return {Boolean} Is logger enabled
+	 */
+	isLoggerEnabled: function() {
+		var PRIVATE_SETTINGS = Meteor.settings.private;
+		if(!PRIVATE_SETTINGS || PRIVATE_SETTINGS.LOGS_ENABLED == undefined){
+			return true;
+		}
+		return PRIVATE_SETTINGS.LOGS_ENABLED;
 	}
 });

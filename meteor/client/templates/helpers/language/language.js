@@ -11,10 +11,12 @@ Template.language.events({
 		event.preventDefault();
 		console.log("it language");
 		TAPi18n.setLanguage("it");
+		Logs.log("Switch language to: italian");
 	},
 	'click #en-button': function(event) {
 		event.preventDefault();
 		console.log("en language");
 		TAPi18n.setLanguage("en");
+		Logs.log("Switch language to: english");
 	}
 });

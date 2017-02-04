@@ -1,3 +1,7 @@
+Template.leaderboard.onRendered(function onRendered(){
+	Logs.log("Open leaderboard");
+});
+
 // Helpers for leaderboard template
 Template.leaderboard.helpers({
 	/**

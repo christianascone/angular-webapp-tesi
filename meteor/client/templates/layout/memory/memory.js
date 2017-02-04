@@ -183,6 +183,8 @@ Template.memory.onCreated(function memoryOnCreated() {
 Template.memory.onRendered(function memoryOnRendered() {
 	// Build gauge after rendering, with default values
 	Blaze._globalHelpers.buildGauge("container-gauge", TAPi18n.__("memory.moves"));
+
+	Logs.log("Open memory game");
 });
 
 // Helpers for memory template
@@ -266,6 +268,7 @@ Template.memory.helpers({
 				// Play sound
 				Blaze._globalHelpers.playCoinSound();
 			}
+			Logs.log("Won memory game: " + Session.get(GAME_TYPE) + " - points: " + scoreValue + " - moves: " + moves_counter);
 
 			scores = scoreSeries.scores().fetch();
 			Session.set(PLAYING, false);
@@ -275,6 +278,7 @@ Template.memory.helpers({
 				Session.set(SCORE_SERIES_ID, undefined);
 				Session.set(GAME_TYPE, undefined);
 				Session.set(END_GAME, true);
+				Logs.log("Closed task series");
 			}
 			return true;
 		} else {
@@ -429,26 +433,36 @@ Template.memory.events({
 			// If player has closed at least one score series and it's not in debug,
 			// show final dialog and prevent from playing
 			if (closedSeries.length > 0 && !response) {
+				Logs.log("Try to start again memory game. Not permitted, due to already closed series.");
 				Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
 				return;
 			}
 			// Otherwise, in case of production environment or no closed series found
 			// for this player, continue with regular game
 			
+			var game_type = Session.get(GAME_TYPE);
 			if (response) {
-				var game_type = Session.get(GAME_TYPE);
 				if (!game_type) {
 					Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, TAPi18n.__("memory.game_type_dialog.message"));
 					return;
 				}
 				setupNewMemoryGame(instance, Session);
 			} else {
+				if (game_type) {
+					Logs.log("Start another memory game");
+					setupNewMemoryGame(instance, Session);
+					return;
+				}
 				var closedIncrementalCount = ScoreSeries.closedIncremental().fetch().length;
 				var closedDecrementalCount = ScoreSeries.closedDecremental().fetch().length;
 				// Start a new game with type which balance the difference
 				if(closedIncrementalCount > closedDecrementalCount){
+					Logs.log("Start memory game: Decremental");
+					
 					createDecrementalSeriesAndStartGame(loggedPlayer, instance);
 				}else{
+					Logs.log("Start memory game: Incremental");
+					
 					createIncrementalSeriesAndStartGame(loggedPlayer, instance);
 				}
 			}
@@ -472,6 +486,7 @@ Template.memory.events({
 		// Unblock other events
 		if (previous_selected_index == index) {
 			Session.set(CARD_EVENT_ALLOWED, true);
+			Logs.log("Clicked already flipped card.");
 			return;
 		}
 
@@ -479,6 +494,7 @@ Template.memory.events({
 		instance.moves_counter.set(instance.moves_counter.get() + 1);
 
 		console.log("Flipped: " + index);
+		Logs.log("Flipped: " + index);
 		console.log("Previously flipped: " + previous_selected_index);
 		// Fade in/out placeholder
 		$(".placeholder-card.card-image-" + index).fadeToggle(ANIMATION_SPEED_FAST, function() {
@@ -500,12 +516,15 @@ Template.memory.events({
 				var foundPair = previousCard.image_index == currentCard.image_index;
 				if (foundPair) {
 					console.log("Found Pair");
+					Logs.log("Found Pair");
 					// Remove found cards
 					cards[previous_selected_index].removed = true;
 					cards[index].removed = true;
 					Session.set('cardsArray', cards);
 					Session.set(PREVIOUS_CARD_INDEX, undefined);
 				} else {
+					console.log("Found Pair");
+					Logs.log("Not found Pair");
 					// Clear saved index
 					Session.set(PREVIOUS_CARD_INDEX, undefined);
 				}
