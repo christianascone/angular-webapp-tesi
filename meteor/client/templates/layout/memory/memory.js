@@ -158,89 +158,6 @@ function setupNewMemoryGame(instance, session) {
 	session.set(PLAYING, true);
 }
 
-/**
- * Build the moves gauge, with options and initial series
- * 
- * @return {void}
- */
-function buildGauge(label) {
-
-	$('#container-gauge').highcharts({
-		// Options json for gauge chart setup
-		chart: {
-			type: 'solidgauge'
-		},
-
-		title: null,
-
-		pane: {
-			center: ['50%', '85%'],
-			size: '140%',
-			startAngle: -90,
-			endAngle: 90,
-			background: {
-				backgroundColor: '#EEE',
-				innerRadius: '60%',
-				outerRadius: '100%',
-				shape: 'arc'
-			}
-		},
-
-		tooltip: {
-			enabled: false
-		},
-
-		yAxis: {
-			min: 0,
-			max: 50,
-			title: {
-				text: label
-			},
-
-			stops: [
-				[0.1, '#4caf50'],
-				[0.5, '#ffc107'],
-				[0.9, '#f44336']
-			],
-			lineWidth: 0,
-			minorTickInterval: null,
-			tickPixelInterval: 400,
-			tickWidth: 0,
-			title: {
-				y: -70
-			},
-			labels: {
-				y: 16
-			}
-		},
-
-		plotOptions: {
-			solidgauge: {
-				dataLabels: {
-					y: 5,
-					borderWidth: 0,
-					useHTML: true
-				}
-			}
-		},
-
-		credits: {
-			enabled: false
-		},
-
-		series: [{
-			name: label,
-			data: [0],
-			dataLabels: {
-				format: '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">{y}</span><br/>' +
-					'<span style="font-size:12px;color:silver">' + label + '</span></div>'
-			},
-			tooltip: {
-				valueSuffix: ' ' + label
-			}
-		}]
-	});
-}
 
 // When template is created, the array is initialized
 Template.memory.onCreated(function memoryOnCreated() {
@@ -264,7 +181,7 @@ Template.memory.onCreated(function memoryOnCreated() {
 
 Template.memory.onRendered(function memoryOnRendered() {
 	// Build gauge after rendering, with default values
-	buildGauge(TAPi18n.__("memory.moves"));
+	Blaze._globalHelpers.buildGauge("container-gauge", TAPi18n.__("memory.moves"));
 });
 
 // Helpers for memory template
@@ -372,15 +289,7 @@ Template.memory.helpers({
 	 */
 	updateGauge() {
 		var moves_counter = Template.instance().moves_counter.get();
-		// Gets rendered chart object
-		var chart = $('#container-gauge').highcharts();
-
-		if (chart) {
-			var point = chart.series[0].points[0];
-			newVal = moves_counter;
-
-			point.update(newVal);
-		}
+		Blaze._globalHelpers.updateGaugeValue("container-gauge", moves_counter);
 	},
 	/*
 	 ** Dialog translation helper functions
