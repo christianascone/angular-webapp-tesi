@@ -4,6 +4,8 @@ console.log("Init scoreSeries");
 var LINEAR = "LINEAR";
 var INCREMENTAL = "INCREMENTAL";
 var DECREMENTAL = "DECREMENTAL";
+var CLOSED_STATE = "CLOSED";
+var OPEN_STATE = "OPEN";
 
 ScoreSeries.helpers({
 	/**
@@ -20,7 +22,7 @@ ScoreSeries.helpers({
 	 * @return {void}            
 	 */
 	close(callback) {
-		ScoreSeries.update(this._id, {$set: {state: "CLOSED"}}, function() {
+		ScoreSeries.update(this._id, {$set: {state: CLOSED_STATE}}, function() {
 			if(callback){
 				callback();
 			}
@@ -56,6 +58,32 @@ ScoreSeries.createScoreSeriesDecremental = function(playerId) {
 };
 
 /**
+ * Select Closed ScoreSeries for incremental game type
+ * @return {[ScoreSeries]} Closed ScoreSeries list for incremental game
+ */
+ScoreSeries.closedIncremental = function() {
+	return ScoreSeries.byStateAndGameType(CLOSED_STATE, INCREMENTAL);
+};
+
+/**
+ * Select Closed ScoreSeries for decremental game type
+ * @return {[ScoreSeries]} Closed ScoreSeries list for decremental game
+ */
+ScoreSeries.closedDecremental = function() {
+	return ScoreSeries.byStateAndGameType(CLOSED_STATE, DECREMENTAL);
+};
+
+/**
+ * Select ScoreSeries by given state and gameType
+ * @param  {String} state ScoreSeries state
+ * @param  {String} gameType ScoreSeries gameType
+ * @return {[ScoreSeries]}       All the scoreSeries with given state
+ */
+ScoreSeries.byStateAndGameType = function(state, gameType) {
+	return ScoreSeries.find({state: state, gameType: gameType});
+};
+
+/**
  * Create a new score series for a player who starts playing
  * @param  {Int} playerId Id of player
  * @param  {String} gameType Type of game
@@ -65,7 +93,7 @@ ScoreSeries.createScoreSeries = function(playerId, gameType) {
 	var scoreData = {
 		playerId: playerId,
 		gameType: gameType,
-		state: "OPEN"
+		state: OPEN_STATE
 	};
 	return ScoreSeries.insert(scoreData);
 };
