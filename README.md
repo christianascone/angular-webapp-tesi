@@ -58,7 +58,7 @@ Place a `settings.json` in meteor directory.
   },
   "private": {
     "DEBUG": false,
-    "LOGS_ENABLED": false,
+    "LOGS_ENABLED": true,
     "MAIL_URL": "smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/"
   }
 }
@@ -74,7 +74,7 @@ Other settings provide default values, but they can be customized:
 - Private
  - DEBUG means if the environment is production or development (**false is default value**).
 
- - LOGS_ENABLED means if it should log user behavior (**true is default value**).
+ - LOGS_ENABLED means if it should log user behavior in MongoDB (**true is default value**).
    
 - Public   
  - MAX_GAME is the number of task for each series (**5 is default value**).
