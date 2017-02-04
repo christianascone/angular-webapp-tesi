@@ -163,7 +163,7 @@ function setupNewMemoryGame(instance, session) {
  * 
  * @return {void}
  */
-function buildGauge() {
+function buildGauge(label) {
 
 	$('#container-gauge').highcharts({
 		// Options json for gauge chart setup
@@ -194,7 +194,7 @@ function buildGauge() {
 			min: 0,
 			max: 50,
 			title: {
-				text: TAPi18n.__("memory.moves")
+				text: label
 			},
 
 			stops: [
@@ -229,14 +229,14 @@ function buildGauge() {
 		},
 
 		series: [{
-			name: TAPi18n.__("memory.moves"),
+			name: label,
 			data: [0],
 			dataLabels: {
 				format: '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">{y}</span><br/>' +
-					'<span style="font-size:12px;color:silver">' + TAPi18n.__("memory.moves") + '</span></div>'
+					'<span style="font-size:12px;color:silver">' + label + '</span></div>'
 			},
 			tooltip: {
-				valueSuffix: ' ' + TAPi18n.__("memory.moves")
+				valueSuffix: ' ' + label
 			}
 		}]
 	});
@@ -264,7 +264,7 @@ Template.memory.onCreated(function memoryOnCreated() {
 
 Template.memory.onRendered(function memoryOnRendered() {
 	// Build gauge after rendering, with default values
-	buildGauge();
+	buildGauge(TAPi18n.__("memory.moves"));
 });
 
 // Helpers for memory template
