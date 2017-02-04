@@ -84,14 +84,15 @@ meteor --settings settings.json
 ```
 
 
-### Setup
+### Setup (Debug only)
 
 1. Register a new user in homepage and login.
 2. Click on **setup tab**
-3. Insert the preferred total score
+3. Insert the preferred total score to use (meant as the final score the real player will gain after tasks)
 4. Click **Create new mock data**
 
 Mock users will be created and added to leaderboard, using the given score.
+
 It is possible to clear users with **Clear mock data** button.
 
 ## Browsers support <sub><sup><sub><sub>made by <a href="https://godban.github.io">godban</a></sub></sub></sup></sub>
