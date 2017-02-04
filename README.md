@@ -57,7 +57,8 @@ Place a `settings.json` in meteor directory.
     }
   },
   "private": {
-    "DEBUG": false, // true or false, for debug environment
+    "DEBUG": false,
+    "LOGS_ENABLED": false,
     "MAIL_URL": "smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/"
   }
 }
@@ -70,8 +71,12 @@ If you want to configure it, the MAIL_URL environment variable can be set in set
 
 Other settings provide default values, but they can be customized:
 
+- Private
  - DEBUG means if the environment is production or development (**false is default value**).
+
+ - LOGS_ENABLED means if it should log user behavior (**true is default value**).
    
+- Public   
  - MAX_GAME is the number of task for each series (**5 is default value**).
    
  - CARDS_NUMBER is the (even) number of cards for memory game (**16 is default value**).
