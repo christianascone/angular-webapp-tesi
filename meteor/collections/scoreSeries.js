@@ -1,7 +1,6 @@
 ScoreSeries = new Mongo.Collection('scoreSeries');
 console.log("Init scoreSeries");
 
-var LINEAR = "LINEAR";
 var INCREMENTAL = "INCREMENTAL";
 var DECREMENTAL = "DECREMENTAL";
 var CLOSED_STATE = "CLOSED";
@@ -29,15 +28,6 @@ ScoreSeries.helpers({
 		});
 	}
 });
-
-/**
- * Create a new ScoreSeries for a player with a LINEAR game type
- * @param  {Int} playerId Id of player
- * @return {Int}          The created object id
- */
-ScoreSeries.createScoreSeriesLinear = function(playerId) {
-	return ScoreSeries.createScoreSeries(playerId, LINEAR);
-};
 
 /**
  * Create a new ScoreSeries for a player with a INCREMENTAL game type
