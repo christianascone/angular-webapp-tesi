@@ -73,20 +73,20 @@ function createRewards(session) {
 	var LINEAR_REWARD = [];
 	var INCREMENTAL_REWARD = [];
 	var DECREMENTAL_REWARD = [];
-	
+
 	// Sum total segments for incremental rewards
 	var incremental_total_segments = 0;
 	for (var i = 0; i < MAX_GAME; i++) {
-		incremental_total_segments += (i+1);
+		incremental_total_segments += (i + 1);
 	}
 
 	for (var i = 0; i < MAX_GAME; i++) {
 		// Simple division for linear reward
 		var linear = MAX_REWARD / MAX_GAME;
 		// Gets the i-th segment of reward (0,1,2,3,...)
-		var incremental = MAX_REWARD / incremental_total_segments * (i+1);
+		var incremental = MAX_REWARD / incremental_total_segments * (i + 1);
 		// Gets the (MAX_GAME-i)-th segment of reward (MAX_GAME, MAX_GAME-1,...,1,0)
-		var decremental = MAX_REWARD / incremental_total_segments * (MAX_GAME-i);
+		var decremental = MAX_REWARD / incremental_total_segments * (MAX_GAME - i);
 
 		LINEAR_REWARD.push(linear);
 		INCREMENTAL_REWARD.push(incremental);
@@ -158,18 +158,102 @@ function setupNewMemoryGame(instance, session) {
 	session.set(PLAYING, true);
 }
 
+/**
+ * Build the moves gauge, with options and initial series
+ * 
+ * @return {void}
+ */
+function buildGauge() {
+
+	$('#container-gauge').highcharts({
+		// Options json for gauge chart setup
+		chart: {
+			type: 'solidgauge'
+		},
+
+		title: null,
+
+		pane: {
+			center: ['50%', '55%'],
+			size: '80%',
+			startAngle: -90,
+			endAngle: 90,
+			background: {
+				backgroundColor: '#EEE',
+				innerRadius: '60%',
+				outerRadius: '100%',
+				shape: 'arc'
+			}
+		},
+
+		tooltip: {
+			enabled: false
+		},
+
+		yAxis: {
+			min: 0,
+			max: 50,
+			title: {
+				text: TAPi18n.__("memory.moves")
+			},
+
+			stops: [
+				[0.1, '#4caf50'],
+				[0.5, '#ffc107'],
+				[0.9, '#f44336']
+			],
+			lineWidth: 0,
+			minorTickInterval: null,
+			tickPixelInterval: 400,
+			tickWidth: 0,
+			title: {
+				y: -70
+			},
+			labels: {
+				y: 16
+			}
+		},
+
+		plotOptions: {
+			solidgauge: {
+				dataLabels: {
+					y: 5,
+					borderWidth: 0,
+					useHTML: true
+				}
+			}
+		},
+
+		credits: {
+			enabled: false
+		},
+
+		series: [{
+			name: TAPi18n.__("memory.moves"),
+			data: [0],
+			dataLabels: {
+				format: '<div style="text-align:center"><span style="font-size:25px;color:#7e7e7e">{y}</span><br/>' +
+					'<span style="font-size:12px;color:silver">' + TAPi18n.__("memory.moves") + '</span></div>'
+			},
+			tooltip: {
+				valueSuffix: ' ' + TAPi18n.__("memory.moves")
+			}
+		}]
+	});
+}
+
 // When template is created, the array is initialized
 Template.memory.onCreated(function memoryOnCreated() {
 	var publicSettings = Meteor.settings.public;
 
 	// If present, try to read values from settings
-	if(publicSettings){
+	if (publicSettings) {
 		// Read number of task in series
-		if(publicSettings.MAX_GAME){
+		if (publicSettings.MAX_GAME) {
 			MAX_GAME = publicSettings.MAX_GAME;
 		}
 		// Read number of cards for game
-		if(publicSettings.CARDS_NUMBER){
+		if (publicSettings.CARDS_NUMBER) {
 			CARDS_NUMBER = publicSettings.CARDS_NUMBER;
 		}
 	}
@@ -178,8 +262,24 @@ Template.memory.onCreated(function memoryOnCreated() {
 	createRewards(Session);
 });
 
+Template.memory.onRendered(function memoryOnRendered() {
+	// Build gauge after rendering, with default values
+	buildGauge();
+});
+
 // Helpers for memory template
 Template.memory.helpers({
+	/**
+	 * Returns if it is the fully gamified environment or not
+	 * @return {Boolean} True, if the environment is full, or False if it's minimal
+	 */
+	isFullEnvironment() {
+		var fullEnvSetting = Meteor.settings.public.ENVIRONMENT.FULL;
+		if (fullEnvSetting == undefined) {
+			return true;
+		}
+		return fullEnvSetting;
+	},
 	/**
 	 * Gets move counter
 	 * 
@@ -209,7 +309,7 @@ Template.memory.helpers({
 			return true;
 		}
 		// If not playing, won is true
-		if(!Session.get(PLAYING)){
+		if (!Session.get(PLAYING)) {
 			return true;
 		}
 
@@ -228,20 +328,24 @@ Template.memory.helpers({
 			var scoreSeries = ScoreSeries.findOne(scoreSeriesId);
 			// scoreSeries is undefined when this function is recalled due to Session
 			// values update
-			if(!scoreSeries){
+			if (!scoreSeries) {
 				Session.set(PLAYING, false);
 				return true;
 			}
 			var scores = scoreSeries.scores().fetch();
 			var scoreValue = 0;
-			if(Session.get(GAME_TYPE) == LINEAR){
+			if (Session.get(GAME_TYPE) == LINEAR) {
 				scoreValue = Session.get(LINEAR_REWARD_KEY)[scores.length];
-			}else if(Session.get(GAME_TYPE) == INCREMENTAL){
+			} else if (Session.get(GAME_TYPE) == INCREMENTAL) {
 				scoreValue = Session.get(INCREMENTAL_REWARD_KEY)[scores.length];
-			}else if(Session.get(GAME_TYPE) == DECREMENTAL){
+			} else if (Session.get(GAME_TYPE) == DECREMENTAL) {
 				scoreValue = Session.get(DECREMENTAL_REWARD_KEY)[scores.length];
 			}
-			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, TAPi18n.__("memory.congratulation_dialog.message", {moves: moves_counter}), TAPi18n.__("memory.congratulation_dialog.title", {points: scoreValue}));
+			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, TAPi18n.__("memory.congratulation_dialog.message", {
+				moves: moves_counter
+			}), TAPi18n.__("memory.congratulation_dialog.title", {
+				points: scoreValue
+			}));
 
 			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
 			// Play sound
@@ -250,7 +354,7 @@ Template.memory.helpers({
 			scores = scoreSeries.scores().fetch();
 			Session.set(PLAYING, false);
 			// If scores length is greater than max game, the score series is closed
-			if(scores.length >= MAX_GAME){
+			if (scores.length >= MAX_GAME) {
 				scoreSeries.close();
 				Session.set(SCORE_SERIES_ID, undefined);
 				Session.set(GAME_TYPE, undefined);
@@ -261,9 +365,26 @@ Template.memory.helpers({
 			return false;
 		}
 	},
+	/**
+	 * Update gauge with moves counter as value
+	 * 
+	 * @return {void} 
+	 */
+	updateGauge() {
+		var moves_counter = Template.instance().moves_counter.get();
+		// Gets rendered chart object
+		var chart = $('#container-gauge').highcharts();
+
+		if (chart) {
+			var point = chart.series[0].points[0];
+			newVal = moves_counter;
+
+			point.update(newVal);
+		}
+	},
 	/*
-	** Dialog translation helper functions
-	*/
+	 ** Dialog translation helper functions
+	 */
 	memoryGameTypeDialogTitle() {
 		return TAPi18n.__("memory.game_type_dialog.title");
 	},
@@ -319,7 +440,7 @@ Template.memory.events({
 		console.log("Game type ok button -> " + INCREMENTAL);
 		Session.set(GAME_TYPE, INCREMENTAL);
 		var loggedPlayer = closeDialogAndGetPlayer();
-		if(!loggedPlayer){
+		if (!loggedPlayer) {
 			return;
 		}
 
@@ -335,7 +456,7 @@ Template.memory.events({
 		console.log("Game type close button -> " + DECREMENTAL);
 		Session.set(GAME_TYPE, DECREMENTAL);
 		var loggedPlayer = closeDialogAndGetPlayer();
-		if(!loggedPlayer){
+		if (!loggedPlayer) {
 			return;
 		}
 
@@ -351,7 +472,7 @@ Template.memory.events({
 		console.log("Game type linear button -> " + LINEAR);
 		Session.set(GAME_TYPE, LINEAR);
 		var loggedPlayer = closeDialogAndGetPlayer();
-		if(!loggedPlayer){
+		if (!loggedPlayer) {
 			return;
 		}
 
@@ -365,7 +486,7 @@ Template.memory.events({
 	 */
 	'click #congratulation_close_button' (event, instance) {
 		Blaze._globalHelpers.closeDialog(CONGRATULATION_DIALOG_ID);
-		if(Session.get(END_GAME)){
+		if (Session.get(END_GAME)) {
 			Session.set(END_GAME, false);
 			Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
 		}
@@ -390,12 +511,12 @@ Template.memory.events({
 		}
 
 		// Check if is in debug
-		Meteor.call("isDebug", function(err, response){
+		Meteor.call("isDebug", function(err, response) {
 			// Find all closed series for logged player
 			var closedSeries = loggedPlayer.closedScoreSeries().fetch();
 			// If player has closed at least one score series and it's not in debug,
 			// show final dialog and prevent from playing
-			if(closedSeries.length > 0 && !response){
+			if (closedSeries.length > 0 && !response) {
 				Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
 				return;
 			}
