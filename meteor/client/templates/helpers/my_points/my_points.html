@@ -1,6 +1,10 @@
 <!-- Template for showing current points and coin image -->
 <template name="my_points">
+{{#if animate}}
 <img class="svg svg-coin" src="/images/coin-money-9.svg" />
+{{else}}
+<span style="margin-right: 5px">Points: </span>
+{{/if}}
 <span class="my_points_counter_{{player._id}} coin-points"></span>
 {{playerPoints player animate}}
 </template>
