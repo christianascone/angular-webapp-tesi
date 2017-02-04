@@ -18,6 +18,8 @@ var DECREMENTAL_REWARD_KEY = "DECREMENTAL_REWARD_KEY";
 var PLAYING = "PLAYING";
 var END_GAME = "END_GAME";
 
+var FULLY_GAMIFIED = true; // Default value
+
 var MAX_GAME = 5; // Default value
 var CARDS_NUMBER = 16; // Default value
 var MAX_REWARD = 750;
@@ -173,6 +175,12 @@ Template.memory.onCreated(function memoryOnCreated() {
 		if (publicSettings.CARDS_NUMBER) {
 			CARDS_NUMBER = publicSettings.CARDS_NUMBER;
 		}
+
+		if(publicSettings.ENVIRONMENT.FULL == undefined){
+			FULLY_GAMIFIED = true;
+		}else{
+			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
+		}
 	}
 	// Set the new reactive var for moves counter
 	this.moves_counter = new ReactiveVar(0);
@@ -191,11 +199,7 @@ Template.memory.helpers({
 	 * @return {Boolean} True, if the environment is full, or False if it's minimal
 	 */
 	isFullEnvironment() {
-		var fullEnvSetting = Meteor.settings.public.ENVIRONMENT.FULL;
-		if (fullEnvSetting == undefined) {
-			return true;
-		}
-		return fullEnvSetting;
+		return FULLY_GAMIFIED;
 	},
 	/**
 	 * Gets move counter
@@ -265,8 +269,12 @@ Template.memory.helpers({
 			}));
 
 			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
-			// Play sound
-			Blaze._globalHelpers.playCoinSound();
+
+			// Play coin sound only if the environment is fully gamified
+			if(FULLY_GAMIFIED){
+				// Play sound
+				Blaze._globalHelpers.playCoinSound();
+			}
 
 			scores = scoreSeries.scores().fetch();
 			Session.set(PLAYING, false);
