@@ -43,7 +43,7 @@
       {{/if}}
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='memory'}}">Memory</a>
       {{#if currentUser}}
-      <a class="mdl-navigation__link mdl-color-text--white logout" href="#">Logout</a>
+        {{> logout class="mdl-color-text--white"}}
       {{/if}}
     </nav>
   </div>
@@ -58,5 +58,5 @@
 </template>
 <!-- Template for logout button -->
 <template name="logout">
-<a class="mdl-navigation__link logout" href="#">Logout</a>
+<a class="mdl-navigation__link logout {{class}}" href="#">Logout</a>
 </template>
