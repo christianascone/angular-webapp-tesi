@@ -348,6 +348,34 @@ function closeDialogAndGetPlayer() {
 	return loggedPlayer;
 }
 
+/**
+ * Create an incremental game series and setup a new game
+ * 
+ * @param  {Player} loggedPlayer Player of logged user
+ * @return {void}              
+ */
+function createIncrementalSeriesAndStartGame(loggedPlayer, instance) {
+	Session.set(GAME_TYPE, INCREMENTAL);
+	var createdScoreSeriesId = ScoreSeries.createScoreSeriesIncremental(loggedPlayer._id);
+	Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
+	console.log("Created ScoreSeries Incremental with id: " + createdScoreSeriesId);
+	setupNewMemoryGame(instance, Session);
+}
+
+/**
+ * Create an decremental game series and setup a new game
+ * 
+ * @param  {Player} loggedPlayer Player of logged user
+ * @return {void}              
+ */
+function createDecrementalSeriesAndStartGame(loggedPlayer, instance) {
+	Session.set(GAME_TYPE, DECREMENTAL);
+	var createdScoreSeriesId = ScoreSeries.createScoreSeriesDecremental(loggedPlayer._id);
+	Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
+	console.log("Created ScoreSeries Decremental with id: " + createdScoreSeriesId);
+	setupNewMemoryGame(instance, Session);
+}
+
 // Events for memory template
 Template.memory.events({
 	/**
@@ -355,32 +383,24 @@ Template.memory.events({
 	 */
 	'click #game_type_ok_button' (event, instance) {
 		console.log("Game type ok button -> " + INCREMENTAL);
-		Session.set(GAME_TYPE, INCREMENTAL);
 		var loggedPlayer = closeDialogAndGetPlayer();
 		if (!loggedPlayer) {
 			return;
 		}
 
-		var createdScoreSeriesId = ScoreSeries.createScoreSeriesIncremental(loggedPlayer._id);
-		Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
-		console.log("Created ScoreSeries Incremental with id: " + createdScoreSeriesId);
-		setupNewMemoryGame(instance, Session);
+		createIncrementalSeriesAndStartGame(loggedPlayer, instance);
 	},
 	/**
 	 * Close button of game type dialog clicked
 	 */
 	'click #game_type_close_button' (event, instance) {
 		console.log("Game type close button -> " + DECREMENTAL);
-		Session.set(GAME_TYPE, DECREMENTAL);
 		var loggedPlayer = closeDialogAndGetPlayer();
 		if (!loggedPlayer) {
 			return;
 		}
 
-		var createdScoreSeriesId = ScoreSeries.createScoreSeriesDecremental(loggedPlayer._id);
-		Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
-		console.log("Created ScoreSeries Decremental with id: " + createdScoreSeriesId);
-		setupNewMemoryGame(instance, Session);
+		createDecrementalSeriesAndStartGame(loggedPlayer, instance);
 	},
 	/**
 	 * Linear button of game type dialog clicked (UNUSED)
@@ -439,12 +459,24 @@ Template.memory.events({
 			}
 			// Otherwise, in case of production environment or no closed series found
 			// for this player, continue with regular game
-			var game_type = Session.get(GAME_TYPE);
-			if (!game_type) {
-				Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, TAPi18n.__("memory.game_type_dialog.message"));
-				return;
+			
+			if (response) {
+				var game_type = Session.get(GAME_TYPE);
+				if (!game_type) {
+					Blaze._globalHelpers.showDialog(GAME_TYPE_DIALOG_ID, TAPi18n.__("memory.game_type_dialog.message"));
+					return;
+				}
+				setupNewMemoryGame(instance, Session);
+			} else {
+				var closedIncrementalCount = ScoreSeries.closedIncremental().fetch().length;
+				var closedDecrementalCount = ScoreSeries.closedDecremental().fetch().length;
+				// Start a new game with type which balance the difference
+				if(closedIncrementalCount > closedDecrementalCount){
+					createDecrementalSeriesAndStartGame(loggedPlayer, instance);
+				}else{
+					createIncrementalSeriesAndStartGame(loggedPlayer, instance);
+				}
 			}
-			setupNewMemoryGame(instance, Session);
 		});
 	},
 	// TODO: Refactor function
