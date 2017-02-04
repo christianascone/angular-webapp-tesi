@@ -39,8 +39,9 @@ meteor
 ```
 Dependencies will be downloaded.
 
-This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) to send some data but it is not necessary.
-If you want to configure it, the MAIL_URL environment variable can be set in a json file with the email address of recipient who will receive messages.
+### Configuration (Optional)
+
+This project uses a settings file for some optional features.
 
 Place a `settings.json` in meteor directory.
 
@@ -61,17 +62,26 @@ Place a `settings.json` in meteor directory.
   }
 }
 ```
-In production (DEBUG absent or equals to false), a user can play only one series.
-MAX_GAME is the number of task for each series (5 is default value).
-CARDS_NUMBER is the (even) number of cards for memory game (16 is default value).
-ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (true is default).
+
+This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) to send some data but it is not necessary.
+If you want to configure it, the MAIL_URL environment variable can be set in setting file with the email address of recipient who will receive messages and email address of sender.
+
+**Pay attention**: special characters (for example @ and /) in MAIL_URL, must be escaped with hex code to be valid.
+
+Other settings provide default values, but they can be customized:
+
+ - DEBUG means if the environment is production or development (**false is default value**).
+   
+ - MAX_GAME is the number of task for each series (**5 is default value**).
+   
+ - CARDS_NUMBER is the (even) number of cards for memory game (**16 is default value**).
+   
+ - ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (**true is default value**).
 
 Run
 ```
 meteor --settings settings.json
 ```
-
-Pay attention: special characters (for example @ and /), must be escaped with hex code to be valid.
 
 
 ### Setup
