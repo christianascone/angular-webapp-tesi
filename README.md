@@ -9,7 +9,7 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 > - [BlazeJS](http://blazejs.org)
 
-## Meteor Plugins
+## Meteor Packages
 
 > - [Zodiase](https://github.com/Zodiase/meteor-mdl) and [Material Design Lite](https://getmdl.io/index.html)
 
@@ -20,6 +20,10 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 > - [msavin/Mongol](https://github.com/msavin/Mongol)
 
 > - [tap-i18n](https://github.com/TAPevents/tap-i18n)
+
+> - [Meteor Wrapper for HighCharts](https://github.com/MaazAli/Meteor-HighCharts)
+
+> - [Highcharts Solid Gauges](https://github.com/MaazAli/highcharts-gauge)
 
 
 ## Getting Started
@@ -46,10 +50,13 @@ Place a `settings.json` in meteor directory.
     "RECIPIENT_MAIL_ADDRESS": "recipient@domain.com",
     "SENDER_MAIL_ADDRESS": "sender@domain.com",
     "MAX_GAME": 5,
-    "CARDS_NUMBER": 16
+    "CARDS_NUMBER": 16,
+    "ENVIRONMENT":{
+      "FULL": true
+    }
   },
   "private": {
-  	"DEBUG": false, // true or false, for debug environment
+    "DEBUG": false, // true or false, for debug environment
     "MAIL_URL": "smtp://USERNAME%40DOMAIN:PASSWORD@HOST:PORT/"
   }
 }
@@ -57,6 +64,7 @@ Place a `settings.json` in meteor directory.
 In production (DEBUG absent or equals to false), a user can play only one series.
 MAX_GAME is the number of task for each series (5 is default value).
 CARDS_NUMBER is the (even) number of cards for memory game (16 is default value).
+ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (true is default).
 
 Run
 ```
@@ -84,6 +92,8 @@ It is possible to clear users with **Clear mock data** button.
 
 ## Credits
 
+### Images
+
 [Main logo](https://github.com/christianascone/meteor-webapp-tesi/blob/master/meteor/TesiMagistrale/public/images/logo.svg) by [Aybigeaya](https://thenounproject.com/aybigeaya/) is licensed under [CC BY 3.0 US](https://creativecommons.org/licenses/by/3.0/us/). ([Original file](https://thenounproject.com/term/screen-game/616239/))
 
 Edited with [Android Material Shadow Generator](https://android-material-icon-generator.bitdroid.de/) licensed under [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/)
@@ -100,6 +110,10 @@ Memory cards images:
 > - [Laputa's Castle](http://img00.deviantart.net/839e/i/2015/182/0/d/laputa__castle_in_the_sky_over_achensee___wp_by_fantasio-d8zco4i.jpg) by DeviantArt
 > - [Pikachu in Charizard Costume](https://s-media-cache-ak0.pinimg.com/originals/98/2c/d8/982cd88ff2d4285eb3596073b14272ad.jpg)
 > - [Unknown symbol](http://destiny.wikia.com/wiki/File:Unknown_License.png) by [T3CHNOCIDE](http://destiny.wikia.com/wiki/User:T3CHNOCIDE) licensed under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)
+
+### Dependencies
+
+[Highcharts](http://www.highcharts.com/) by [Highsoft](http://www.highcharts.com/about) licensed under [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/)
 
 ## License
 

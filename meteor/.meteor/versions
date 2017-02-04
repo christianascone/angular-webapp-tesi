@@ -56,6 +56,8 @@ launch-screen@1.0.12
 livedata@1.0.18
 localstorage@1.0.12
 logging@1.1.16
+maazalik:highcharts@0.4.0
+maazalik:highcharts-gauge@0.4.0
 meteor@1.6.0
 meteor-base@1.0.4
 meteorspark:util@0.2.0
