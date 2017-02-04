@@ -28,6 +28,15 @@ Template.main.onCreated(function mainOnCreated() {
 	});
 });
 
+Template.main.onRendered(function onRendered() {
+	// Logs scrolling
+	$('main').scroll(function() {
+		var main_offset = $('main').scrollTop();
+
+		Logs.log("Scroll to offset: " + main_offset);
+	});
+});
+
 // Helpers for logout template
 Template.main.helpers({
 	/**
@@ -95,6 +104,7 @@ Template.main.helpers({
 Template.logout.events({
 	'click .logout' (event, instance) {
 		event.preventDefault();
+		Logs.log("Logout");
 		Meteor.logout(function(err) {
 			Router.go('login');
 		});
