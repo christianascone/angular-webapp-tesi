@@ -174,8 +174,8 @@ function buildGauge() {
 		title: null,
 
 		pane: {
-			center: ['50%', '55%'],
-			size: '80%',
+			center: ['50%', '85%'],
+			size: '140%',
 			startAngle: -90,
 			endAngle: 90,
 			background: {

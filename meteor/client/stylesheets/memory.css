@@ -28,6 +28,14 @@
 	margin: 0 !important;
 }
 
+.memory-title-width {
+	width: 100%;
+}
+
+.moves-counter {
+	margin-left: 18px;
+}
+
 #new-game-button {
 	position: fixed;
     display: block;
@@ -40,6 +48,6 @@
 
 .highcharts-background {
 	width: 330px; 
-	height: 230px;
+	height: 150px;
 	fill: rgba(255, 255, 255, 0);
 }

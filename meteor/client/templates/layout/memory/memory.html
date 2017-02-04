@@ -1,10 +1,14 @@
 <template name="memory">
-<div class="mdl-grid memory-title">
-  <h1>{{_ "memory.name"}}</h1>
+<div class="mdl-grid memory-title-width {{#if isFullEnvironment}}{{else}}memory-title{{/if}}">
+  <div class="mdl-cell mdl-cell--6-col">
+    <h1>{{_ "memory.name"}}</h1>
+  </div>
   {{#if isFullEnvironment}}
-  <div id="container-gauge" class="highcharts-background">{{updateGauge}}</div>
+  <div class="mdl-cell mdl-cell--6-col">
+    <div id="container-gauge" class="highcharts-background">{{updateGauge}}</div>
+  </div>
   {{else}}
-  <h4>{{_ "memory.moves"}}: {{counter}}</h4>
+  <h4 class="moves-counter">{{_ "memory.moves"}}: {{counter}}</h4>
   {{/if}}
   <!-- If this game is won, shows the Play button, able to restart the game -->
   {{#if won}}
