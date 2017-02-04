@@ -1,6 +1,13 @@
 {
   "title": "Progetto di Tesi",
-  "register": "Registrati",
+  "register": {
+    "title": "Registrati",
+    "age": "Età",
+    "gender": {
+      "male": "Maschio",
+      "female": "Femmina"
+    }
+  },
   "welcome": {
     "title": "Benvenuto nel mio progetto di tesi!",
     "button": "Inizia test"

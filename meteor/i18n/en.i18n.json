@@ -1,6 +1,13 @@
 {
   "title": "Dissertation Project",
-  "register": "Register",
+  "register": {
+    "title": "Register",
+    "age": "Age",
+    "gender": {
+      "male": "Male",
+      "female": "Female"
+    }
+  },
   "welcome": {
     "title": "Welcome to my dissertation project!",
     "button": "Start test"

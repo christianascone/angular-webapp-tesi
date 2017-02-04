@@ -2,7 +2,7 @@
 {{afterLoad}}
 <div class="demo-cards mdl-shadow--2dp mdl-card mdl-grid">
 	<div class="mdl-grid">
-		<h2>{{_ "register"}}</h2>
+		<h2>{{_ "register.title"}}</h2>
 	</div>
 	<div class="mdl-grid">
 		<form class="register" action="#">
@@ -14,10 +14,24 @@
 				<input class="mdl-textfield__input" type="password" name="password">
 				<label class="mdl-textfield__label" for="password">Password</label>
 			</div>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="number" name="age">
+				<label class="mdl-textfield__label" for="age">{{_ "register.age"}}</label>
+			</div>
+			<div>
+				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="gender-male">
+					<input type="radio" id="gender-male" class="mdl-radio__button" name="genders" value="male" checked>
+					<span class="mdl-radio__label">{{_ "register.gender.male"}}</span>
+				</label>
+				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="gender-female">
+					<input type="radio" id="gender-female" class="mdl-radio__button" name="genders" value="female">
+					<span class="mdl-radio__label">{{_ "register.gender.female"}}</span>
+				</label>
+			</div>
 			<div class="mdl-grid">
 				<!-- Raised button with ripple -->
 				<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect center-block">
-				{{_ "register"}}
+				{{_ "register.title"}}
 				</button>
 			</div>
 		</form>
