@@ -46,6 +46,20 @@ Template.survey_1.helpers({
     return getSurvey1QuestionsJson();
   },
   /**
+   * Simple check for first object in options list.
+   * If true, the checked option is added to input
+   * 
+   * @param  {Int}  index Index of item to check
+   * @return {String}       "Checked" if index is equal to 0, "" otherwise
+   */
+  isChecked(index) {
+    if(index == 0){
+      return "checked";
+    }else{
+      return "";
+    }
+  },
+  /**
    * Translate a question object
    * @param  {JSON} json Json object containing string to translate
    * @param  {String} tag  Tag identifier for object to translate

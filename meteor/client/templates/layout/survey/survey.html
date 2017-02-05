@@ -12,7 +12,7 @@
 				<div class="survey-options-container">
 					{{#each option in question.options}}
 					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{question.id}}_{{option.value}}">
-						<input type="radio" id="{{question.id}}_{{option.value}}" class="mdl-radio__button" name="{{question.id}}" value="{{option.value}}" checked>
+						<input type="radio" id="{{question.id}}_{{option.value}}" class="mdl-radio__button" name="{{question.id}}" value="{{option.value}}" {{isChecked @index}}>
 						<span class="mdl-radio__label">{{translateJsonObject option "label"}}</span>
 					</label>
 					{{/each}}

@@ -1,30 +1,30 @@
 // Json object containing the questions for two final surveys
 survey_questions = {
 	survey_1: [{
-		question_en: "Test EN",
-		question_it: "Test IT",
+		question_en: "Question 1: Text",
+		question_it: "Domanda 1: Testo",
 		id: 1,
 		options: [{
-			label_en: "One_1 EN",
-			label_it: "One_1 IT",
-			value: "One_1"
+			label_en: "1",
+			label_it: "1",
+			value: "1"
 		}, {
-			label_en: "Two_1 EN",
-			label_it: "Two_1 IT",
-			value: "Two_1"
+			label_en: "2",
+			label_it: "2",
+			value: "2"
 		}]
 	}, {
-		question_en: "Test2 EN",
-		question_it: "Test2 IT",
+		question_en: "Question 2: Text",
+		question_it: "Domanda 2: Testo",
 		id: 2,
 		options: [{
-			label_en: "One_2 EN",
-			label_it: "One_2 IT",
-			value: "One_2"
+			label_en: "1",
+			label_it: "1",
+			value: "1"
 		}, {
-			label_en: "Two_2 EN",
-			label_it: "Two_2 IT",
-			value: "Two_2"
+			label_en: "2",
+			label_it: "2",
+			value: "2"
 		}]
 	}]
 };
