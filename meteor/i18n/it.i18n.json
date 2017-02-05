@@ -37,5 +37,10 @@
       "message": "Tutti i task sono stati completati. Grazie.",
       "close": "Chiudi"
     }
+  },
+  "survey": {
+    "1": {
+      "title": "Domande: Parte 1"
+    }
   }
 }
