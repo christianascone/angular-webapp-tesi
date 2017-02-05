@@ -1,3 +1,5 @@
+var SURVEY1_FINAL_DIALOG_ID = "survey1_final_dialog";
+
 /**
  * Gets the questions json for survey 1, using current language
  * 
@@ -21,6 +23,19 @@ Template.survey_1.helpers({
     }
 
     Logs.log("Open Survey_1");
+
+    // Check if is in debug
+    Meteor.call("isDebug", function(err, response) {
+      // Find survey with index 1 for logged user
+      var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, 1).fetch();
+      // If user already completed the survey with index 1 and this is not
+      // a debug environment, he cannot continue
+      if (userSurveyResults.length > 0 && !response) {
+        Logs.log("Try to complete another Survey 1. Not permitted, due to already present results.");
+        Blaze._globalHelpers.showDialog(SURVEY1_FINAL_DIALOG_ID);
+        return;
+      }
+    });
   },
   /**
    * Gets list of questions for survey 1
@@ -40,11 +55,27 @@ Template.survey_1.helpers({
     // For example: "question" tag, in english ("en")
     // will return json["question_en"]
     return json[tag + "_" + TAPi18n.getLanguage()];
+  },
+  surveyFinalDialogTitle() {
+    return TAPi18n.__("survey.1.final_dialog.title");
+  },
+  surveyFinalDialogMessage() {
+    return TAPi18n.__("survey.1.final_dialog.message");
+  },
+  surveyFinalDialogClose() {
+    return TAPi18n.__("survey.1.final_dialog.close");
   }
 });
 
 // Events for survey_1 template
 Template.survey_1.events({
+  /**
+   * Close button of survey ending dialog clicked
+   */
+  'click #survey1_final_close_button' (event, instance) {
+    Blaze._globalHelpers.closeDialog(SURVEY1_FINAL_DIALOG_ID);
+    Router.go('welcome');
+  },
   // submit action on form element
   'submit form': function(event) {
     event.preventDefault();
@@ -74,5 +105,7 @@ Template.survey_1.events({
       return;
     }
     SurveyResults.createSurvey1Result(user._id, results);
+    Logs.log("Survey 1 completed.");
+    Blaze._globalHelpers.showDialog(SURVEY1_FINAL_DIALOG_ID);
   }
 });

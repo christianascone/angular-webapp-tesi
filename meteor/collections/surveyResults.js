@@ -2,6 +2,19 @@ SurveyResults = new Mongo.Collection('surveyResults');
 console.log("Init surveyResults");
 
 /**
+* Find surveyResults with given userId and index
+* @param  {Int} userId Id of survey owner user
+* @param  {Int} index  Index of survey
+* @return {[SurveyResults]}        List of found surveyResults
+*/
+SurveyResults.byUserIdAndIndex = function(userId, index) {
+	return SurveyResults.find({
+		userId: userId,
+		index: index
+	});
+}
+
+/**
  * Create a new result for survey 1 and given user
  * @param  {Int} userId Id of result's user
  * @param  {Json} data   Json object containing survey result data

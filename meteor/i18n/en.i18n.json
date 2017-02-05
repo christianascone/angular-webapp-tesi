@@ -41,7 +41,12 @@
   "survey": {
     "submit": "Submit",
     "1": {
-      "title": "Questions: Part 1"
+      "title": "Questions: Part 1",
+      "final_dialog":{
+        "title": "Survey completed!",
+        "message": "Thank you for your answers. Go to the leaderboard and complete the test.",
+        "close": "Continue"
+      }
     }
   }
 }

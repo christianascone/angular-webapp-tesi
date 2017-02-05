@@ -41,7 +41,12 @@
   "survey": {
     "submit": "Invia",
     "1": {
-      "title": "Domande: Parte 1"
+      "title": "Domande: Parte 1",
+      "final_dialog":{
+        "title": "Questionario terminato!",
+        "message": "Grazie per aver risposto al questionario. Apri la leaderboard per concludere l'esperimento.",
+        "close": "Continua"
+      }
     }
   }
 }
