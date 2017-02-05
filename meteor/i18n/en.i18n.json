@@ -39,6 +39,7 @@
     }
   },
   "survey": {
+    "submit": "Submit",
     "1": {
       "title": "Questions: Part 1"
     }
