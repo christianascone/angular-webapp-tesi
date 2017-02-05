@@ -1,3 +1,12 @@
+/**
+ * Gets the questions json for survey 1, using current language
+ * 
+ * @return {Json} Json containing (localized) questions for survey 1
+ */
+function getSurvey1QuestionsJson() {
+  return survey["survey_questions_" + TAPi18n.getLanguage()].survey_1;
+}
+
 Template.survey_1.helpers({
   /**
    * Function to execute after survey_1 template done loading
@@ -14,7 +23,7 @@ Template.survey_1.helpers({
     Logs.log("Open Survey_1");
   },
   questions() {
-    return survey["survey_questions_" + TAPi18n.getLanguage()].survey_1;
+    return getSurvey1QuestionsJson();
   }
 });
 
