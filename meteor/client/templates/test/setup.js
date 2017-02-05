@@ -18,10 +18,6 @@ Template.setup.helpers({
 Template.setup.events({
   // Click event to send a test email
   'click #send-mail-button' (event, instance) {
-    var publicSettings = Meteor.settings.public;
-    var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
-    var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
-
     var json = {testJson: "test", array: [1,2,3]};
     var attachment = {
       fileName: "Test.json",
