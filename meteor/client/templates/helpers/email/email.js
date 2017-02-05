@@ -13,6 +13,10 @@ Template.registerHelper(
 		var publicSettings = Meteor.settings.public;
 		var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
 		var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
+		if(!recipientAddress || !senderAddress){
+			console.warn("Recipient or Sender address not found.");
+			return;
+		}
 		Meteor.call("sendEmail", recipientAddress, senderAddress, subject, body, attachments);
 	}
 );
