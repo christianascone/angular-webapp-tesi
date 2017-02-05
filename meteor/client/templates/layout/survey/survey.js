@@ -36,6 +36,24 @@ Template.survey_1.events({
   // submit action on form element
   'submit form': function(event) {
     event.preventDefault();
-    var example = $('input[name=example]:checked').val();
+
+    var results = [];
+    // Gets all the survey 1 questions
+    var questions = getSurvey1QuestionsJson();
+    for (var i = 0; i < questions.length; i++) {
+      var question = questions[i];
+      // Read selected radio button value
+      var answer = $('input[name=' + question.id + ']:checked').val();
+      // Build a json with all data useful for a more readable result
+      // (question id, question text and answer value)
+      var result = {
+        id: question.id,
+        question: question.question,
+        answer: answer
+      };
+      results.push(result);
+    }
+
+    console.log(results);
   }
 });

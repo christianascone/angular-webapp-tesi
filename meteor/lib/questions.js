@@ -29,20 +29,20 @@ survey = {
 			id: 1,
 			options: [{
 				label: "Uno_1",
-				value: "Uno_1"
+				value: "One_1"
 			}, {
 				label: "Due_1",
-				value: "Due_1"
+				value: "Two_1"
 			}]
 		}, {
 			question: "Test2",
 			id: 2,
 			options: [{
 				label: "Uno_2",
-				value: "Uno_2"
+				value: "One_2"
 			}, {
 				label: "Due_2",
-				value: "Due_2"
+				value: "Two_2"
 			}]
 		}]
 	}
