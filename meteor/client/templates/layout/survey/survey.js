@@ -55,5 +55,12 @@ Template.survey_1.events({
     }
 
     console.log(results);
+    var user = Meteor.user();
+    if(!user){
+      console.log("Logged user not found.");
+      Router.go('login');
+      return;
+    }
+    SurveyResults.createSurvey1Result(user._id, results);
   }
 });
