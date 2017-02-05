@@ -1,0 +1,7 @@
+.survey-container {
+	width: 60%;
+}
+
+.survey-container div.mdl-cell {
+	margin: 0 auto;
+}

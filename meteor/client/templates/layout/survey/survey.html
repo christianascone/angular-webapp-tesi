@@ -1,0 +1,39 @@
+<template name="survey_1">
+{{afterLoad}}
+<div class="demo-cards mdl-shadow--2dp mdl-grid survey-container">
+	<div class="mdl-cell mdl-cell--8-col">
+		<h2>{{_ "survey.1.title"}}</h2>
+	</div>
+	<div class="mdl-cell mdl-cell--8-col">
+		<form class="register" action="#">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="email" name="email">
+				<label class="mdl-textfield__label" for="email">Email</label>
+			</div>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="password" name="password">
+				<label class="mdl-textfield__label" for="password">Password</label>
+			</div>
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<input class="mdl-textfield__input" type="number" name="age">
+				<label class="mdl-textfield__label" for="age">{{_ "register.age"}}</label>
+			</div>
+			<div>
+				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="gender-male">
+					<input type="radio" id="gender-male" class="mdl-radio__button" name="genders" value="male" checked>
+					<span class="mdl-radio__label">{{_ "register.gender.male"}}</span>
+				</label>
+				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="gender-female">
+					<input type="radio" id="gender-female" class="mdl-radio__button" name="genders" value="female">
+					<span class="mdl-radio__label">{{_ "register.gender.female"}}</span>
+				</label>
+			</div>
+		</form>
+	</div>
+	<div class="mdl-cell mdl-cell--8-col">
+		<button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect center-block">
+		Login
+		</button>
+	</div>
+</div>
+</template>

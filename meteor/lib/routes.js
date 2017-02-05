@@ -45,3 +45,9 @@ Router.route('/memory', {
 	template: 'memory',
 	layoutTemplate: 'main'
 });
+
+Router.route('/survey_1', {
+	name: 'survey_1',
+	template: 'survey_1',
+	layoutTemplate: 'none'
+});
