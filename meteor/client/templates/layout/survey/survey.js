@@ -4,12 +4,8 @@
  * @return {Json} Json containing (localized) questions for survey 1
  */
 function getSurvey1QuestionsJson() {
-  return survey["survey_questions_" + TAPi18n.getLanguage()].survey_1;
+  return survey_questions.survey_1;
 }
-
-Template.survey_1.onRendered(function onRendered() {
-  Logs.log("Open survey 1");
-});
 
 Template.survey_1.helpers({
   /**
@@ -26,8 +22,24 @@ Template.survey_1.helpers({
 
     Logs.log("Open Survey_1");
   },
+  /**
+   * Gets list of questions for survey 1
+   * @return {JSONArray} Array of questions
+   */
   questions() {
     return getSurvey1QuestionsJson();
+  },
+  /**
+   * Translate a question object
+   * @param  {JSON} json Json object containing string to translate
+   * @param  {String} tag  Tag identifier for object to translate
+   * @return {String}      Translated string
+   */
+  translateJsonObject(json, tag) {
+    // Read from object using a tag concatenation
+    // For example: "question" tag, in english ("en")
+    // will return json["question_en"]
+    return json[tag + "_" + TAPi18n.getLanguage()];
   }
 });
 
@@ -48,7 +60,7 @@ Template.survey_1.events({
       // (question id, question text and answer value)
       var result = {
         id: question.id,
-        question: question.question,
+        question: question.question_en,
         answer: answer
       };
       results.push(result);
