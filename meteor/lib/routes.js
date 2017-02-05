@@ -46,8 +46,8 @@ Router.route('/memory', {
 	layoutTemplate: 'main'
 });
 
-Router.route('/survey_1', {
-	name: 'survey_1',
-	template: 'survey_1',
+Router.route('/survey/:_index', {
+	name: 'survey',
+	template: 'survey',
 	layoutTemplate: 'none'
 });
