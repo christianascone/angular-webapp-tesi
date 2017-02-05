@@ -40,6 +40,12 @@ Meteor.methods({
 			text: text,
 			attachments: attachments
 		});
+
+		var attachmentsCount = 0;
+		if(attachments){
+			attachmentsCount = attachments.length;
+		}
+		console.log("Sending email to: ["+to+"], from: ["+from+"], subject: ["+subject+"], text: ["+text+"], with ["+attachmentsCount+"] attachments");
 	},
 	/**
 	 * Check if it's running in debug

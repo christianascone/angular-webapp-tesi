@@ -21,7 +21,15 @@ Template.setup.events({
     var publicSettings = Meteor.settings.public;
     var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
     var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
-    Meteor.call("sendEmail", recipientAddress, senderAddress, "Test", "Body");
+
+    var json = {testJson: "test", array: [1,2,3]};
+    var attachment = {
+      fileName: "Test.json",
+      contents: JSON.stringify(json, null, 2)
+    };
+    var attachmentsArray = [attachment];
+    Blaze._globalHelpers.sendMeEmail("Test subject", "Body No attachments");
+    Blaze._globalHelpers.sendMeEmail("Test subject", "Body With attachments", attachmentsArray);
   },
   // Click event for "create mock user" button
   'click #create-button' (event, instance) {
