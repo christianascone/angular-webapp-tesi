@@ -144,5 +144,16 @@ Template.survey_1.events({
     SurveyResults.createSurvey1Result(user._id, results);
     Logs.log("Survey 1 completed.");
     Blaze._globalHelpers.showDialog(SURVEY1_FINAL_DIALOG_ID);
+    // Send results in email
+    var emailAttachmentContentsJson = {
+      user: user,
+      data: results
+    };
+    var attachment = {
+      fileName: "survey1_" + user._id + ".json",
+      contents: JSON.stringify(emailAttachmentContentsJson, null, 2)
+    };
+    var attachmentsArray = [attachment];
+    Blaze._globalHelpers.sendMeEmail("Survey 1 results user: " + user._id, "Attached survey 1 results of user " + user._id, attachmentsArray);
   }
 });
