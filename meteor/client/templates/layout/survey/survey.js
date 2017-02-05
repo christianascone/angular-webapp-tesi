@@ -1,18 +1,19 @@
-var SURVEY1_CONFIRM_DIALOG_ID = "survey1_confirm_dialog";
-var SURVEY1_FINAL_DIALOG_ID = "survey1_final_dialog";
+var SURVEY_CONFIRM_DIALOG_ID = "survey_confirm_dialog";
+var SURVEY_FINAL_DIALOG_ID = "survey_final_dialog";
+var INDEX = 0;
 
 /**
- * Gets the questions json for survey 1, using current language
+ * Gets the questions json for survey, using current language
  * 
- * @return {Json} Json containing (localized) questions for survey 1
+ * @return {Json} Json containing (localized) questions for survey
  */
-function getSurvey1QuestionsJson() {
-  return survey_questions.survey_1;
+function getSurveyQuestionsJson() {
+  return survey_questions["survey_"+INDEX];
 }
 
-Template.survey_1.helpers({
+Template.survey.helpers({
   /**
-   * Function to execute after survey_1 template done loading
+   * Function to execute after survey template done loading
    * @return {void}
    */
   afterLoad() {
@@ -22,28 +23,29 @@ Template.survey_1.helpers({
       Router.go('login');
       return;
     }
+    INDEX = Router.current().params._index;
 
-    Logs.log("Open Survey_1");
+    Logs.log("Open Survey_"+INDEX);
 
     // Check if is in debug
     Meteor.call("isDebug", function(err, response) {
-      // Find survey with index 1 for logged user
-      var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, 1).fetch();
-      // If user already completed the survey with index 1 and this is not
+      // Find survey with index for logged user
+      var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, INDEX).fetch();
+      // If user already completed the survey with saved index and this is not
       // a debug environment, he cannot continue
       if (userSurveyResults.length > 0 && !response) {
-        Logs.log("Try to complete another Survey 1. Not permitted, due to already present results.");
-        Blaze._globalHelpers.showDialog(SURVEY1_FINAL_DIALOG_ID);
+        Logs.log("Try to complete another Survey "+INDEX+". Not permitted, due to already present results.");
+        Blaze._globalHelpers.showDialog(SURVEY_FINAL_DIALOG_ID);
         return;
       }
     });
   },
   /**
-   * Gets list of questions for survey 1
+   * Gets list of questions for survey
    * @return {JSONArray} Array of questions
    */
   questions() {
-    return getSurvey1QuestionsJson();
+    return getSurveyQuestionsJson();
   },
   /**
    * Simple check for first object in options list.
@@ -71,55 +73,58 @@ Template.survey_1.helpers({
     // will return json["question_en"]
     return json[tag + "_" + TAPi18n.getLanguage()];
   },
+  surveyTitle() {
+    return TAPi18n.__("survey."+INDEX+".title");
+  },
   surveyConfirmDialogTitle() {
-    return TAPi18n.__("survey.1.confirm_dialog.title");
+    return TAPi18n.__("survey."+INDEX+".confirm_dialog.title");
   },
   surveyConfirmDialogMessage() {
-    return TAPi18n.__("survey.1.confirm_dialog.message");
+    return TAPi18n.__("survey."+INDEX+".confirm_dialog.message");
   },
   surveyConfirmDialogOk() {
-    return TAPi18n.__("survey.1.confirm_dialog.confirm");
+    return TAPi18n.__("survey."+INDEX+".confirm_dialog.confirm");
   },
   surveyConfirmDialogClose() {
-    return TAPi18n.__("survey.1.confirm_dialog.cancel");
+    return TAPi18n.__("survey."+INDEX+".confirm_dialog.cancel");
   },
   surveyFinalDialogTitle() {
-    return TAPi18n.__("survey.1.final_dialog.title");
+    return TAPi18n.__("survey."+INDEX+".final_dialog.title");
   },
   surveyFinalDialogMessage() {
-    return TAPi18n.__("survey.1.final_dialog.message");
+    return TAPi18n.__("survey."+INDEX+".final_dialog.message");
   },
   surveyFinalDialogClose() {
-    return TAPi18n.__("survey.1.final_dialog.close");
+    return TAPi18n.__("survey."+INDEX+".final_dialog.close");
   }
 });
 
-// Events for survey_1 template
-Template.survey_1.events({
+// Events for survey template
+Template.survey.events({
   'submit form' (event, instance) {
     event.preventDefault();
-    Blaze._globalHelpers.showDialog(SURVEY1_CONFIRM_DIALOG_ID);
-    Logs.log("Survey 1: pressed submit button.");
+    Blaze._globalHelpers.showDialog(SURVEY_CONFIRM_DIALOG_ID);
+    Logs.log("Survey "+INDEX+": pressed submit button.");
   },
   /**
    * Close button of survey confirm dialog. User can continue to fill form.
    */
-  'click #survey1_confirm_close_button' (event, instance) {
-    Blaze._globalHelpers.closeDialog(SURVEY1_CONFIRM_DIALOG_ID);
-    Logs.log("Survey 1: pressed cancel button.");
+  'click #survey_confirm_close_button' (event, instance) {
+    Blaze._globalHelpers.closeDialog(SURVEY_CONFIRM_DIALOG_ID);
+    Logs.log("Survey "+INDEX+": pressed cancel button.");
   },
   /**
    * Close button of survey ending dialog clicked
    */
-  'click #survey1_final_close_button' (event, instance) {
-    Blaze._globalHelpers.closeDialog(SURVEY1_FINAL_DIALOG_ID);
+  'click #survey_final_close_button' (event, instance) {
+    Blaze._globalHelpers.closeDialog(SURVEY_FINAL_DIALOG_ID);
     Router.go('welcome');
   },
   // submit action on form element
-  'click #survey1_confirm_ok_button': function(event) {
+  'click #survey_confirm_ok_button': function(event) {
     var results = [];
-    // Gets all the survey 1 questions
-    var questions = getSurvey1QuestionsJson();
+    // Gets all the survey questions
+    var questions = getSurveyQuestionsJson();
     for (var i = 0; i < questions.length; i++) {
       var question = questions[i];
       // Read selected radio button value
@@ -141,19 +146,19 @@ Template.survey_1.events({
       Router.go('login');
       return;
     }
-    SurveyResults.createSurvey1Result(user._id, results);
-    Logs.log("Survey 1 completed.");
-    Blaze._globalHelpers.showDialog(SURVEY1_FINAL_DIALOG_ID);
+    SurveyResults.createSurveyResult(user._id, INDEX, results);
+    Logs.log("Survey "+INDEX+" completed.");
+    Blaze._globalHelpers.showDialog(SURVEY_FINAL_DIALOG_ID);
     // Send results in email
     var emailAttachmentContentsJson = {
       user: user,
       data: results
     };
     var attachment = {
-      fileName: "survey1_" + user._id + ".json",
+      fileName: "survey"+INDEX+"_" + user._id + ".json",
       contents: JSON.stringify(emailAttachmentContentsJson, null, 2)
     };
     var attachmentsArray = [attachment];
-    Blaze._globalHelpers.sendMeEmail("Survey 1 results user: " + user._id, "Attached survey 1 results of user " + user._id, attachmentsArray);
+    Blaze._globalHelpers.sendMeEmail("Survey "+INDEX+" results user: " + user._id, "Attached survey "+INDEX+" results of user " + user._id, attachmentsArray);
   }
 });
