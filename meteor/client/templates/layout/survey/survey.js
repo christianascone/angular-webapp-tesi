@@ -12,6 +12,9 @@ Template.survey_1.helpers({
     }
 
     Logs.log("Open Survey_1");
+  },
+  questions() {
+    return survey["survey_questions_" + TAPi18n.getLanguage()].survey_1;
   }
 });
 

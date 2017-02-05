@@ -6,32 +6,19 @@
 	</div>
 	<div class="mdl-cell mdl-cell--8-col">
 		<form class="survey" action="#">
+			{{#each question in questions}}
 			<div>
-				<span class="mdl-typography--headline survey-question">Very long question, used to understand how to format the survey, also with multiline questions.</span>
+				<span class="mdl-typography--headline survey-question">{{question.question}}</span>
 				<div class="survey-options-container">
-					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-1-1">
-						<input type="radio" id="test-1-1" class="mdl-radio__button" name="test-1" value="1" checked>
-						<span class="mdl-radio__label">One</span>
+					{{#each option in question.options}}
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{question.id}}_{{option.value}}">
+						<input type="radio" id="{{question.id}}_{{option.value}}" class="mdl-radio__button" name="{{question.id}}" value="{{option.value}}" checked>
+						<span class="mdl-radio__label">{{option.label}}</span>
 					</label>
-					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-1-2">
-						<input type="radio" id="test-1-2" class="mdl-radio__button" name="test-1" value="2">
-						<span class="mdl-radio__label">Two</span>
-					</label>
+					{{/each}}
 				</div>
 			</div>
-			<div>
-				<span class="mdl-typography--headline survey-question">Very long question, used to understand how to format the survey, also with multiline questions.</span>
-				<div class="survey-options-container">
-					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-2-1">
-						<input type="radio" id="test-2-1" class="mdl-radio__button" name="test-2" value="1" checked>
-						<span class="mdl-radio__label">One</span>
-					</label>
-					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-2-2">
-						<input type="radio" id="test-2-2" class="mdl-radio__button" name="test-2" value="2">
-						<span class="mdl-radio__label">Two</span>
-					</label>
-				</div>
-			</div>
+			{{/each}}
 		</form>
 	</div>
 	<div class="mdl-cell mdl-cell--8-col">
