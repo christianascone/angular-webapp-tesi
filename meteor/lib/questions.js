@@ -26,5 +26,32 @@ survey_questions = {
 			label_it: "2",
 			value: "2"
 		}]
+	}],
+	survey_2: [{
+		question_en: "Question 3: Text",
+		question_it: "Domanda 3: Testo",
+		id: 3,
+		options: [{
+			label_en: "3",
+			label_it: "3",
+			value: "3"
+		}, {
+			label_en: "4",
+			label_it: "4",
+			value: "4"
+		}]
+	}, {
+		question_en: "Question 4: Text",
+		question_it: "Domanda 4: Testo",
+		id: 4,
+		options: [{
+			label_en: "3",
+			label_it: "3",
+			value: "3"
+		}, {
+			label_en: "4",
+			label_it: "4",
+			value: "4"
+		}]
 	}]
 };
