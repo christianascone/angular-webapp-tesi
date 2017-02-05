@@ -28,16 +28,5 @@ Template.survey_1.events({
     var age = $('[name=age]').val();
     var gender = $('input[name=genders]:checked').val();
     
-  },
-  /**
-   * Click event for login button.
-   * Goes to login page
-   * 
-   * @param  {Event} event Click event
-   * @return {void}       
-   */
-  'click #login-button': function(event) {
-    event.preventDefault();
-    Router.go("login");
   }
 });
