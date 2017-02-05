@@ -5,34 +5,38 @@
 		<h2>{{_ "survey.1.title"}}</h2>
 	</div>
 	<div class="mdl-cell mdl-cell--8-col">
-		<form class="register" action="#">
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="email" name="email">
-				<label class="mdl-textfield__label" for="email">Email</label>
-			</div>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="password" name="password">
-				<label class="mdl-textfield__label" for="password">Password</label>
-			</div>
-			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-				<input class="mdl-textfield__input" type="number" name="age">
-				<label class="mdl-textfield__label" for="age">{{_ "register.age"}}</label>
+		<form class="survey" action="#">
+			<div>
+				<span class="mdl-typography--headline survey-question">Very long question, used to understand how to format the survey, also with multiline questions.</span>
+				<div class="survey-options-container">
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-1-1">
+						<input type="radio" id="test-1-1" class="mdl-radio__button" name="test-1" value="1" checked>
+						<span class="mdl-radio__label">One</span>
+					</label>
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-1-2">
+						<input type="radio" id="test-1-2" class="mdl-radio__button" name="test-1" value="2">
+						<span class="mdl-radio__label">Two</span>
+					</label>
+				</div>
 			</div>
 			<div>
-				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="gender-male">
-					<input type="radio" id="gender-male" class="mdl-radio__button" name="genders" value="male" checked>
-					<span class="mdl-radio__label">{{_ "register.gender.male"}}</span>
-				</label>
-				<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="gender-female">
-					<input type="radio" id="gender-female" class="mdl-radio__button" name="genders" value="female">
-					<span class="mdl-radio__label">{{_ "register.gender.female"}}</span>
-				</label>
+				<span class="mdl-typography--headline survey-question">Very long question, used to understand how to format the survey, also with multiline questions.</span>
+				<div class="survey-options-container">
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-2-1">
+						<input type="radio" id="test-2-1" class="mdl-radio__button" name="test-2" value="1" checked>
+						<span class="mdl-radio__label">One</span>
+					</label>
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-2-2">
+						<input type="radio" id="test-2-2" class="mdl-radio__button" name="test-2" value="2">
+						<span class="mdl-radio__label">Two</span>
+					</label>
+				</div>
 			</div>
 		</form>
 	</div>
 	<div class="mdl-cell mdl-cell--8-col">
-		<button id="login-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect center-block">
-		Login
+		<button id="survey-submit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect center-block">
+		{{_ "survey.submit"}}
 		</button>
 	</div>
 </div>
