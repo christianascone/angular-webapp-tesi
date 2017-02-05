@@ -27,5 +27,8 @@
 		</form>
 	</div>
 </div>
+<!-- Confirm dialog to show before sending definitive answers -->
+{{> dialog dialog_id="survey1_confirm_dialog" title=surveyConfirmDialogTitle message=surveyConfirmDialogMessage close_button_id="survey1_confirm_close_button" ok_button_id="survey1_confirm_ok_button" ok_message=surveyConfirmDialogOk close_message=surveyConfirmDialogClose}}
+<!-- Final dialog to show after sending definitve answers -->
 {{> dialog dialog_id="survey1_final_dialog" close_button_id="survey1_final_close_button" title=surveyFinalDialogTitle hide_ok_button="true" message=surveyFinalDialogMessage close_message=surveyFinalDialogClose}}
 </template>

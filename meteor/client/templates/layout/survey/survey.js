@@ -1,3 +1,4 @@
+var SURVEY1_CONFIRM_DIALOG_ID = "survey1_confirm_dialog";
 var SURVEY1_FINAL_DIALOG_ID = "survey1_final_dialog";
 
 /**
@@ -56,6 +57,18 @@ Template.survey_1.helpers({
     // will return json["question_en"]
     return json[tag + "_" + TAPi18n.getLanguage()];
   },
+  surveyConfirmDialogTitle() {
+    return TAPi18n.__("survey.1.confirm_dialog.title");
+  },
+  surveyConfirmDialogMessage() {
+    return TAPi18n.__("survey.1.confirm_dialog.message");
+  },
+  surveyConfirmDialogOk() {
+    return TAPi18n.__("survey.1.confirm_dialog.confirm");
+  },
+  surveyConfirmDialogClose() {
+    return TAPi18n.__("survey.1.confirm_dialog.cancel");
+  },
   surveyFinalDialogTitle() {
     return TAPi18n.__("survey.1.final_dialog.title");
   },
@@ -69,6 +82,18 @@ Template.survey_1.helpers({
 
 // Events for survey_1 template
 Template.survey_1.events({
+  'submit form' (event, instance) {
+    event.preventDefault();
+    Blaze._globalHelpers.showDialog(SURVEY1_CONFIRM_DIALOG_ID);
+    Logs.log("Survey 1: pressed submit button.");
+  },
+  /**
+   * Close button of survey confirm dialog. User can continue to fill form.
+   */
+  'click #survey1_confirm_close_button' (event, instance) {
+    Blaze._globalHelpers.closeDialog(SURVEY1_CONFIRM_DIALOG_ID);
+    Logs.log("Survey 1: pressed cancel button.");
+  },
   /**
    * Close button of survey ending dialog clicked
    */
@@ -77,9 +102,7 @@ Template.survey_1.events({
     Router.go('welcome');
   },
   // submit action on form element
-  'submit form': function(event) {
-    event.preventDefault();
-
+  'click #survey1_confirm_ok_button': function(event) {
     var results = [];
     // Gets all the survey 1 questions
     var questions = getSurvey1QuestionsJson();
@@ -99,7 +122,7 @@ Template.survey_1.events({
 
     console.log(results);
     var user = Meteor.user();
-    if(!user){
+    if (!user) {
       console.log("Logged user not found.");
       Router.go('login');
       return;
