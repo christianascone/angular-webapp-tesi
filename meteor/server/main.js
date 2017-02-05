@@ -28,7 +28,7 @@ Meteor.methods({
 	 * @param  {String} text    Mail body
 	 * @return {void}
 	 */
-	sendEmail: function(to, from, subject, text) {
+	sendEmail: function(to, from, subject, text, attachments) {
 		check([to, from, subject, text], [String]);
 		// Let other method calls from the same client start running,
 		// without waiting for the email sending to complete.
@@ -37,7 +37,8 @@ Meteor.methods({
 			to: to,
 			from: from,
 			subject: subject,
-			text: text
+			text: text,
+			attachments: attachments
 		});
 	},
 	/**
@@ -46,7 +47,7 @@ Meteor.methods({
 	 */
 	isDebug: function() {
 		var PRIVATE_SETTINGS = Meteor.settings.private;
-		if(!PRIVATE_SETTINGS || !PRIVATE_SETTINGS.DEBUG){
+		if (!PRIVATE_SETTINGS || !PRIVATE_SETTINGS.DEBUG) {
 			return false;
 		}
 		return true;
@@ -57,7 +58,7 @@ Meteor.methods({
 	 */
 	isLoggerEnabled: function() {
 		var PRIVATE_SETTINGS = Meteor.settings.private;
-		if(!PRIVATE_SETTINGS || PRIVATE_SETTINGS.LOGS_ENABLED == undefined){
+		if (!PRIVATE_SETTINGS || PRIVATE_SETTINGS.LOGS_ENABLED == undefined) {
 			return true;
 		}
 		return PRIVATE_SETTINGS.LOGS_ENABLED;
