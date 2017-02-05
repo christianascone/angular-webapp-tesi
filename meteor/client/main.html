@@ -32,7 +32,7 @@
       <div class="demo-avatar-dropdown">
         <span>{{loggedUserEmail}}</span>
         <div class="mdl-layout-spacer"></div>
-        {{> my_points player=currentPlayer isFullEnvironment=isFullEnvironment}}
+        {{> my_points player=currentPlayer isFullEnvironment=isFullEnvironment animate=isFullEnvironment}}
       </div>
     </header>
     <nav class="mdl-navigation mdl-color--blue-grey-800">
@@ -40,6 +40,8 @@
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
       {{#if isDebug}}
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='setup'}}">Setup</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey_1'}}">Survey 1</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey_2'}}">Survey 2</a>
       {{/if}}
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='memory'}}">Memory</a>
       {{#if currentUser}}

@@ -92,7 +92,7 @@ Template.main.helpers({
 	isFullEnvironment() {
 		var FULLY_GAMIFIED = true;
 		var publicSettings = Meteor.settings.public;
-		if(publicSettings.ENVIRONMENT.FULL == undefined){
+		if(!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined){
 			FULLY_GAMIFIED = true;
 		}else{
 			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;

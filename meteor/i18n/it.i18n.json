@@ -37,5 +37,22 @@
       "message": "Tutti i task sono stati completati. Grazie.",
       "close": "Chiudi"
     }
+  },
+  "survey": {
+    "submit": "Invia",
+    "1": {
+      "title": "Domande: Parte 1",
+      "confirm_dialog": {
+        "title": "Conferma",
+        "message": "Sei sicuro di voler inviare le risposte? Una volta confermate non potranno più essere modificate.",
+        "confirm": "Conferma",
+        "cancel": "Indietro"
+      },
+      "final_dialog": {
+        "title": "Questionario terminato!",
+        "message": "Grazie per aver risposto al questionario. Apri la leaderboard per concludere l'esperimento.",
+        "close": "Continua"
+      }
+    }
   }
 }

@@ -158,22 +158,19 @@ function setupNewMemoryGame(instance, session) {
 Template.memory.onCreated(function memoryOnCreated() {
 	var publicSettings = Meteor.settings.public;
 
-	// If present, try to read values from settings
-	if (publicSettings) {
-		// Read number of task in series
-		if (publicSettings.MAX_GAME) {
-			MAX_GAME = publicSettings.MAX_GAME;
-		}
-		// Read number of cards for game
-		if (publicSettings.CARDS_NUMBER) {
-			CARDS_NUMBER = publicSettings.CARDS_NUMBER;
-		}
+	// Read number of task in series
+	if (publicSettings.MAX_GAME) {
+		MAX_GAME = publicSettings.MAX_GAME;
+	}
+	// Read number of cards for game
+	if (publicSettings.CARDS_NUMBER) {
+		CARDS_NUMBER = publicSettings.CARDS_NUMBER;
+	}
 
-		if(publicSettings.ENVIRONMENT.FULL == undefined){
-			FULLY_GAMIFIED = true;
-		}else{
-			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
-		}
+	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
+		FULLY_GAMIFIED = true;
+	} else {
+		FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
 	}
 	// Set the new reactive var for moves counter
 	this.moves_counter = new ReactiveVar(0);

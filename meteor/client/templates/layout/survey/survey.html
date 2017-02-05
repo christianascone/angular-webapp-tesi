@@ -1,0 +1,34 @@
+<template name="survey_1">
+{{afterLoad}}
+<div class="demo-cards mdl-shadow--2dp mdl-grid survey-container">
+	<div class="mdl-cell mdl-cell--8-col">
+		<h2>{{_ "survey.1.title"}}</h2>
+	</div>
+	<div class="mdl-cell mdl-cell--8-col">
+		<form class="survey" action="#">
+			{{#each question in questions}}
+			<div>
+				<span class="mdl-typography--headline survey-question">{{translateJsonObject question "question"}}</span>
+				<div class="survey-options-container">
+					{{#each option in question.options}}
+					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{question.id}}_{{option.value}}">
+						<input type="radio" id="{{question.id}}_{{option.value}}" class="mdl-radio__button" name="{{question.id}}" value="{{option.value}}" {{isChecked @index}}>
+						<span class="mdl-radio__label">{{translateJsonObject option "label"}}</span>
+					</label>
+					{{/each}}
+				</div>
+			</div>
+			{{/each}}
+			<div class="mdl-grid">
+				<button id="survey-submit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+				{{_ "survey.submit"}}
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- Confirm dialog to show before sending definitive answers -->
+{{> dialog dialog_id="survey1_confirm_dialog" title=surveyConfirmDialogTitle message=surveyConfirmDialogMessage close_button_id="survey1_confirm_close_button" ok_button_id="survey1_confirm_ok_button" ok_message=surveyConfirmDialogOk close_message=surveyConfirmDialogClose}}
+<!-- Final dialog to show after sending definitve answers -->
+{{> dialog dialog_id="survey1_final_dialog" close_button_id="survey1_final_close_button" title=surveyFinalDialogTitle hide_ok_button="true" message=surveyFinalDialogMessage close_message=surveyFinalDialogClose}}
+</template>
