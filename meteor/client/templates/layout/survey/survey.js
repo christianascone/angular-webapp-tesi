@@ -23,10 +23,6 @@ Template.survey_1.events({
   // submit action on form element
   'submit form': function(event) {
     event.preventDefault();
-    var email = $('[name=email]').val();
-    var password = $('[name=password]').val();
-    var age = $('[name=age]').val();
-    var gender = $('input[name=genders]:checked').val();
-    
+    var example = $('input[name=example]:checked').val();
   }
 });
