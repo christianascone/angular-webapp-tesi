@@ -7,6 +7,10 @@ function getSurvey1QuestionsJson() {
   return survey["survey_questions_" + TAPi18n.getLanguage()].survey_1;
 }
 
+Template.survey_1.onRendered(function onRendered() {
+  Logs.log("Open survey 1");
+});
+
 Template.survey_1.helpers({
   /**
    * Function to execute after survey_1 template done loading
