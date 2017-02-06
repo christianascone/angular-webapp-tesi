@@ -38,6 +38,13 @@
       "close": "Close"
     }
   },
+  "leaderboard": {
+    "final_dialog": {
+      "title": "Congratulation!",
+      "message": "Experiment successfully completed!. Thank you for your time.",
+      "close": "Close"
+    }
+  },
   "survey": {
     "submit": "Submit",
     "1": {

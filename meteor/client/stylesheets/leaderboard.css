@@ -43,3 +43,13 @@
 .coin-row {
   display: block !important;
 }
+
+#leaderboard-survey-button {
+  position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    z-index: 900;
+}

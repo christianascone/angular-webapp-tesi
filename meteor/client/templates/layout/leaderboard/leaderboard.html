@@ -1,6 +1,11 @@
 <template name="leaderboard">
 <!-- List items with avatar and action -->
 <div class="demo-list-action mdl-list">
+	<!-- Colored FAB button with ripple -->
+	<button id="leaderboard-survey-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+	<i class="material-icons">send</i>
+	</button>
+	<span class="mdl-tooltip" for="leaderboard-survey-button">Survey</span>
 	{{#each player in players}}
 	<div class="mdl-list__item demo-cards {{#if isCurrentPlayer player}}mdl-color--grey-200 mdl-shadow--16dp{{else}}mdl-shadow--2dp{{/if}} mdl-card leaderboard-card">
 		<span class="mdl-list__item-primary-content leaderboard-rank">
@@ -25,4 +30,5 @@
 	<div class="demo-separator mdl-cell--1-col"></div>
 	{{/each}}
 </div>
+{{> dialog dialog_id="leaderboard_final_dialog" close_button_id="leaderboard_final_close_button" title=leaderboardFinalDialogTitle hide_ok_button="true" message=leaderboardFinalDialogMessage close_message=leaderboardFinalDialogClose}}
 </template>

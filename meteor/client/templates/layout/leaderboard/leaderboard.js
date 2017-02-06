@@ -1,3 +1,5 @@
+var LEADERBOARD_FINAL_DIALOG_ID = "leaderboard_final_dialog";
+
 Template.leaderboard.onRendered(function onRendered(){
 	Logs.log("Open leaderboard");
 });
@@ -54,5 +56,40 @@ Template.leaderboard.helpers({
 			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
 		}
 		return FULLY_GAMIFIED;
+	},
+	leaderboardFinalDialogTitle() {
+		return TAPi18n.__("leaderboard.final_dialog.title");
+	},
+	leaderboardFinalDialogMessage() {
+		return TAPi18n.__("leaderboard.final_dialog.message");
+	},
+	leaderboardFinalDialogClose() {
+		return TAPi18n.__("leaderboard.final_dialog.close");
+	}
+});
+
+Template.leaderboard.events({
+	/**
+	 * Click event on survey button
+	 */
+	'click #leaderboard-survey-button' (event, instance) {
+		var user = Meteor.user();
+		// Index of second survey (certainty/reflection effect)
+		var surveyIndex = "2";
+		// Find survey with index for logged user
+		var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, surveyIndex).fetch();
+		// If user already completed the survey with saved index, router redirect to welcome page
+		if (userSurveyResults.length > 0) {
+			Blaze._globalHelpers.showDialog(LEADERBOARD_FINAL_DIALOG_ID);
+		} else {
+			Router.go('survey', {_index: surveyIndex});
+		}
+	},
+	/**
+	 * Close button of final dialog clicked
+	 */
+	'click #leaderboard_final_close_button' (event, instance) {
+		Blaze._globalHelpers.closeDialog(LEADERBOARD_FINAL_DIALOG_ID);
+		Router.go('welcome');
 	}
 });
