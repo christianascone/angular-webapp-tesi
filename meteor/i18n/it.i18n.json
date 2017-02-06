@@ -10,7 +10,13 @@
   },
   "welcome": {
     "title": "Benvenuto nel mio progetto di tesi!",
-    "button": "Inizia test"
+    "button": "Inizia test",
+    "tasks": {
+      "1": "Gioca a Memory",
+      "2": "Rispondi al questionario sul Memory",
+      "3": "Vai alla leaderboard e osserva la tua posizione",
+      "4": "Rispondi al questionario finale"
+    }
   },
   "memory": {
     "name": "Gioco Memory",

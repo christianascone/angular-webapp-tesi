@@ -10,7 +10,13 @@
   },
   "welcome": {
     "title": "Welcome to my dissertation project!",
-    "button": "Start test"
+    "button": "Start test",
+    "tasks": {
+      "1": "Play memory game",
+      "2": "Submit the Memory game survey",
+      "3": "Go to the leaderboard and watch your ranking",
+      "4": "Submit the final survey"
+    }
   },
   "memory": {
     "name": "Memory Game",

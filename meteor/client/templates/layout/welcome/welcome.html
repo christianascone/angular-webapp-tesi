@@ -1,7 +1,29 @@
 <template name="welcome">
 <div>
 	<h1>{{_ "welcome.title"}}</h1>
+	<ol class="mdl-typography--headline">
+		<li>
+			<span id="task-1" class="{{#if taskMemoryIsDone}}mdl-color-text--green task-done{{/if}}">
+				<span style='color:black'>{{_ "welcome.tasks.1"}}</span>
+			</span>
+		</li>
+		<li>
+			<span id="task-2" class="{{#if taskSurvey1IsDone}}mdl-color-text--green task-done{{/if}}">
+				<span style='color:black'>{{_ "welcome.tasks.2"}}</span>
+			</span>
+		</li>
+		<li>
+			<span id="task-3" class="{{#if taskSurvey2IsDone}}mdl-color-text--green task-done{{/if}}">
+				<span style='color:black'>{{_ "welcome.tasks.3"}}</span>
+			</span>
+		</li>
+		<li>
+			<span id="task-4" class="{{#if taskSurvey2IsDone}}mdl-color-text--green task-done{{/if}}">
+				<span style='color:black'>{{_ "welcome.tasks.4"}}</span>
+			</span>
+		</li>
+	</ol>
 	<!-- Accent-colored raised button with ripple -->
-	<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">{{_ "welcome.button"}}</button>
+	<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="{{#if allTasksCompleted }}display: none{{/if}}" >{{_ "welcome.button"}}</button>
 </div>
 </template>
