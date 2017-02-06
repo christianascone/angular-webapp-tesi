@@ -24,13 +24,13 @@ function userDoneMemoryGame() {
 
 /**
  * Check if user has completed the survey with given index
- * @param  {Strign} surveyIndex Survey index
+ * @param  {String} surveyBias Survey index
  * @return {Boolean}             If user has completed the survey
  */
-function userDoneSurvey(surveyIndex) {
+function userDoneSurvey(surveyBias) {
   var user = Meteor.user();
   // Find survey with index for logged user
-  var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, surveyIndex).fetch();
+  var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, surveyBias).fetch();
   return userSurveyResults.length > 0;
 }
 

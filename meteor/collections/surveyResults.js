@@ -2,15 +2,15 @@ SurveyResults = new Mongo.Collection('surveyResults');
 console.log("Init surveyResults");
 
 /**
-* Find surveyResults with given userId and index
+* Find surveyResults with given userId and bias
 * @param  {Int} userId Id of survey owner user
-* @param  {String} index  Index of survey
+* @param  {String} bias  Bias of survey
 * @return {[SurveyResults]}        List of found surveyResults
 */
-SurveyResults.byUserIdAndIndex = function(userId, index) {
+SurveyResults.byUserIdAndBias = function(userId, bias) {
 	return SurveyResults.find({
 		userId: userId,
-		index: index
+		bias: bias
 	});
 }
 
@@ -37,14 +37,14 @@ SurveyResults.createSurvey2Result = function(userId, data) {
 /**
  * Create a new survey result for userId
  * @param  {Int} userId Id of result's user
- * @param  {String} index  Index of filled survey ("1" or "2")
+ * @param  {String} bias  Bias of filled survey ("1" or "2")
  * @param  {Json} data   Json object containing survey result data
  * @return {SurveyResults}        The newly created object
  */
-SurveyResults.createSurveyResult = function(userId, index, data) {
+SurveyResults.createSurveyResult = function(userId, bias, data) {
 	var surveyResultsData = {
 		userId: userId,
-		index: index,
+		bias: bias,
 		data: data
 	};
 	return SurveyResults.insert(surveyResultsData);

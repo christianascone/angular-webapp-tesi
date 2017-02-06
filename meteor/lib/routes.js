@@ -46,7 +46,7 @@ Router.route('/memory', {
 	layoutTemplate: 'main'
 });
 
-Router.route('/survey/:_index', {
+Router.route('/survey/:_bias', {
 	name: 'survey',
 	template: 'survey',
 	layoutTemplate: 'none'
