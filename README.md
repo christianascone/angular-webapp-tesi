@@ -86,6 +86,8 @@ Other settings provide default values, but they can be customized:
    
  - ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (**true is default value**).
 
+ - LANGUAGE.DEFAULT is the default language's code ("en", it") to use when user saved language is not available (**en is default value**).
+
 Run
 ```
 meteor --settings settings.json
