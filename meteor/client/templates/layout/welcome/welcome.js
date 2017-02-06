@@ -41,9 +41,19 @@ Template.welcome.events({
   'click .close-dialog' (event, instance) {
     Blaze._globalHelpers.closeDialog();
   },
-  // click is the event type and button is the selector
-  'click #start-test' (event, instance) {
+  // Click event for "start test" button which open the memory game
+  'click #start-test-button' (event, instance) {
     Logs.log("Clicked Start Test button");
     Router.go('memory');
   },
+  // Click event for "first survey" button which open the first survey
+  'click #first-survey-button' (event, instance) {
+    Logs.log("Clicked First survey button");
+    Router.go('survey', {_bias: SURVEY_FRAMING_EFFECT_KEY});
+  },
+  // Click event for "go to leaderboard" button which open the leaderboard
+  'click #leaderboard-button' (event, instance) {
+    Logs.log("Clicked go to leaderboard button");
+    Router.go('leaderboard');
+  }
 });
