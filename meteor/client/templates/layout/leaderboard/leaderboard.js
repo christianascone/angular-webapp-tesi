@@ -70,7 +70,8 @@ Template.leaderboard.helpers({
 		// Check if is in debug
 		Meteor.call("isDebug", function(err, response) {
 			if (response) {
-				return true;
+				instance.show_survey_button.set(true);
+				return;
 			}
 
 			var res = !userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) && !userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
