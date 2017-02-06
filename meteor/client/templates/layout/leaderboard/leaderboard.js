@@ -1,6 +1,10 @@
 var LEADERBOARD_FINAL_DIALOG_ID = "leaderboard_final_dialog";
 
-Template.leaderboard.onRendered(function onRendered(){
+Template.leaderboard.onCreated(function onCreated() {
+	this.show_survey_button = new ReactiveVar(false);
+});
+
+Template.leaderboard.onRendered(function onRendered() {
 	Logs.log("Open leaderboard");
 });
 
@@ -32,14 +36,14 @@ Template.leaderboard.helpers({
 		return index < 3;
 	},
 	isCurrentPlayer(player) {
-		if(!player){
+		if (!player) {
 			return false;
 		}
 
 		var user = Meteor.user();
-		if(user._id == player.userId){
+		if (user._id == player.userId) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	},
@@ -50,12 +54,30 @@ Template.leaderboard.helpers({
 	isFullEnvironment() {
 		var FULLY_GAMIFIED = true;
 		var publicSettings = Meteor.settings.public;
-		if(!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined){
+		if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
 			FULLY_GAMIFIED = true;
-		}else{
+		} else {
 			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
 		}
 		return FULLY_GAMIFIED;
+	},
+	/**
+	 * Check if the survey button must be showed or not
+	 * @return {Boolean} If it's debug environment or user already filled the final survey
+	 */
+	showSurveyButton() {
+		var instance = Template.instance();
+		// Check if is in debug
+		Meteor.call("isDebug", function(err, response) {
+			if (response) {
+				return true;
+			}
+
+			var res = !userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) && !userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
+			instance.show_survey_button.set(res);
+		});
+
+		return instance.show_survey_button.get();
 	},
 	leaderboardFinalDialogTitle() {
 		return TAPi18n.__("leaderboard.final_dialog.title");
@@ -73,11 +95,13 @@ Template.leaderboard.events({
 	 * Click event on survey button
 	 */
 	'click #leaderboard-survey-button' (event, instance) {
-		var doneSurvey = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY);
+		var doneSurvey = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
 		if (doneSurvey) {
 			Blaze._globalHelpers.showDialog(LEADERBOARD_FINAL_DIALOG_ID);
 		} else {
-			Router.go('survey', {_bias: surveyBias});
+			Router.go('survey', {
+				_bias: SURVEY_CERTAINTY_EFFECT_KEY
+			});
 		}
 	},
 	/**
