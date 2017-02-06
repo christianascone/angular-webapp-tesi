@@ -8,16 +8,13 @@
         <img class="main-logo header-logo" src="/images/logo.svg" />
         {{_ "title"}}
       </span>
-      <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
-      <!-- Navigation. We hide it in small screens. -->
+      <!-- Top navbar -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <a class="mdl-navigation__link" href="{{pathFor route='welcome'}}">Home</a>
-        <a class="mdl-navigation__link" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
         {{#if isDebug}}
         <a class="mdl-navigation__link" href="{{pathFor route='setup'}}">Setup</a>
         {{/if}}
-        <a class="mdl-navigation__link" href="{{pathFor route='memory'}}">Memory</a>
         <!-- If user is logged, show logout template (logout button) -->
         {{#if currentUser}}
           {{> logout}}
@@ -35,6 +32,7 @@
         {{> my_points player=currentPlayer isFullEnvironment=isFullEnvironment animate=isFullEnvironment}}
       </div>
     </header>
+    <!-- Side navbar -->
     <nav class="mdl-navigation mdl-color--blue-grey-800">
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='welcome'}}">Home</a>
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
