@@ -98,6 +98,27 @@ Template.main.helpers({
 			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
 		}
 		return FULLY_GAMIFIED;
+	},
+	/**
+	 * Gets the framing path for survey
+	 * @return {String} _bias value for survey
+	 */
+	framingPath() {
+		return SURVEY_FRAMING_EFFECT_KEY;
+	},
+	/**
+	 * Gets the certainty path for survey
+	 * @return {String} _bias value for survey
+	 */
+	certaintyPath() {
+		return SURVEY_CERTAINTY_EFFECT_KEY;
+	},
+	/**
+	 * Gets the reflection path for survey
+	 * @return {String} _bias value for survey
+	 */
+	reflectionPath() {
+		return SURVEY_REFLECTION_EFFECT_KEY;
 	}
 });
 

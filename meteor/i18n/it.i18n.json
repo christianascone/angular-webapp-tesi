@@ -10,7 +10,11 @@
   },
   "welcome": {
     "title": "Benvenuto nel mio progetto di tesi!",
-    "button": "Inizia test",
+    "buttons": {
+      "1": "Inizia il test",
+      "2": "Vai al primo questionario",
+      "3": "Vai alla leaderboard"
+    },
     "tasks": {
       "1": "Gioca a Memory",
       "2": "Rispondi al questionario sul Memory",
@@ -53,7 +57,7 @@
   },
   "survey": {
     "submit": "Invia",
-    "1": {
+    "FRAMING": {
       "title": "Domande: Parte 1",
       "confirm_dialog": {
         "title": "Conferma",
@@ -67,7 +71,7 @@
         "close": "Continua"
       }
     },
-    "2": {
+    "CERTAINTY": {
       "title": "Domande: Parte 2",
       "confirm_dialog": {
         "title": "Conferma",

@@ -1,29 +1,56 @@
 <template name="welcome">
 <div>
 	<h1>{{_ "welcome.title"}}</h1>
-	<ol class="mdl-typography--headline">
+	<ol class="mdl-typography--headline task-list">
 		<li>
 			<span id="task-1" class="{{#if taskMemoryIsDone}}mdl-color-text--green task-done{{/if}}">
 				<span style='color:black'>{{_ "welcome.tasks.1"}}</span>
 			</span>
+			{{#if taskMemoryIsDone}}
+			<i class="material-icons task-done-icon mdl-color-text--green">done_all</i>
+			{{/if}}
 		</li>
 		<li>
 			<span id="task-2" class="{{#if taskSurvey1IsDone}}mdl-color-text--green task-done{{/if}}">
 				<span style='color:black'>{{_ "welcome.tasks.2"}}</span>
 			</span>
+			{{#if taskSurvey1IsDone}}
+			<i class="material-icons task-done-icon mdl-color-text--green">done_all</i>
+			{{/if}}
 		</li>
 		<li>
 			<span id="task-3" class="{{#if taskSurvey2IsDone}}mdl-color-text--green task-done{{/if}}">
 				<span style='color:black'>{{_ "welcome.tasks.3"}}</span>
 			</span>
+			{{#if taskSurvey2IsDone}}
+			<i class="material-icons task-done-icon mdl-color-text--green">done_all</i>
+			{{/if}}
 		</li>
 		<li>
 			<span id="task-4" class="{{#if taskSurvey2IsDone}}mdl-color-text--green task-done{{/if}}">
 				<span style='color:black'>{{_ "welcome.tasks.4"}}</span>
 			</span>
+			{{#if taskSurvey2IsDone}}
+			<i class="material-icons task-done-icon mdl-color-text--green">done_all</i>
+			{{/if}}
 		</li>
 	</ol>
-	<!-- Accent-colored raised button with ripple -->
-	<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="{{#if allTasksCompleted }}display: none{{/if}}" >{{_ "welcome.button"}}</button>
+	{{#if taskMemoryIsDone}}
+		{{#if taskSurvey1IsDone}}
+			{{#if taskSurvey2IsDone}}
+				<!-- All tasks done -->
+			{{else}}
+				<!-- Accent-colored raised button with ripple -->
+				<button id="leaderboard-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.3"}}</button>
+			{{/if}}
+		{{else}}
+			<!-- Accent-colored raised button with ripple -->
+			<button id="first-survey-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.2"}}</button>
+		{{/if}}
+	{{else}}
+		<!-- Accent-colored raised button with ripple -->
+		<button id="start-test-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.1"}}</button>
+	{{/if}}
+	
 </div>
 </template>

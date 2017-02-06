@@ -1,3 +1,11 @@
 .task-done {
     text-decoration: line-through;
 }
+
+.task-done-icon {
+	margin-left: 10px;
+}
+
+.task-list li{
+	margin-bottom: 10px;
+}

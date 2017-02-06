@@ -2,38 +2,6 @@ Template.welcome.onRendered(function onRendered() {
   Logs.log("Open Welcome");
 });
 
-/**
- * Check if the logged user has done memory game
- * @return {Boolean} If user has done memory game
- */
-function userDoneMemoryGame() {
-  var user = Meteor.user();
-  var userId = user._id;
-  var loggedPlayer = undefined;
-  if (Players.findOne()) {
-    loggedPlayer = Players.findOne().byUserId(userId);
-  }
-  if (!loggedPlayer) {
-    return false;
-  }
-  // Find all closed series for logged player
-  var closedSeries = loggedPlayer.closedScoreSeries().fetch();
-  // Check if player has closed at least one score series
-  return closedSeries.length > 0;
-}
-
-/**
- * Check if user has completed the survey with given index
- * @param  {Strign} surveyIndex Survey index
- * @return {Boolean}             If user has completed the survey
- */
-function userDoneSurvey(surveyIndex) {
-  var user = Meteor.user();
-  // Find survey with index for logged user
-  var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, surveyIndex).fetch();
-  return userSurveyResults.length > 0;
-}
-
 Template.welcome.helpers({
   /**
    * Check if task 1 (Memory Game) is already done
@@ -47,21 +15,21 @@ Template.welcome.helpers({
    * @return {Boolean} True if task is done
    */
   taskSurvey1IsDone() {
-    return userDoneSurvey("1");
+    return userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY);
   },
   /**
    * Check if task 3/4 (leaderboard and survey 2) is already done
    * @return {Boolean} True if task is done
    */
   taskSurvey2IsDone() {
-    return userDoneSurvey("2");
+    return userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
   },
   /**
    * Check if user has completed every task
    * @return {Boolean} If user completed every task
    */
   allTasksCompleted() {
-    return userDoneMemoryGame() && userDoneSurvey("1") && userDoneSurvey("2");
+    return userDoneMemoryGame() && userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY) && userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY);
   }
 });
 // Events for dialog template
@@ -73,9 +41,19 @@ Template.welcome.events({
   'click .close-dialog' (event, instance) {
     Blaze._globalHelpers.closeDialog();
   },
-  // click is the event type and button is the selector
-  'click #start-test' (event, instance) {
+  // Click event for "start test" button which open the memory game
+  'click #start-test-button' (event, instance) {
     Logs.log("Clicked Start Test button");
     Router.go('memory');
   },
+  // Click event for "first survey" button which open the first survey
+  'click #first-survey-button' (event, instance) {
+    Logs.log("Clicked First survey button");
+    Router.go('survey', {_bias: SURVEY_FRAMING_EFFECT_KEY});
+  },
+  // Click event for "go to leaderboard" button which open the leaderboard
+  'click #leaderboard-button' (event, instance) {
+    Logs.log("Clicked go to leaderboard button");
+    Router.go('leaderboard');
+  }
 });

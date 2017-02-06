@@ -409,16 +409,11 @@ Template.memory.events({
 	 */
 	'click #final_close_button' (event, instance) {
 		Blaze._globalHelpers.closeDialog(FINAL_DIALOG_ID);
-		var user = Meteor.user();
-		// Index of first survey (framing effect)
-		var surveyIndex = "1";
-		// Find survey with index for logged user
-		var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, surveyIndex).fetch();
-		// If user already completed the survey with saved index, router redirect to welcome page
-		if (userSurveyResults.length > 0) {
+		var doneSurvey = userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY);
+		if (doneSurvey) {
 			Router.go('welcome');
 		} else {
-			Router.go('survey', {_index: surveyIndex});
+			Router.go('survey', {_bias: SURVEY_FRAMING_EFFECT_KEY});
 		}
 	},
 	/**

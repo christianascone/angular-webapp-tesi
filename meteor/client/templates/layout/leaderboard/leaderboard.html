@@ -1,10 +1,12 @@
 <template name="leaderboard">
 <!-- List items with avatar and action -->
 <div class="demo-list-action mdl-list">
+	{{#if showSurveyButton}}
 	<!-- Colored FAB button with ripple -->
 	<button id="leaderboard-survey-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
 	<i class="material-icons">send</i>
 	</button>
+	{{/if}}
 	<span class="mdl-tooltip" for="leaderboard-survey-button">Survey</span>
 	{{#each player in players}}
 	<div class="mdl-list__item demo-cards {{#if isCurrentPlayer player}}mdl-color--grey-200 mdl-shadow--16dp{{else}}mdl-shadow--2dp{{/if}} mdl-card leaderboard-card">

@@ -10,7 +10,11 @@
   },
   "welcome": {
     "title": "Welcome to my dissertation project!",
-    "button": "Start test",
+    "buttons": {
+      "1": "Start test",
+      "2": "Go to first survey",
+      "3": "Go to leaderboard"
+    },
     "tasks": {
       "1": "Play memory game",
       "2": "Submit the Memory game survey",
@@ -53,7 +57,7 @@
   },
   "survey": {
     "submit": "Submit",
-    "1": {
+    "FRAMING": {
       "title": "Questions: Part 1",
       "confirm_dialog": {
         "title": "Confirm",
@@ -67,7 +71,7 @@
         "close": "Continue"
       }
     },
-    "2": {
+    "CERTAINTY": {
       "title": "Questions: Part 2",
       "confirm_dialog": {
         "title": "Confirm",
