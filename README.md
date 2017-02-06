@@ -48,7 +48,10 @@ Place a `settings.json` in meteor directory.
 ```javascript
 {
   "public": {
-    "RECIPIENT_MAIL_ADDRESS": "recipient@domain.com",
+    "RECIPIENT_MAIL_ADDRESS": [
+      "recipient1@domain.com",
+      "recipient2@domain.com"
+    ],
     "SENDER_MAIL_ADDRESS": "sender@domain.com",
     "MAX_GAME": 5,
     "CARDS_NUMBER": 16,

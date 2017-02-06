@@ -29,7 +29,8 @@ Meteor.methods({
 	 * @return {void}
 	 */
 	sendEmail: function(to, from, subject, text, attachments) {
-		check([to, from, subject, text], [String]);
+		check([from, subject, text], [String]);
+		check(to, [String]);
 		// Let other method calls from the same client start running,
 		// without waiting for the email sending to complete.
 		this.unblock();
