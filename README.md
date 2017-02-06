@@ -52,8 +52,11 @@ Place a `settings.json` in meteor directory.
     "SENDER_MAIL_ADDRESS": "sender@domain.com",
     "MAX_GAME": 5,
     "CARDS_NUMBER": 16,
-    "ENVIRONMENT":{
+    "ENVIRONMENT": {
       "FULL": true
+    },
+    "LANGUAGE": {
+      "DEFAULT": "it"
     }
   },
   "private": {
