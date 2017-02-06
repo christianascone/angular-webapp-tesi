@@ -2,44 +2,6 @@ Template.welcome.onRendered(function onRendered() {
   Logs.log("Open Welcome");
 });
 
-/**
- * Check if the logged user has done memory game
- * @return {Boolean} If user has done memory game
- */
-function userDoneMemoryGame() {
-  var user = Meteor.user();
-  if(!user){
-    return false;
-  }
-  var userId = user._id;
-  var loggedPlayer = undefined;
-  if (Players.findOne()) {
-    loggedPlayer = Players.findOne().byUserId(userId);
-  }
-  if (!loggedPlayer) {
-    return false;
-  }
-  // Find all closed series for logged player
-  var closedSeries = loggedPlayer.closedScoreSeries().fetch();
-  // Check if player has closed at least one score series
-  return closedSeries.length > 0;
-}
-
-/**
- * Check if user has completed the survey with given index
- * @param  {String} surveyBias Survey index
- * @return {Boolean}             If user has completed the survey
- */
-function userDoneSurvey(surveyBias) {
-  var user = Meteor.user();
-  if(!user){
-    return false;
-  }
-  // Find survey with index for logged user
-  var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, surveyBias).fetch();
-  return userSurveyResults.length > 0;
-}
-
 Template.welcome.helpers({
   /**
    * Check if task 1 (Memory Game) is already done
