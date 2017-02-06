@@ -152,7 +152,10 @@ Template.survey.events({
     // Send results in email
     var emailAttachmentContentsJson = {
       user: user,
-      data: results
+      survey: {
+        index: INDEX,
+        data: results
+      }
     };
     var attachment = {
       fileName: "survey"+INDEX+"_" + user._id + ".json",

@@ -71,7 +71,7 @@ Place a `settings.json` in meteor directory.
 ```
 
 This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) to send some data but it is not necessary.
-If you want to configure it, the MAIL_URL environment variable can be set in setting file with the email address of recipient who will receive messages and email address of sender.
+If you want to configure it, the MAIL_URL environment variable can be set in setting file with the email address of recipients who will receive messages and email address of sender.
 
 **Pay attention**: special characters (for example @ and /) in MAIL_URL, must be escaped with hex code to be valid.
 
