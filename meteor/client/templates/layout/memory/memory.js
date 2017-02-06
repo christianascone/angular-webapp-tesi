@@ -409,7 +409,17 @@ Template.memory.events({
 	 */
 	'click #final_close_button' (event, instance) {
 		Blaze._globalHelpers.closeDialog(FINAL_DIALOG_ID);
-		Router.go('welcome');
+		var user = Meteor.user();
+		// Index of first survey (framing effect)
+		var surveyIndex = 1;
+		// Find survey with index for logged user
+		var userSurveyResults = SurveyResults.byUserIdAndIndex(user._id, surveyIndex).fetch();
+		// If user already completed the survey with saved index, router redirect to welcome page
+		if (userSurveyResults.length > 0) {
+			Router.go('welcome');
+		} else {
+			Router.go('survey', {_index: surveyIndex});
+		}
 	},
 	/**
 	 * Play button click event.
