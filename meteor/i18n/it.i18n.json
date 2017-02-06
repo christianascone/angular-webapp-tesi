@@ -53,7 +53,7 @@
   },
   "survey": {
     "submit": "Invia",
-    "1": {
+    "FRAMING": {
       "title": "Domande: Parte 1",
       "confirm_dialog": {
         "title": "Conferma",
@@ -67,7 +67,7 @@
         "close": "Continua"
       }
     },
-    "2": {
+    "CERTAINTY": {
       "title": "Domande: Parte 2",
       "confirm_dialog": {
         "title": "Conferma",

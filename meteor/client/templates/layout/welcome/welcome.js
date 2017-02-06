@@ -8,6 +8,9 @@ Template.welcome.onRendered(function onRendered() {
  */
 function userDoneMemoryGame() {
   var user = Meteor.user();
+  if(!user){
+    return false;
+  }
   var userId = user._id;
   var loggedPlayer = undefined;
   if (Players.findOne()) {
@@ -29,6 +32,9 @@ function userDoneMemoryGame() {
  */
 function userDoneSurvey(surveyBias) {
   var user = Meteor.user();
+  if(!user){
+    return false;
+  }
   // Find survey with index for logged user
   var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, surveyBias).fetch();
   return userSurveyResults.length > 0;
@@ -47,21 +53,21 @@ Template.welcome.helpers({
    * @return {Boolean} True if task is done
    */
   taskSurvey1IsDone() {
-    return userDoneSurvey("1");
+    return userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY);
   },
   /**
    * Check if task 3/4 (leaderboard and survey 2) is already done
    * @return {Boolean} True if task is done
    */
   taskSurvey2IsDone() {
-    return userDoneSurvey("2");
+    return userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
   },
   /**
    * Check if user has completed every task
    * @return {Boolean} If user completed every task
    */
   allTasksCompleted() {
-    return userDoneMemoryGame() && userDoneSurvey("1") && userDoneSurvey("2");
+    return userDoneMemoryGame() && userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY) && userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY);
   }
 });
 // Events for dialog template

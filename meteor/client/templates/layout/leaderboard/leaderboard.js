@@ -75,7 +75,7 @@ Template.leaderboard.events({
 	'click #leaderboard-survey-button' (event, instance) {
 		var user = Meteor.user();
 		// Bias of second survey (certainty/reflection effect)
-		var surveyBias = "2";
+		var surveyBias = SURVEY_CERTAINTY_EFFECT_KEY;
 		// Find survey with index for logged user
 		var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, surveyBias).fetch();
 		// If user already completed the survey with saved index, router redirect to welcome page

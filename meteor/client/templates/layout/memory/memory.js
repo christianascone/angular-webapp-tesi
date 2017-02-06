@@ -411,7 +411,7 @@ Template.memory.events({
 		Blaze._globalHelpers.closeDialog(FINAL_DIALOG_ID);
 		var user = Meteor.user();
 		// Bias of first survey (framing effect)
-		var surveyBias = "1";
+		var surveyBias = SURVEY_FRAMING_EFFECT_KEY;
 		// Find survey with index for logged user
 		var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, surveyBias).fetch();
 		// If user already completed the survey with saved index, router redirect to welcome page

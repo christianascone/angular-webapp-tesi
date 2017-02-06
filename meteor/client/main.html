@@ -38,8 +38,9 @@
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='leaderboard'}}">Leaderboard</a>
       {{#if isDebug}}
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='setup'}}">Setup</a>
-      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey' _bias=1}}">Survey 1</a>
-      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey' _bias=2}}">Survey 2</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey' _bias=framingPath}}">Survey Framing</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey' _bias=certaintyPath}}">Survey Certainty</a>
+      <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='survey' _bias=reflectionPath}}">Survey Reflection</a>
       {{/if}}
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='memory'}}">Memory</a>
       {{#if currentUser}}

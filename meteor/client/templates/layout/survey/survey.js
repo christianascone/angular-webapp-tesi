@@ -8,7 +8,7 @@ var BIAS = 0;
  * @return {Json} Json containing (localized) questions for survey
  */
 function getSurveyQuestionsJson() {
-  return survey_questions["survey_"+BIAS];
+  return survey_questions[BIAS];
 }
 
 Template.survey.helpers({
