@@ -413,7 +413,7 @@ Template.memory.events({
 		if (doneSurvey) {
 			Router.go('welcome');
 		} else {
-			Router.go('survey', {_bias: surveyBias});
+			Router.go('survey', {_bias: SURVEY_FRAMING_EFFECT_KEY});
 		}
 	},
 	/**

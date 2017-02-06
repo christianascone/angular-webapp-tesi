@@ -35,7 +35,22 @@
 			{{/if}}
 		</li>
 	</ol>
-	<!-- Accent-colored raised button with ripple -->
-	<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="{{#if allTasksCompleted }}display: none{{/if}}" >{{_ "welcome.button"}}</button>
+	{{#if taskMemoryIsDone}}
+		{{#if taskSurvey1IsDone}}
+			{{#if taskSurvey2IsDone}}
+				<!-- All tasks done -->
+			{{else}}
+				<!-- Accent-colored raised button with ripple -->
+				<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.3"}}</button>
+			{{/if}}
+		{{else}}
+			<!-- Accent-colored raised button with ripple -->
+			<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.2"}}</button>
+		{{/if}}
+	{{else}}
+		<!-- Accent-colored raised button with ripple -->
+		<button id="start-test" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.1"}}</button>
+	{{/if}}
+	
 </div>
 </template>
