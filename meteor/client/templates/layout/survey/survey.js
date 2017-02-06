@@ -25,7 +25,7 @@ Template.survey.helpers({
     }
     BIAS = Router.current().params._bias;
 
-    Logs.log("Open Survey_"+BIAS);
+    Logs.log("Open Survey_" + BIAS);
 
     // Check if is in debug
     Meteor.call("isDebug", function(err, response) {
@@ -34,7 +34,7 @@ Template.survey.helpers({
       // If user already completed the survey with saved bias and this is not
       // a debug environment, he cannot continue
       if (userSurveyResults.length > 0 && !response) {
-        Logs.log("Try to complete another Survey "+BIAS+". Not permitted, due to already present results.");
+        Logs.log("Try to complete another Survey " + BIAS + ". Not permitted, due to already present results.");
         Blaze._globalHelpers.showDialog(SURVEY_FINAL_DIALOG_ID);
         return;
       }
@@ -55,9 +55,9 @@ Template.survey.helpers({
    * @return {String}       "Checked" if index is equal to 0, "" otherwise
    */
   isChecked(index) {
-    if(index == 0){
+    if (index == 0) {
       return "checked";
-    }else{
+    } else {
       return "";
     }
   },
@@ -74,28 +74,28 @@ Template.survey.helpers({
     return json[tag + "_" + TAPi18n.getLanguage()];
   },
   surveyTitle() {
-    return TAPi18n.__("survey."+BIAS+".title");
+    return TAPi18n.__("survey." + BIAS + ".title");
   },
   surveyConfirmDialogTitle() {
-    return TAPi18n.__("survey."+BIAS+".confirm_dialog.title");
+    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.title");
   },
   surveyConfirmDialogMessage() {
-    return TAPi18n.__("survey."+BIAS+".confirm_dialog.message");
+    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.message");
   },
   surveyConfirmDialogOk() {
-    return TAPi18n.__("survey."+BIAS+".confirm_dialog.confirm");
+    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.confirm");
   },
   surveyConfirmDialogClose() {
-    return TAPi18n.__("survey."+BIAS+".confirm_dialog.cancel");
+    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.cancel");
   },
   surveyFinalDialogTitle() {
-    return TAPi18n.__("survey."+BIAS+".final_dialog.title");
+    return TAPi18n.__("survey." + BIAS + ".final_dialog.title");
   },
   surveyFinalDialogMessage() {
-    return TAPi18n.__("survey."+BIAS+".final_dialog.message");
+    return TAPi18n.__("survey." + BIAS + ".final_dialog.message");
   },
   surveyFinalDialogClose() {
-    return TAPi18n.__("survey."+BIAS+".final_dialog.close");
+    return TAPi18n.__("survey." + BIAS + ".final_dialog.close");
   }
 });
 
@@ -104,14 +104,14 @@ Template.survey.events({
   'submit form' (event, instance) {
     event.preventDefault();
     Blaze._globalHelpers.showDialog(SURVEY_CONFIRM_DIALOG_ID);
-    Logs.log("Survey "+BIAS+": pressed submit button.");
+    Logs.log("Survey " + BIAS + ": pressed submit button.");
   },
   /**
    * Close button of survey confirm dialog. User can continue to fill form.
    */
   'click #survey_confirm_close_button' (event, instance) {
     Blaze._globalHelpers.closeDialog(SURVEY_CONFIRM_DIALOG_ID);
-    Logs.log("Survey "+BIAS+": pressed cancel button.");
+    Logs.log("Survey " + BIAS + ": pressed cancel button.");
   },
   /**
    * Close button of survey ending dialog clicked
@@ -147,7 +147,7 @@ Template.survey.events({
       return;
     }
     SurveyResults.createSurveyResult(user._id, BIAS, results);
-    Logs.log("Survey "+BIAS+" completed.");
+    Logs.log("Survey " + BIAS + " completed.");
     Blaze._globalHelpers.showDialog(SURVEY_FINAL_DIALOG_ID);
     // Send results in email
     var emailAttachmentContentsJson = {
@@ -158,10 +158,10 @@ Template.survey.events({
       }
     };
     var attachment = {
-      fileName: "survey"+BIAS+"_" + user._id + ".json",
+      fileName: "survey" + BIAS + "_" + user._id + ".json",
       contents: JSON.stringify(emailAttachmentContentsJson, null, 2)
     };
     var attachmentsArray = [attachment];
-    Blaze._globalHelpers.sendMeEmail("Survey "+BIAS+" results user: " + user._id, "Attached survey "+BIAS+" results of user " + user._id, attachmentsArray);
+    Blaze._globalHelpers.sendMeEmail("Survey " + BIAS + " results user: " + user._id, "Attached survey " + BIAS + " results of user " + user._id, attachmentsArray);
   }
 });
