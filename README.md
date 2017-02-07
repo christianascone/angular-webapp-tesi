@@ -25,6 +25,8 @@ Academic Dissertation Project for my final exam in [University of Bologna](http:
 
 > - [Highcharts Solid Gauges](https://github.com/MaazAli/highcharts-gauge)
 
+> - [Buzz Smart Package](https://github.com/brentjanderson/meteor-buzz)
+
 
 ## Getting Started
 
@@ -37,7 +39,7 @@ meteor npm install
 ```
 meteor
 ```
-Dependencies will be downloaded.
+Dependencies will be downloaded and the project will run.
 
 ### Configuration (Optional)
 
@@ -59,7 +61,7 @@ Place a `settings.json` in meteor directory.
       "FULL": true
     },
     "LANGUAGE": {
-      "DEFAULT": "it"
+      "DEFAULT": "en"
     }
   },
   "private": {
@@ -71,7 +73,7 @@ Place a `settings.json` in meteor directory.
 ```
 
 This project uses [Meteor Mail package](https://docs.meteor.com/api/email.html) to send some data but it is not necessary.
-If you want to configure it, the MAIL_URL environment variable can be set in setting file with the email address of recipients who will receive messages and email address of sender.
+If you want to configure it, the MAIL_URL environment variable can be set in setting file with the email address of recipients (RECIPIENT_MAIL_ADDRESS) who will receive messages and email address of sender (SENDER_MAIL_ADDRESS).
 
 **Pay attention**: special characters (for example @ and /) in MAIL_URL, must be escaped with hex code to be valid.
 
