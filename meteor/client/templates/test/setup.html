@@ -20,13 +20,16 @@
 			</button>
 		</div>
 	</div>
-	<br>
-	{{#each player in players}}
-	<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card" style="display: block">
-		<h5>{{player.name.address}}</h5>
-		<h6>Total Score: {{player.totalScore}}</h6>
+	<div>
+		<span class="mdl-typography--display-1">Players list</span>
+		<div class="setup-buttons-container">
+			{{#each player in players}}
+			<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card" style="display: block">
+				<h5>{{player.name.address}}</h5>
+				<h6>Total Score: {{player.totalScore}}</h6>
+			</div>
+			{{/each}}
+		</div>
 	</div>
-	<br>
-	{{/each}}
 </div>
 </template>
