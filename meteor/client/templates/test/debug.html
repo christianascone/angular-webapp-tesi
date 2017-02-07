@@ -1,8 +1,8 @@
-<template name="setup">
+<template name="debug">
 <div>
 	<div>
 		<span class="mdl-typography--display-1">Mail Package</span>
-		<div class="setup-buttons-container">
+		<div class="debug-buttons-container">
 			<button id="send-mail-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect center-block">
 			Send test mail
 			</button>
@@ -10,7 +10,7 @@
 	</div>
 	<div>
 		<span class="mdl-typography--display-1">Players setup</span>
-		<div class="setup-buttons-container">
+		<div class="debug-buttons-container">
 			<!-- Raised button with ripple -->
 			<button id="create-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect center-block">
 			Create new mock data
@@ -22,7 +22,7 @@
 	</div>
 	<div>
 		<span class="mdl-typography--display-1">Players list</span>
-		<div class="setup-buttons-container">
+		<div class="debug-buttons-container">
 			{{#each player in players}}
 			<div class="mdl-list__item demo-cards mdl-shadow--2dp mdl-card" style="display: block">
 				<h5>{{player.name.address}}</h5>

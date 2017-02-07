@@ -28,9 +28,9 @@ Router.route('/login', {
 	layoutTemplate: 'home'
 });
 
-Router.route('/setup', {
-	name: 'setup',
-	template: 'setup',
+Router.route('/debug', {
+	name: 'debug',
+	template: 'debug',
 	layoutTemplate: 'main'
 });
 

@@ -1,9 +1,9 @@
-Template.setup.onCreated(function setupOnCreated() {
+Template.debug.onCreated(function debugOnCreated() {
 
 });
 
-// Helpers for setup template
-Template.setup.helpers({
+// Helpers for debug template
+Template.debug.helpers({
   players() {
     console.log("player list");
     // TODO: Gets only user without userId and add current user
@@ -12,8 +12,8 @@ Template.setup.helpers({
   }
 });
 
-// Events for setup template
-Template.setup.events({
+// Events for debug template
+Template.debug.events({
   // Click event to send a test email
   'click #send-mail-button' (event, instance) {
     var json = {testJson: "test", array: [1,2,3]};
