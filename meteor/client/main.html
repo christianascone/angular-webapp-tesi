@@ -17,7 +17,7 @@
         {{/if}}
         <!-- If user is logged, show logout template (logout button) -->
         {{#if currentUser}}
-          {{> logout}}
+        {{> logout}}
         {{/if}}
         {{> language}}
       </nav>
@@ -44,14 +44,14 @@
       {{/if}}
       <a class="mdl-navigation__link mdl-color-text--white" href="{{pathFor route='memory'}}">{{#if isFullEnvironment}}<i class="mdl-color-text--blue-grey-400 material-icons navigation-icon">games</i>{{/if}}Memory</a>
       {{#if currentUser}}
-        {{> logout class="mdl-color-text--white"}}
+      {{> logout class="mdl-color-text--white"}}
       {{/if}}
     </nav>
   </div>
   <main class="mdl-layout__content mdl-color--grey-100">
   <div class="mdl-grid demo-content" style="padding-left:50px;">
-  {{afterLoad}}
-  {{> yield}}  
+    {{afterLoad}}
+    {{> yield}}
   </div>
   </main>
   
