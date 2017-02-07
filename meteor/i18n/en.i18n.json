@@ -72,7 +72,21 @@
       }
     },
     "CERTAINTY": {
-      "title": "Questions: Part 2",
+      "title": "Questions: Part 2.1",
+      "confirm_dialog": {
+        "title": "Confirm",
+        "message": "Are you sure you wish to confirm? You will not be able to modify them.",
+        "confirm": "Confirm",
+        "cancel": "Back"
+      },
+      "final_dialog": {
+        "title": "Survey completed!",
+        "message": "Thank you for your answers. Go to the leaderboard and complete the test.",
+        "close": "Continue"
+      }
+    },
+    "REFLECTION": {
+      "title": "Questions: Part 2.2",
       "confirm_dialog": {
         "title": "Confirm",
         "message": "Are you sure you wish to confirm? You will not be able to modify them.",
