@@ -22,13 +22,19 @@ Meteor.startup(() => {
 
 // In your server code: define a method that the client can call
 Meteor.methods({
+	/**
+	 * Setup system with mocked users and mocked scores
+	 * @return {void} 
+	 */
 	setupMockUsers: function() {
 		var points = 750;
+		// Try to read MAX_REWARD from public settings
 		if (Meteor.settings.public && Meteor.settings.public.MAX_REWARD) {
 			points = Meteor.settings.public.MAX_REWARD;
 		}
 		var mockUsersSize = 9;
 		var existentMockSeries = ScoreSeries.byMockedUsers().fetch();
+		// If mocked users are found, stop setup
 	    if(mockUsersSize <= existentMockSeries.length){
 	      console.log("Setup already done.");
 	      return;
