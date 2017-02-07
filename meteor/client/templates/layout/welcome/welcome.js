@@ -23,13 +23,6 @@ Template.welcome.helpers({
    */
   taskSurvey2IsDone() {
     return userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
-  },
-  /**
-   * Check if user has completed every task
-   * @return {Boolean} If user completed every task
-   */
-  allTasksCompleted() {
-    return userDoneMemoryGame() && userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY) && userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY);
   }
 });
 // Events for dialog template
