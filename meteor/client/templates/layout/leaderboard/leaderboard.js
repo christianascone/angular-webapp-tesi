@@ -74,6 +74,12 @@ Template.leaderboard.helpers({
 				return;
 			}
 
+			// If user must play memory or fill framing survey, hide button
+			if(!userDoneMemoryGame() || !userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY)){
+				instance.show_survey_button.set(false);
+				return;	
+			}
+			
 			var res = !userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) && !userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
 			instance.show_survey_button.set(res);
 		});
