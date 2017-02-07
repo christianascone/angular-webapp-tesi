@@ -15,26 +15,6 @@ SurveyResults.byUserIdAndBias = function(userId, bias) {
 }
 
 /**
- * Create a new result for survey SURVEY_FRAMING_EFFECT_KEY and given user
- * @param  {String} userId Id of result's user
- * @param  {Json} data   Json object containing survey result data
- * @return {SurveyResults}        The newly created object
- */
-SurveyResults.createSurvey1Result = function(userId, data) {
-	return SurveyResults.createSurveyResult(userId, SURVEY_FRAMING_EFFECT_KEY, data);
-}
-
-/**
- * Create a new result for survey SURVEY_CERTAINTY_EFFECT_KEY and given user
- * @param  {String} userId Id of result's user
- * @param  {Json} data   Json object containing survey result data
- * @return {SurveyResults}        The newly created object
- */
-SurveyResults.createSurvey2Result = function(userId, data) {
-	return SurveyResults.createSurveyResult(userId, SURVEY_CERTAINTY_EFFECT_KEY, data);
-}
-
-/**
  * Create a new survey result for userId
  * @param  {Int} userId Id of result's user
  * @param  {String} bias  Bias of filled survey (SURVEY_FRAMING_EFFECT_KEY or SURVEY_CERTAINTY_EFFECT_KEY)
