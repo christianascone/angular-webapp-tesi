@@ -34,8 +34,8 @@ var survey_framing = [{
 }];
 survey_questions[SURVEY_FRAMING_EFFECT_KEY] = survey_framing;
 var survey_certainty = [{
-	question_en: "Question 3: Text",
-	question_it: "Domanda 3: Testo",
+	question_en: "Question " + SURVEY_CERTAINTY_EFFECT_KEY + ": Text",
+	question_it: "Domanda " + SURVEY_CERTAINTY_EFFECT_KEY + ": Testo",
 	id: 3,
 	options: [{
 		label_en: "3",
@@ -47,8 +47,8 @@ var survey_certainty = [{
 		value: "4"
 	}]
 }, {
-	question_en: "Question 4: Text",
-	question_it: "Domanda 4: Testo",
+	question_en: "Question " + SURVEY_CERTAINTY_EFFECT_KEY + " 2: Text",
+	question_it: "Domanda " + SURVEY_CERTAINTY_EFFECT_KEY + " 2: Testo",
 	id: 4,
 	options: [{
 		label_en: "3",
@@ -60,4 +60,32 @@ var survey_certainty = [{
 		value: "4"
 	}]
 }];
-survey_questions[SURVEY_CERTAINTY_EFFECT_KEY] = survey_certainty
+survey_questions[SURVEY_CERTAINTY_EFFECT_KEY] = survey_certainty;
+var survey_reflection = [{
+	question_en: "Question " + SURVEY_REFLECTION_EFFECT_KEY + ": Text",
+	question_it: "Domanda " + SURVEY_REFLECTION_EFFECT_KEY + ": Testo",
+	id: 5,
+	options: [{
+		label_en: "5",
+		label_it: "5",
+		value: "5"
+	}, {
+		label_en: "6",
+		label_it: "6",
+		value: "6"
+	}]
+}, {
+	question_en: "Question " + SURVEY_REFLECTION_EFFECT_KEY + " 2: Text",
+	question_it: "Domanda " + SURVEY_REFLECTION_EFFECT_KEY + " 2: Testo",
+	id: 6,
+	options: [{
+		label_en: "5",
+		label_it: "5",
+		value: "5"
+	}, {
+		label_en: "6",
+		label_it: "6",
+		value: "6"
+	}]
+}];
+survey_questions[SURVEY_REFLECTION_EFFECT_KEY] = survey_reflection;
