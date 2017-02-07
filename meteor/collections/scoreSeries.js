@@ -1,8 +1,13 @@
 ScoreSeries = new Mongo.Collection('scoreSeries');
 console.log("Init scoreSeries");
 
+// GameType values
 var INCREMENTAL = "INCREMENTAL";
 var DECREMENTAL = "DECREMENTAL";
+// (Mock user game type)
+var MOCK = "MOCK";
+
+// State values
 var CLOSED_STATE = "CLOSED";
 var OPEN_STATE = "OPEN";
 
@@ -48,6 +53,15 @@ ScoreSeries.createScoreSeriesDecremental = function(playerId) {
 };
 
 /**
+ * Create a new ScoreSeries for a mock player (used for setup)
+ * @param  {Int} playerId Id of player
+ * @return {Int}          The created object id
+ */
+ScoreSeries.createScoreSeriesMock = function(playerId) {
+	return ScoreSeries.createScoreSeries(playerId, MOCK);
+};
+
+/**
  * Select Closed ScoreSeries for incremental game type
  * @return {[ScoreSeries]} Closed ScoreSeries list for incremental game
  */
@@ -71,6 +85,10 @@ ScoreSeries.closedDecremental = function() {
  */
 ScoreSeries.byStateAndGameType = function(state, gameType) {
 	return ScoreSeries.find({state: state, gameType: gameType});
+};
+
+ScoreSeries.byMockedUsers = function() {
+	return ScoreSeries.byStateAndGameType(CLOSED_STATE, MOCK);
 };
 
 /**
