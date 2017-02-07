@@ -106,8 +106,18 @@ Template.leaderboard.events({
 		if (doneSurvey) {
 			Blaze._globalHelpers.showDialog(LEADERBOARD_FINAL_DIALOG_ID);
 		} else {
+			var certaintySurveyResults = SurveyResults.byBias(SURVEY_CERTAINTY_EFFECT_KEY).fetch();
+			var reflectionSurveyResults = SurveyResults.byBias(SURVEY_REFLECTION_EFFECT_KEY).fetch();
+
+			var biasToUse = "";
+			if(certaintySurveyResults.length > reflectionSurveyResults.length){
+				biasToUse = SURVEY_REFLECTION_EFFECT_KEY;
+			}else{
+				biasToUse = SURVEY_CERTAINTY_EFFECT_KEY;
+			}
+
 			Router.go('survey', {
-				_bias: SURVEY_CERTAINTY_EFFECT_KEY
+				_bias: biasToUse
 			});
 		}
 	},
