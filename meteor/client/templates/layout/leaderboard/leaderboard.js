@@ -102,6 +102,8 @@ Template.leaderboard.events({
 	 * Click event on survey button
 	 */
 	'click #leaderboard-survey-button' (event, instance) {
+		Logs.log("Clicked survey button in leaderboard page");
+
 		var doneSurvey = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
 		if (doneSurvey) {
 			Blaze._globalHelpers.showDialog(LEADERBOARD_FINAL_DIALOG_ID);

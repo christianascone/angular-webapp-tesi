@@ -20,7 +20,7 @@ var FULLY_GAMIFIED = true; // Default value
 
 var MAX_GAME = 5; // Default value
 var CARDS_NUMBER = 16; // Default value
-var MAX_REWARD = 750;
+var MAX_REWARD = 750; // Default value
 
 /**
  * Returns a random int value between min and max
@@ -166,7 +166,10 @@ Template.memory.onCreated(function memoryOnCreated() {
 	if (publicSettings.CARDS_NUMBER) {
 		CARDS_NUMBER = publicSettings.CARDS_NUMBER;
 	}
-
+	// Read maximum reward for game
+	if (publicSettings.MAX_REWARD) {
+		MAX_REWARD = publicSettings.MAX_REWARD;
+	}
 	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
 		FULLY_GAMIFIED = true;
 	} else {
