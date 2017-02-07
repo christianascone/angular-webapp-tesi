@@ -40,16 +40,16 @@
 			{{#if taskSurvey2IsDone}}
 				<!-- All tasks done -->
 			{{else}}
-				<!-- Accent-colored raised button with ripple -->
-				<button id="leaderboard-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.3"}}</button>
+				<!-- Button for task 3 and 4 -->
+				<button id="leaderboard-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent task-button" >{{_ "welcome.buttons.3"}}</button>
 			{{/if}}
 		{{else}}
-			<!-- Accent-colored raised button with ripple -->
-			<button id="first-survey-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.2"}}</button>
+			<!-- Button for task 2 -->
+			<button id="first-survey-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent task-button" >{{_ "welcome.buttons.2"}}</button>
 		{{/if}}
 	{{else}}
-		<!-- Accent-colored raised button with ripple -->
-		<button id="start-test-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" >{{_ "welcome.buttons.1"}}</button>
+		<!-- Button for task 1 -->
+		<button id="start-test-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent task-button" >{{_ "welcome.buttons.1"}}</button>
 	{{/if}}
 	
 </div>

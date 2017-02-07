@@ -7,5 +7,9 @@
 }
 
 .task-list li{
-	margin-bottom: 10px;
+	margin-bottom: 30px;
+}
+
+.task-button {
+	margin-top: 10px !important;
 }
