@@ -17,8 +17,8 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="{{pathFor route='login'}}"><i class="material-icons navigation-icon">home</i>Home</a>
-        <a class="mdl-navigation__link" href="{{pathFor route='about'}}"><i class="material-icons navigation-icon">info</i>About</a>
+        <a class="mdl-navigation__link" href="{{pathFor route='login'}}">{{#if isFullEnvironment}}<i class="mdl-color-text--blue-grey-400 material-icons navigation-icon">home</i>{{/if}}Home</a>
+        <a class="mdl-navigation__link" href="{{pathFor route='about'}}">{{#if isFullEnvironment}}<i class="mdl-color-text--blue-grey-400 material-icons navigation-icon">info</i>{{/if}}About</a>
         {{> language}}
       </nav>
     </div>
