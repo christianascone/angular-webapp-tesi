@@ -57,6 +57,7 @@ Place a `settings.json` in meteor directory.
     "SENDER_MAIL_ADDRESS": "sender@domain.com",
     "MAX_GAME": 5,
     "CARDS_NUMBER": 16,
+    "MAX_REWARD": 750,
     "ENVIRONMENT": {
       "FULL": true
     },
@@ -88,6 +89,8 @@ Other settings provide default values, but they can be customized:
  - MAX_GAME is the number of task for each series (**5 is default value**).
    
  - CARDS_NUMBER is the (even) number of cards for memory game (**16 is default value**).
+
+ - MAX_REWARD is the maximum overall amount of points a user will gain after memory game (**750 is default value**).
    
  - ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (**true is default value**).
 
