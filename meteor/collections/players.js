@@ -106,7 +106,23 @@ Players.clearMockUsers = function() {
 	var toRemoveList = Players.find({userId: null}).fetch();
 	// WARNING: Due to untrusted client, it MUST remove every item by id
 	for (var i = 0; i < toRemoveList.length; i++) {
-		Players.remove(toRemoveList[i]._id);
+		// Gets Player object to remove
+		var playerToRemove = toRemoveList[i];
+		// Gets every (mocked) scoreSeries of this player
+		var scoreSeriesToRemoveList = toRemoveList[i].scoreSeries().fetch();
+		for (var j = 0; j < scoreSeriesToRemoveList.length; j++) {
+			// Gets ScoreSeries object to remove
+			var scoreSeriesToRemove = scoreSeriesToRemoveList[j];
+			// Gets score list to remove
+			var scoresToRemoveList = scoreSeriesToRemove.scores().fetch();
+			for (var k = 0; k < scoresToRemoveList.length; k++) {
+				// Gets score object to remove
+				var scoreToRemove = scoresToRemoveList[k];
+				Scores.remove(scoreToRemove._id);
+			}
+			ScoreSeries.remove(scoreSeriesToRemove._id);
+		}
+		Players.remove(playerToRemove._id);
 	}
 };
 
