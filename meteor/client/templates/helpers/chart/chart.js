@@ -7,7 +7,7 @@ Template.registerHelper(
 	 * @param  {String} label Label to use for gauge
 	 * @return {void}       
 	 */
-	'buildGauge', (id, label) => {
+	'buildGauge', (id, label, yAxisMax) => {
 		$('#' + id).highcharts({
 			// Options json for gauge chart setup
 			chart: {
@@ -35,7 +35,7 @@ Template.registerHelper(
 
 			yAxis: {
 				min: 0,
-				max: 50,
+				max: yAxisMax,
 				title: {
 					text: label
 				},
@@ -47,7 +47,7 @@ Template.registerHelper(
 				],
 				lineWidth: 0,
 				minorTickInterval: null,
-				tickPixelInterval: 400,
+				tickPositions: [0, yAxisMax],
 				tickWidth: 0,
 				title: {
 					y: -70

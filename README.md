@@ -58,6 +58,7 @@ Place a `settings.json` in meteor directory.
     "MAX_GAME": 5,
     "CARDS_NUMBER": 16,
     "MAX_REWARD": 750,
+    "MAX_GAUGE_COUNTER": 50,
     "ENVIRONMENT": {
       "FULL": true
     },

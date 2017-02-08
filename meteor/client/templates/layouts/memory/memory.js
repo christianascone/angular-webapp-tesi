@@ -21,6 +21,7 @@ var FULLY_GAMIFIED = true; // Default value
 var MAX_GAME = 5; // Default value
 var CARDS_NUMBER = 16; // Default value
 var MAX_REWARD = 750; // Default value
+var MAX_GAUGE_COUNTER = 50; // Default value
 
 /**
  * Returns a random int value between min and max
@@ -170,6 +171,10 @@ Template.memory.onCreated(function memoryOnCreated() {
 	if (publicSettings.MAX_REWARD) {
 		MAX_REWARD = publicSettings.MAX_REWARD;
 	}
+	// Read maximum gauge counter for game
+	if (publicSettings.MAX_GAUGE_COUNTER) {
+		MAX_GAUGE_COUNTER = publicSettings.MAX_GAUGE_COUNTER;
+	}
 	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
 		FULLY_GAMIFIED = true;
 	} else {
@@ -182,7 +187,7 @@ Template.memory.onCreated(function memoryOnCreated() {
 
 Template.memory.onRendered(function memoryOnRendered() {
 	// Build gauge after rendering, with default values
-	Blaze._globalHelpers.buildGauge("container-gauge", TAPi18n.__("memory.moves"));
+	Blaze._globalHelpers.buildGauge("container-gauge", TAPi18n.__("memory.moves"), MAX_GAUGE_COUNTER);
 
 	Logs.log("Open memory game");
 });
