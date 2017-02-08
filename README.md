@@ -1,4 +1,4 @@
-meteor-webapp-tesi
+ilinx-webapp-tesi
 ==================
 
 Academic Dissertation Project for my final exam in [University of Bologna](http://www.unibo.it/en/homepage).
