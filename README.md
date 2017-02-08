@@ -92,6 +92,8 @@ Other settings provide default values, but they can be customized:
  - CARDS_NUMBER is the (even) number of cards for memory game (**16 is default value**).
 
  - MAX_REWARD is the maximum overall amount of points a user will gain after memory game (**750 is default value**).
+
+ - MAX_GAUGE_COUNTER is the maximum counter for Memory moves gauge. It's only a graphic value for gauge (**50 is default value**).
    
  - ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (**true is default value**).
 
