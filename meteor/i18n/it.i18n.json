@@ -1,5 +1,5 @@
 {
-  "title": "Ilinx",
+  "title": "Ilinx Project",
   "register": {
     "title": "Registrati",
     "age": "Età",
@@ -9,7 +9,7 @@
     }
   },
   "welcome": {
-    "title": "Benvenuto nel mio progetto di tesi!",
+    "title": "Benvenuto nel Progetto Ilinx!",
     "buttons": {
       "1": "Inizia il test",
       "2": "Vai al primo questionario",

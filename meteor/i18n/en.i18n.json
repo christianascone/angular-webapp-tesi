@@ -1,5 +1,5 @@
 {
-  "title": "Ilinx",
+  "title": "Ilinx Project",
   "register": {
     "title": "Register",
     "age": "Age",
@@ -9,7 +9,7 @@
     }
   },
   "welcome": {
-    "title": "Welcome to my dissertation project!",
+    "title": "Welcome to Ilinx Project!",
     "buttons": {
       "1": "Start test",
       "2": "Go to first survey",
