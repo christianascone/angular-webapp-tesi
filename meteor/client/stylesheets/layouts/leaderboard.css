@@ -40,6 +40,10 @@
   margin: auto;
 }
 
+.leaderboard-no-margin {
+  margin: 0 !important;
+}
+
 .coin-row {
   display: block !important;
 }
