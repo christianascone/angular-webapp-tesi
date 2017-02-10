@@ -500,9 +500,6 @@ Template.memory.events({
 			return;
 		}
 
-		// Increment move counter
-		instance.moves_counter.set(instance.moves_counter.get() + 1);
-
 		console.log("Flipped: " + index);
 		Logs.log("Flipped: " + index);
 		console.log("Previously flipped: " + previous_selected_index);
@@ -517,6 +514,9 @@ Template.memory.events({
 					Session.set(CARD_EVENT_ALLOWED, true);
 					return;
 				}
+
+				// Increment move counter
+				instance.moves_counter.set(instance.moves_counter.get() + 1);
 
 				// Gets pair of cards
 				var cards = Session.get('cardsArray');
