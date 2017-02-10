@@ -260,6 +260,77 @@ Template.memory.helpers({
 			} else if (Session.get(GAME_TYPE) == DECREMENTAL) {
 				scoreValue = Session.get(DECREMENTAL_REWARD_KEY)[scores.length];
 			}
+
+			// So sorry, but I'm late. This fragment of code is dirty
+			var congratulation_dialog_width = "300px";
+			var dialog_title_font_size = "2.5rem";
+			var dialog_title_line_height = "32px";
+			var dialog_message_font_size = "14px";
+
+			var scoreIndex = scores.length + 1;
+
+			if (Session.get(GAME_TYPE) == INCREMENTAL) {
+				if (100 / (MAX_GAME / scoreIndex) <= 20) {
+					//piccolo
+				} else if (100 / (MAX_GAME / scoreIndex) <= 40) {
+					congratulation_dialog_width = "325px";
+					dialog_title_font_size = "3rem";
+					dialog_title_line_height = "36px";
+					dialog_message_font_size = "17px";
+
+				} else if (100 / (MAX_GAME / scoreIndex) <= 60) {
+					congratulation_dialog_width = "350px";
+					dialog_title_font_size = "3.5rem";
+					dialog_title_line_height = "50px";
+					dialog_message_font_size = "23px";
+
+				} else if (100 / (MAX_GAME / scoreIndex) <= 80) {
+					congratulation_dialog_width = "400px";
+					dialog_title_font_size = "4rem";
+					dialog_title_line_height = "55px";
+					dialog_message_font_size = "25px";
+				} else if (100 / (MAX_GAME / scoreIndex) <= 100) {
+					congratulation_dialog_width = "500px";
+					dialog_title_font_size = "5rem";
+					dialog_title_line_height = "60px";
+					dialog_message_font_size = "30px";
+				}
+			} else {
+				if (100 / (MAX_GAME / scoreIndex) <= 20) {
+					//grande
+					congratulation_dialog_width = "500px";
+					dialog_title_font_size = "5rem";
+					dialog_title_line_height = "60px";
+					dialog_message_font_size = "30px";
+				} else if (100 / (MAX_GAME / scoreIndex) <= 40) {
+					congratulation_dialog_width = "400px";
+					dialog_title_font_size = "4rem";
+					dialog_title_line_height = "55px";
+					dialog_message_font_size = "25px";
+
+				} else if (100 / (MAX_GAME / scoreIndex) <= 60) {
+					congratulation_dialog_width = "350px";
+					dialog_title_font_size = "3.5rem";
+					dialog_title_line_height = "50px";
+					dialog_message_font_size = "23px";
+
+				} else if (100 / (MAX_GAME / scoreIndex) <= 80) {
+					congratulation_dialog_width = "325px";
+					dialog_title_font_size = "3rem";
+					dialog_title_line_height = "36px";
+					dialog_message_font_size = "17px";
+
+				} else if (100 / (MAX_GAME / scoreIndex) <= 100) {
+
+				}
+			}
+
+
+			$( "#"+CONGRATULATION_DIALOG_ID ).css( "width", congratulation_dialog_width );
+			$( "#"+CONGRATULATION_DIALOG_ID+" #dialog-title" ).css( "font-size", dialog_title_font_size );
+			$( "#"+CONGRATULATION_DIALOG_ID+" #dialog-title" ).css( "line-height", dialog_title_line_height );
+			$( "#"+CONGRATULATION_DIALOG_ID+" #dialog-message" ).css( "font-size", dialog_message_font_size );
+
 			Blaze._globalHelpers.showDialog(CONGRATULATION_DIALOG_ID, TAPi18n.__("memory.congratulation_dialog.message", {
 				moves: moves_counter
 			}), TAPi18n.__("memory.congratulation_dialog.title", {
