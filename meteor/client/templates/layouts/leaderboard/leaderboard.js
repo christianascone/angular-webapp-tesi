@@ -126,7 +126,36 @@ Template.leaderboard.helpers({
 	}
 });
 
+/**
+ * Save the selected fatality data (deathblow or mercy).
+ * Build a json with used bias, message shown to user and his choice
+ * 
+ * @param  {String} usedBias Bias to use (Certainty or Reflection)
+ * @param  {String} clicked  Fatality or mercy string value to save
+ * @return {void}          
+ */
+function saveFatalityData(usedBias, clicked) {
+	var user = Meteor.user();
+	var results = {
+		id: usedBias,
+		question: TAPi18n.__("leaderboard.fatality_dialog.message_" + usedBias, {}, "en"),
+		answer: TAPi18n.__("leaderboard.fatality_dialog." + clicked, {}, "en")
+	};
+	Meteor.call("saveSurveyDataOnDb", user, usedBias, results, navigator.userAgent);
+	Blaze._globalHelpers.closeDialog(LEADERBOARD_FATALITY_DIALOG_ID);
+	Blaze._globalHelpers.showDialog(LEADERBOARD_FINAL_DIALOG_ID);
+}
+
 Template.leaderboard.events({
+	'click #leaderboard_fatality_button' (event, instance) {
+		var clicked = "fatality";
+		saveFatalityData(usedBias, clicked);
+
+	},
+	'click #leaderboard_mercy_button' (event, instance) {
+		var clicked = "mercy";
+		saveFatalityData(usedBias, clicked);
+	},
 	/**
 	 * Hover fatality button, set the new background for +2 or -2 positions
 	 */
@@ -134,10 +163,10 @@ Template.leaderboard.events({
 		if (!previousBackgroundColor) {
 			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
 		}
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-2)).css("background-color", materialGreen);
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", materialGreen);
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", materialRed);
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+2)).css("background-color", materialRed);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 2)).css("background-color", materialGreen);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 1)).css("background-color", materialGreen);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 1)).css("background-color", materialRed);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 2)).css("background-color", materialRed);
 	},
 	/**
 	 * Hover mercy button, set the new background for +1 (certainty) or -1 (reflection)
@@ -147,28 +176,28 @@ Template.leaderboard.events({
 			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
 		}
 		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
-			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", materialGreen);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 1)).css("background-color", materialGreen);
 		} else {
-			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", materialRed);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 1)).css("background-color", materialRed);
 		}
 	},
 	/**
 	 * Leave fatality button, set the previous backround color
 	 */
 	'mouseleave #leaderboard_fatality_button' (event, instance) {
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-2)).css("background-color", previousBackgroundColor);
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", previousBackgroundColor);
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", previousBackgroundColor);
-		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+2)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 2)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 1)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 1)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 2)).css("background-color", previousBackgroundColor);
 	},
 	/**
 	 * Leave mercy button, set the previous backround color
 	 */
 	'mouseleave #leaderboard_mercy_button' (event, instance) {
 		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
-			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", previousBackgroundColor);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 1)).css("background-color", previousBackgroundColor);
 		} else {
-			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", previousBackgroundColor);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 1)).css("background-color", previousBackgroundColor);
 		}
 	},
 	/**
