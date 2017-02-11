@@ -151,8 +151,6 @@ Meteor.methods({
 	 * @return {void}            
 	 */
 	savePersonalUserDetail: function(user, SURVEY_KEY, results) {
-		console.log("user id : "+user._id);
-		console.log("results : "+results);
 		Meteor.users.update(user._id, {
 		$set: {
 			'profile.data': results
