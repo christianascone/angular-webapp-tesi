@@ -6,8 +6,14 @@ var previousBackgroundColor = undefined;
 var materialGreen = "#4caf50";
 var materialRed = "#f44336";
 
+var FINAL_USER_POSITION = 3;
+
 Template.leaderboard.onCreated(function onCreated() {
 	this.show_survey_button = new ReactiveVar(false);
+	// Try to read FINAL_USER_POSITION from public settings
+	if (Meteor.settings.public && Meteor.settings.public.FINAL_USER_POSITION) {
+		FINAL_USER_POSITION = Meteor.settings.public.FINAL_USER_POSITION;
+	}
 });
 
 Template.leaderboard.onRendered(function onRendered() {
@@ -120,10 +126,10 @@ Template.leaderboard.events({
 		if (!previousBackgroundColor) {
 			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
 		}
-		$('.leaderboard-rank-card-' + "1").css("background-color", materialGreen);
-		$('.leaderboard-rank-card-' + "2").css("background-color", materialGreen);
-		$('.leaderboard-rank-card-' + "4").css("background-color", materialRed);
-		$('.leaderboard-rank-card-' + "5").css("background-color", materialRed);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-2)).css("background-color", materialGreen);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", materialGreen);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", materialRed);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+2)).css("background-color", materialRed);
 	},
 	/**
 	 * Hover mercy button, set the new background for +1 (certainty) or -1 (reflection)
@@ -133,28 +139,28 @@ Template.leaderboard.events({
 			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
 		}
 		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
-			$('.leaderboard-rank-card-' + "2").css("background-color", materialGreen);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", materialGreen);
 		} else {
-			$('.leaderboard-rank-card-' + "4").css("background-color", materialRed);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", materialRed);
 		}
 	},
 	/**
 	 * Leave fatality button, set the previous backround color
 	 */
 	'mouseleave #leaderboard_fatality_button' (event, instance) {
-		$('.leaderboard-rank-card-' + "1").css("background-color", previousBackgroundColor);
-		$('.leaderboard-rank-card-' + "2").css("background-color", previousBackgroundColor);
-		$('.leaderboard-rank-card-' + "4").css("background-color", previousBackgroundColor);
-		$('.leaderboard-rank-card-' + "5").css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-2)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+2)).css("background-color", previousBackgroundColor);
 	},
 	/**
 	 * Leave mercy button, set the previous backround color
 	 */
 	'mouseleave #leaderboard_mercy_button' (event, instance) {
 		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
-			$('.leaderboard-rank-card-' + "2").css("background-color", previousBackgroundColor);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION-1)).css("background-color", previousBackgroundColor);
 		} else {
-			$('.leaderboard-rank-card-' + "4").css("background-color", previousBackgroundColor);
+			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION+1)).css("background-color", previousBackgroundColor);
 		}
 	},
 	/**

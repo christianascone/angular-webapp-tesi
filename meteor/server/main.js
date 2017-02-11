@@ -2,8 +2,6 @@ import {
 	Meteor
 } from 'meteor/meteor';
 
-var FINAL_USER_POSITION = 3;
-
 Meteor.startup(() => {
 	// Check MAIL_URL
 	var email_env = process.env.MAIL_URL;
@@ -31,6 +29,11 @@ Meteor.methods({
 		// Try to read MAX_REWARD from public settings
 		if (Meteor.settings.public && Meteor.settings.public.MAX_REWARD) {
 			points = Meteor.settings.public.MAX_REWARD;
+		}
+		var finalUserPosition = 3;
+		// Try to read FINAL_USER_POSITION from public settings
+		if (Meteor.settings.public && Meteor.settings.public.FINAL_USER_POSITION) {
+			finalUserPosition = Meteor.settings.public.FINAL_USER_POSITION;
 		}
 		var mockUsersSize = 9;
 		var existentMockSeries = ScoreSeries.byMockedUsers().fetch();
@@ -76,7 +79,7 @@ Meteor.methods({
 			var playerId = playersArray[i];
 			// Divisor is 0+1 in order to prevent a 0 division
 			var divisor = i + 1;
-			var userPosition = FINAL_USER_POSITION;
+			var userPosition = finalUserPosition;
 			var multiplier = userPosition - 1 + 0.2;
 
 			// Points for player are the maximum real user points (gets from input)
