@@ -59,6 +59,7 @@ Place a `settings.json` in meteor directory.
     "CARDS_NUMBER": 16,
     "MAX_REWARD": 750,
     "MAX_GAUGE_COUNTER": 50,
+    "FINAL_USER_POSITION": 3,
     "ENVIRONMENT": {
       "FULL": true
     },
@@ -94,6 +95,8 @@ Other settings provide default values, but they can be customized:
  - MAX_REWARD is the maximum overall amount of points a user will gain after memory game (**750 is default value**).
 
  - MAX_GAUGE_COUNTER is the maximum counter for Memory moves gauge. It's only a graphic value for gauge (**50 is default value**).
+
+ - FINAL_USER_POSITION is the final user's position in leadeboard when tasks end (**3 is default value**).
    
  - ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (**true is default value**).
 
