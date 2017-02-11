@@ -7,8 +7,23 @@ SURVEY_REFLECTION_EFFECT_KEY = "REFLECTION";
 // Json object containing the questions for two final surveys
 survey_questions = {};
 
-var survey_personal_data = [{
-	id: 1,
+var survey_personal_data = [
+{
+	id: "firstname",
+	type: "TEXT",
+	options: [{
+		label_en: "First Name",
+		label_it: "Nome"
+	}]
+},{
+	id: "lastname",
+	type: "TEXT",
+	options: [{
+		label_en: "Last Name",
+		label_it: "Cognome"
+	}]
+},{
+	id: "age",
 	type: "TEXT",
 	options: [{
 		label_en: "Age",
@@ -17,21 +32,21 @@ var survey_personal_data = [{
 }, {
 	question_en: "Gender",
 	question_it: "Genere",
-	id: 2,
+	id: "gender",
 	type: "RADIO",
 	options: [{
-		label_en: "Yes",
-		label_it: "Sì",
-		value: "Yes"
+		label_en: "Male",
+		label_it: "Maschio",
+		value: "Male"
 	}, {
-		label_en: "No",
-		label_it: "No",
-		value: "No"
+		label_en: "Female",
+		label_it: "Femmina",
+		value: "Female"
 	}]
 }, {
 	question_en: "Do you usually play videogames?",
 	question_it: "Giochi abitualmente con i videogiochi?",
-	id: 3,
+	id: 5,
 	type: "RADIO",
 	options: [{
 		label_en: "Yes",
@@ -45,7 +60,7 @@ var survey_personal_data = [{
 }, {
 	question_en: "Have you played to money games, in the last year?",
 	question_it: "Hai svolto giochi a soldi nell'ultimo anno?",
-	id: 4,
+	id: 6,
 	type: "RADIO",
 	options: [{
 		label_en: "Yes",
