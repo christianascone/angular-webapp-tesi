@@ -57,6 +57,20 @@
   },
   "survey": {
     "submit": "Submit",
+    "PERSONAL_DATA": {
+      "title": "Personal Data",
+      "confirm_dialog": {
+        "title": "Confirm",
+        "message": "Are you sure?",
+        "confirm": "Save",
+        "cancel": "Back"
+      },
+      "final_dialog": {
+        "title": "Personal data saved!",
+        "message": "Thank you! Saved data.",
+        "close": "Continue"
+      }
+    },
     "FRAMING": {
       "title": "Questions: Part 1",
       "confirm_dialog": {

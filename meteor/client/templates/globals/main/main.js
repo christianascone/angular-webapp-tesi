@@ -100,6 +100,13 @@ Template.main.helpers({
 		return FULLY_GAMIFIED;
 	},
 	/**
+	 * Gets the personal data path for survey
+	 * @return {String} survey path key
+	 */
+	personalDataPath() {
+		return SURVEY_PERSONAL_DATA_KEY;
+	},
+	/**
 	 * Gets the framing path for survey
 	 * @return {String} _bias value for survey
 	 */

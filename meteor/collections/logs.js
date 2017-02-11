@@ -7,6 +7,16 @@ console.log("Init logs");
  * @return {Logs}             The new log object
  */
 Logs.log = function(description) {
+	Logs.logUserAgent(description, navigator.userAgent);
+};
+
+/**
+ * Log a new user action
+ * @param  {String} description Description of log
+ * @param  {String} userAgent UserAgent
+ * @return {Logs}             The new log object
+ */
+Logs.logUserAgent = function(description, userAgent) {
 	// Check if a logged user is available
 	var user = Meteor.user();
 	if(!user){
@@ -14,7 +24,7 @@ Logs.log = function(description) {
 	}
 	var logData = {
 		userId: user._id,
-		userAgent: navigator.userAgent,
+		userAgent: userAgent,
 		description: description,
 		date: new Date()
 	};

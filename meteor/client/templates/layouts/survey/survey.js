@@ -1,6 +1,6 @@
 var SURVEY_CONFIRM_DIALOG_ID = "survey_confirm_dialog";
 var SURVEY_FINAL_DIALOG_ID = "survey_final_dialog";
-var BIAS = 0;
+var SURVEY_KEY = 0;
 
 /**
  * Gets the questions json for survey, using current language
@@ -8,7 +8,7 @@ var BIAS = 0;
  * @return {Json} Json containing (localized) questions for survey
  */
 function getSurveyQuestionsJson() {
-  return survey_questions[BIAS];
+  return survey_questions[SURVEY_KEY];
 }
 
 Template.survey.helpers({
@@ -23,18 +23,18 @@ Template.survey.helpers({
       Router.go('login');
       return;
     }
-    BIAS = Router.current().params._bias;
+    SURVEY_KEY = Router.current().params._bias;
 
-    Logs.log("Open Survey_" + BIAS);
+    Logs.log("Open Survey_" + SURVEY_KEY);
 
     // Check if is in debug
     Meteor.call("isDebug", function(err, response) {
       // Find survey with bias for logged user
-      var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, BIAS).fetch();
+      var userSurveyResults = SurveyResults.byUserIdAndBias(user._id, SURVEY_KEY).fetch();
       // If user already completed the survey with saved bias and this is not
       // a debug environment, he cannot continue
       if (userSurveyResults.length > 0 && !response) {
-        Logs.log("Try to complete another Survey " + BIAS + ". Not permitted, due to already present results.");
+        Logs.log("Try to complete another Survey " + SURVEY_KEY + ". Not permitted, due to already present results.");
         Blaze._globalHelpers.showDialog(SURVEY_FINAL_DIALOG_ID);
         return;
       }
@@ -73,29 +73,37 @@ Template.survey.helpers({
     // will return json["question_en"]
     return json[tag + "_" + TAPi18n.getLanguage()];
   },
+  /**
+   * Check if the input is a radio field
+   * @param  {JSON}  option Json descriptor for input field
+   * @return {Boolean}        If input field is Radio or not
+   */
+  isRadio(option) {
+    return option.type == "RADIO";
+  },
   surveyTitle() {
-    return TAPi18n.__("survey." + BIAS + ".title");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".title");
   },
   surveyConfirmDialogTitle() {
-    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.title");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".confirm_dialog.title");
   },
   surveyConfirmDialogMessage() {
-    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.message");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".confirm_dialog.message");
   },
   surveyConfirmDialogOk() {
-    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.confirm");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".confirm_dialog.confirm");
   },
   surveyConfirmDialogClose() {
-    return TAPi18n.__("survey." + BIAS + ".confirm_dialog.cancel");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".confirm_dialog.cancel");
   },
   surveyFinalDialogTitle() {
-    return TAPi18n.__("survey." + BIAS + ".final_dialog.title");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".final_dialog.title");
   },
   surveyFinalDialogMessage() {
-    return TAPi18n.__("survey." + BIAS + ".final_dialog.message");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".final_dialog.message");
   },
   surveyFinalDialogClose() {
-    return TAPi18n.__("survey." + BIAS + ".final_dialog.close");
+    return TAPi18n.__("survey." + SURVEY_KEY + ".final_dialog.close");
   }
 });
 
@@ -104,14 +112,14 @@ Template.survey.events({
   'submit form' (event, instance) {
     event.preventDefault();
     Blaze._globalHelpers.showDialog(SURVEY_CONFIRM_DIALOG_ID);
-    Logs.log("Survey " + BIAS + ": pressed submit button.");
+    Logs.log("Survey " + SURVEY_KEY + ": pressed submit button.");
   },
   /**
    * Close button of survey confirm dialog. User can continue to fill form.
    */
   'click #survey_confirm_close_button' (event, instance) {
     Blaze._globalHelpers.closeDialog(SURVEY_CONFIRM_DIALOG_ID);
-    Logs.log("Survey " + BIAS + ": pressed cancel button.");
+    Logs.log("Survey " + SURVEY_KEY + ": pressed cancel button.");
   },
   /**
    * Close button of survey ending dialog clicked
@@ -127,8 +135,12 @@ Template.survey.events({
     var questions = getSurveyQuestionsJson();
     for (var i = 0; i < questions.length; i++) {
       var question = questions[i];
-      // Read selected radio button value
-      var answer = $('input[name=' + question.id + ']:checked').val();
+      if (question.type == "RADIO") {
+        // Read selected radio button value
+        answer = $('input[name=' + question.id + ']:checked').val();
+      } else {
+        answer = $('[name=' + question.id + ']').val();
+      }
       // Build a json with all data useful for a more readable result
       // (question id, question text and answer value)
       var result = {
@@ -146,22 +158,14 @@ Template.survey.events({
       Router.go('login');
       return;
     }
-    SurveyResults.createSurveyResult(user._id, BIAS, results);
-    Logs.log("Survey " + BIAS + " completed.");
+    var instanceData = Router.current().params.query;
+    var serverMethod = "saveSurveyDataOnDb";
+    if(instanceData && instanceData.q){
+      serverMethod = instanceData.q;
+    }
+    
+    Meteor.call(serverMethod, user, SURVEY_KEY, results, navigator.userAgent);
+
     Blaze._globalHelpers.showDialog(SURVEY_FINAL_DIALOG_ID);
-    // Send results in email
-    var emailAttachmentContentsJson = {
-      user: user,
-      survey: {
-        bias: BIAS,
-        data: results
-      }
-    };
-    var attachment = {
-      fileName: "survey" + BIAS + "_" + user._id + ".json",
-      contents: JSON.stringify(emailAttachmentContentsJson, null, 2)
-    };
-    var attachmentsArray = [attachment];
-    Blaze._globalHelpers.sendMeEmail("Survey " + BIAS + " results user: " + user._id, "Attached survey " + BIAS + " results of user " + user._id, attachmentsArray);
   }
 });

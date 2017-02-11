@@ -11,10 +11,17 @@
 				<span class="mdl-typography--headline survey-question">{{translateJsonObject question "question"}}</span>
 				<div class="survey-options-container">
 					{{#each option in question.options}}
+					{{#if isRadio question}}
 					<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{question.id}}_{{option.value}}">
 						<input type="radio" id="{{question.id}}_{{option.value}}" class="mdl-radio__button" name="{{question.id}}" value="{{option.value}}" {{isChecked @index}}>
 						<span class="mdl-radio__label">{{translateJsonObject option "label"}}</span>
 					</label>
+					{{else}}
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" name="{{question.id}}">
+						<label class="mdl-textfield__label" for="{{question.id}}">{{translateJsonObject option "label"}}</label>
+					</div>
+					{{/if}}
 					{{/each}}
 				</div>
 			</div>

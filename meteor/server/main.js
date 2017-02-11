@@ -35,10 +35,10 @@ Meteor.methods({
 		var mockUsersSize = 9;
 		var existentMockSeries = ScoreSeries.byMockedUsers().fetch();
 		// If mocked users are found, stop setup
-	    if(mockUsersSize <= existentMockSeries.length){
-	      console.log("Setup already done.");
-	      return;
-	    }
+		if (mockUsersSize <= existentMockSeries.length) {
+			console.log("Setup already done.");
+			return;
+		}
 		// Create new mock user
 		var result1 = Players.createPlayer({
 			address: "max.rinaldi@gmail.com"
@@ -70,7 +70,7 @@ Meteor.methods({
 
 		// Create a new series and score for every player
 		var playersArray = [result1, result2, result3, result4, result5, result6, result7, result8, result9];
-		
+
 		console.log("Setting up...");
 		for (var i = 0; i < playersArray.length; i++) {
 			var playerId = playersArray[i];
@@ -142,5 +142,55 @@ Meteor.methods({
 			return true;
 		}
 		return PRIVATE_SETTINGS.LOGS_ENABLED;
+	},
+	/**
+	 * Save given personal data (json) in user 
+	 * @param  {User} user       User to update
+	 * @param  {String} SURVEY_KEY Survey key
+	 * @param  {JSON} results    Profile data
+	 * @return {void}            
+	 */
+	savePersonalUserDetail: function(user, SURVEY_KEY, results) {
+		console.log("user id : "+user._id);
+		console.log("results : "+results);
+		Meteor.users.update(user._id, {
+		$set: {
+			'profile.data': results
+		}
+	})
+	},
+	/**
+	 * Save survey data on db
+	 * @param  {User} user       User who filled the survey
+	 * @param  {String} SURVEY_KEY Survey key
+	 * @param  {JSON} results    Survey data
+	 * @return {void}            
+	 */
+	saveSurveyDataOnDb: function(user, SURVEY_KEY, results, userAgent) {
+		SurveyResults.createSurveyResult(user._id, SURVEY_KEY, results);
+		Logs.logUserAgent("Survey " + SURVEY_KEY + " completed.", userAgent);
+
+		// Send results in email
+		var emailAttachmentContentsJson = {
+			user: user,
+			survey: {
+				bias: SURVEY_KEY,
+				data: results
+			}
+		};
+		var attachment = {
+			fileName: "survey" + SURVEY_KEY + "_" + user._id + ".json",
+			contents: JSON.stringify(emailAttachmentContentsJson, null, 2)
+		};
+		var attachmentsArray = [attachment];
+
+		var publicSettings = Meteor.settings.public;
+		var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
+		var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
+		if(!recipientAddress || !senderAddress){
+			console.warn("Recipient or Sender address not found.");
+			return;
+		}
+		Meteor.call("sendEmail", recipientAddress, senderAddress, "Survey " + SURVEY_KEY + " results user: " + user._id, "Attached survey " + SURVEY_KEY + " results of user " + user._id, attachmentsArray);
 	}
 });

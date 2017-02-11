@@ -1,5 +1,10 @@
 Template.welcome.onRendered(function onRendered() {
   Logs.log("Open Welcome");
+
+  var user = Meteor.user();
+  if (!user.profile.data) {
+    Router.go('survey', {_bias: SURVEY_PERSONAL_DATA_KEY}, {query: "q=savePersonalUserDetail"});
+  }
 });
 
 Template.welcome.helpers({
