@@ -18,6 +18,14 @@ Template.leaderboard.onCreated(function onCreated() {
 
 Template.leaderboard.onRendered(function onRendered() {
 	Logs.log("Open leaderboard");
+
+	// Random number for fatality buttons swap
+	var randomSwap = Math.floor(Math.random() * 2);
+	if (randomSwap == 1) {
+		// Swap two fatality dialog buttons
+		$el = $('#leaderboard_mercy_button');
+		$('#leaderboard_fatality_button').insertBefore($el);
+	}
 });
 
 // Helpers for leaderboard template
