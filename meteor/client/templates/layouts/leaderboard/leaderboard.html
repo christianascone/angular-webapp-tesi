@@ -9,7 +9,7 @@
 	<span class="mdl-tooltip" for="leaderboard-survey-button">Survey</span>
 	{{/if}}
 	{{#each player in players}}
-	<div class="mdl-list__item demo-cards {{#if isCurrentPlayer player}}mdl-color--grey-200 {{#if isFullEnvironment}}mdl-shadow--16dp{{else}}mdl-shadow--2dp{{/if}}{{else}}mdl-shadow--2dp{{/if}} mdl-card leaderboard-card {{#if isFullEnvironment}}{{else}}leaderboard-no-margin{{/if}}">
+	<div class="mdl-list__item demo-cards leaderboard-rank-card-{{incremented @index}} {{#if isCurrentPlayer player}}mdl-color--grey-200 {{#if isFullEnvironment}}mdl-shadow--16dp{{else}}mdl-shadow--2dp{{/if}}{{else}}mdl-shadow--2dp{{/if}} mdl-card leaderboard-card {{#if isFullEnvironment}}{{else}}leaderboard-no-margin{{/if}}">
 		<span class="mdl-list__item-primary-content leaderboard-rank">
 			<span class="mdl-typography--title leaderboard-rank-counter leaderboard-rank-counter-{{incremented @index}}">{{incremented @index}}</span>
 			{{#if isFullEnvironment}}
@@ -34,4 +34,6 @@
 	{{/each}}
 </div>
 {{> dialog dialog-classe="dialog-large" dialog_id="leaderboard_final_dialog" close_button_id="leaderboard_final_close_button" title=leaderboardFinalDialogTitle hide_ok_button="true" message=leaderboardFinalDialogMessage close_message=leaderboardFinalDialogClose}}
+
+{{> dialog dialog-classe="dialog-large" dialog_id="leaderboard_fatality_dialog" ok_button_id="leaderboard_mercy_button" close_button_id="leaderboard_fatality_button" title=leaderboardFatalityDialogTitle  close_message=leaderboardFatalityDialogFatality ok_message=leaderboardFatalityDialogMercy}}
 </template>

@@ -48,6 +48,13 @@
       "title": "Congratulazioni!",
       "message": "Hai terminato l'esperimento con successo!. Grazie per il tempo dedicato.",
       "close": "Chiudi"
+    },
+    "fatality_dialog": {
+      "title": "Colpo di grazia!",
+      "message_CERTAINTY": "Messaggio certainty",
+      "message_REFLECTION": "Messaggio reflection",
+      "fatality": "Colpo di grazia",
+      "mercy": "Pietà"
     }
   },
   "survey": {

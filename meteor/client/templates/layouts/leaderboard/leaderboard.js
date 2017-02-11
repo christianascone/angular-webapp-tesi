@@ -1,4 +1,10 @@
 var LEADERBOARD_FINAL_DIALOG_ID = "leaderboard_final_dialog";
+var LEADERBOARD_FATALITY_DIALOG_ID = "leaderboard_fatality_dialog";
+
+var usedBias = undefined;
+var previousBackgroundColor = undefined;
+var materialGreen = "#4caf50";
+var materialRed = "#f44336";
 
 Template.leaderboard.onCreated(function onCreated() {
 	this.show_survey_button = new ReactiveVar(false);
@@ -75,16 +81,25 @@ Template.leaderboard.helpers({
 			}
 
 			// If user must play memory or fill framing survey, hide button
-			if(!userDoneMemoryGame() || !userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY)){
+			if (!userDoneMemoryGame() || !userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY)) {
 				instance.show_survey_button.set(false);
-				return;	
+				return;
 			}
-			
+
 			var res = !userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) && !userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
 			instance.show_survey_button.set(res);
 		});
 
 		return instance.show_survey_button.get();
+	},
+	leaderboardFatalityDialogTitle() {
+		return TAPi18n.__("leaderboard.fatality_dialog.title");
+	},
+	leaderboardFatalityDialogFatality() {
+		return TAPi18n.__("leaderboard.fatality_dialog.fatality");
+	},
+	leaderboardFatalityDialogMercy() {
+		return TAPi18n.__("leaderboard.fatality_dialog.mercy");
 	},
 	leaderboardFinalDialogTitle() {
 		return TAPi18n.__("leaderboard.final_dialog.title");
@@ -99,6 +114,50 @@ Template.leaderboard.helpers({
 
 Template.leaderboard.events({
 	/**
+	 * Hover fatality button, set the new background for +2 or -2 positions
+	 */
+	'mouseenter #leaderboard_fatality_button' (event, instance) {
+		if (!previousBackgroundColor) {
+			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
+		}
+		$('.leaderboard-rank-card-' + "1").css("background-color", materialGreen);
+		$('.leaderboard-rank-card-' + "2").css("background-color", materialGreen);
+		$('.leaderboard-rank-card-' + "4").css("background-color", materialRed);
+		$('.leaderboard-rank-card-' + "5").css("background-color", materialRed);
+	},
+	/**
+	 * Hover mercy button, set the new background for +1 (certainty) or -1 (reflection)
+	 */
+	'mouseenter #leaderboard_mercy_button' (event, instance) {
+		if (!previousBackgroundColor) {
+			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
+		}
+		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
+			$('.leaderboard-rank-card-' + "2").css("background-color", materialGreen);
+		} else {
+			$('.leaderboard-rank-card-' + "4").css("background-color", materialRed);
+		}
+	},
+	/**
+	 * Leave fatality button, set the previous backround color
+	 */
+	'mouseleave #leaderboard_fatality_button' (event, instance) {
+		$('.leaderboard-rank-card-' + "1").css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + "2").css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + "4").css("background-color", previousBackgroundColor);
+		$('.leaderboard-rank-card-' + "5").css("background-color", previousBackgroundColor);
+	},
+	/**
+	 * Leave mercy button, set the previous backround color
+	 */
+	'mouseleave #leaderboard_mercy_button' (event, instance) {
+		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
+			$('.leaderboard-rank-card-' + "2").css("background-color", previousBackgroundColor);
+		} else {
+			$('.leaderboard-rank-card-' + "4").css("background-color", previousBackgroundColor);
+		}
+	},
+	/**
 	 * Click event on survey button
 	 */
 	'click #leaderboard-survey-button' (event, instance) {
@@ -112,15 +171,15 @@ Template.leaderboard.events({
 			var reflectionSurveyResults = SurveyResults.byBias(SURVEY_REFLECTION_EFFECT_KEY).fetch();
 
 			var biasToUse = "";
-			if(certaintySurveyResults.length > reflectionSurveyResults.length){
+			if (certaintySurveyResults.length > reflectionSurveyResults.length) {
 				biasToUse = SURVEY_REFLECTION_EFFECT_KEY;
-			}else{
+			} else {
 				biasToUse = SURVEY_CERTAINTY_EFFECT_KEY;
 			}
+			// Save the used bias
+			usedBias = biasToUse;
 
-			Router.go('survey', {
-				_bias: biasToUse
-			});
+			Blaze._globalHelpers.showDialog(LEADERBOARD_FATALITY_DIALOG_ID, TAPi18n.__("leaderboard.fatality_dialog.message_" + biasToUse));
 		}
 	},
 	/**

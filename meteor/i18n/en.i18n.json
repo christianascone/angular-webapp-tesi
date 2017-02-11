@@ -48,6 +48,13 @@
       "title": "Congratulation!",
       "message": "Experiment successfully completed!. Thank you for your time.",
       "close": "Close"
+    },
+    "fatality_dialog": {
+      "title": "Deathblow!",
+      "message_CERTAINTY": "Message certainty",
+      "message_REFLECTION": "Message reflection",
+      "fatality": "Deathblow",
+      "mercy": "Mercy"
     }
   },
   "survey": {

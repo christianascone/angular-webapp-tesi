@@ -34,6 +34,10 @@
 .leaderboard-card {
   width: initial !important;
   margin-bottom: 5px;
+  -webkit-transition: background-color 0.5s ease-out;
+  -moz-transition: background-color 0.5s ease-out;
+  -o-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;
 }
 
 .leaderboard-rank {
