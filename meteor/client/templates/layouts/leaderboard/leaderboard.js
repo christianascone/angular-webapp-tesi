@@ -148,11 +148,13 @@ function saveFatalityData(usedBias, clicked) {
 
 Template.leaderboard.events({
 	'click #leaderboard_fatality_button' (event, instance) {
+		Logs.log("Clicked fatality button");
 		var clicked = "fatality";
 		saveFatalityData(usedBias, clicked);
 
 	},
 	'click #leaderboard_mercy_button' (event, instance) {
+		Logs.log("Clicked mercy button");
 		var clicked = "mercy";
 		saveFatalityData(usedBias, clicked);
 	},
