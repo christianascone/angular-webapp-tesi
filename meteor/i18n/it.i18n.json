@@ -1,12 +1,7 @@
 {
   "title": "Ilinx Project",
   "register": {
-    "title": "Registrati",
-    "age": "Età",
-    "gender": {
-      "male": "Maschio",
-      "female": "Femmina"
-    }
+    "title": "Registrati"
   },
   "welcome": {
     "title": "Benvenuto nel Progetto Ilinx!",

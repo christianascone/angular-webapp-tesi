@@ -19,17 +19,11 @@ Template.register.events({
     event.preventDefault();
     var email = $('[name=email]').val();
     var password = $('[name=password]').val();
-    var age = $('[name=age]').val();
-    var gender = $('input[name=genders]:checked').val();
     // Save user with email and password
     Accounts.createUser({
       email,
       email,
-      password,
-      profile: {
-        gender: gender,
-        age: age
-      }
+      password
     }, function(error) {
       // If error, show error toast
       if (error) {

@@ -1,12 +1,7 @@
 {
   "title": "Ilinx Project",
   "register": {
-    "title": "Register",
-    "age": "Age",
-    "gender": {
-      "male": "Male",
-      "female": "Female"
-    }
+    "title": "Register"
   },
   "welcome": {
     "title": "Welcome to Ilinx Project!",
