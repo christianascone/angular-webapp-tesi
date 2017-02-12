@@ -9,6 +9,10 @@
         {{_ "title"}}
       </span>
       <div class="mdl-layout-spacer"></div>
+      {{#if isFullEnvironment}}
+      {{> progress_bar progress_bar_id="progress_id" amount=currentProgress total="5" width="200px"}}
+      {{/if}}
+      <div class="mdl-layout-spacer"></div>
       <!-- Top navbar -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <a class="mdl-navigation__link" href="{{pathFor route='welcome'}}">{{> material_icon icon_name="home"}}Home</a>

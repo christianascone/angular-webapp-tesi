@@ -8,3 +8,8 @@
 .navigation-icon {
 	margin-right: 20px;
 }
+
+header .progress {
+	color: black;
+    margin: 0 !important;
+}

@@ -53,6 +53,7 @@ iron:url@1.0.11
 jquery@1.11.10
 lai:collection-extensions@0.1.4
 launch-screen@1.0.12
+ldk:bootstrap-progressbar@0.9.0
 livedata@1.0.18
 localstorage@1.0.12
 logging@1.1.16

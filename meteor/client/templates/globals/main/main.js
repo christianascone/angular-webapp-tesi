@@ -99,6 +99,23 @@ Template.main.helpers({
 		}
 		return FULLY_GAMIFIED;
 	},
+	currentProgress() {
+		var doneMemory = userDoneMemoryGame();
+		var doneSurvey1 = userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY);
+		var doneSurvey2 = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
+		var progressTask = 0;
+		if (doneMemory) {
+			progressTask++;
+		}
+		if (doneSurvey1) {
+			progressTask++;
+		}
+		if (doneSurvey2) {
+			progressTask += 2;
+		}
+		var progress = 100 / 5 * progressTask;
+		return progress;
+	},
 	/**
 	 * Gets the personal data path for survey
 	 * @return {String} survey path key
