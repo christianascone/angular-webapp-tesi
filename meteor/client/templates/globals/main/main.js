@@ -15,6 +15,8 @@ dialogPolyfill = require('dialog-polyfill');
 
 import './main.html';
 
+var TOTAL_PROGRESS = 5;
+
 Template.main.onCreated(function mainOnCreated() {
 	// Set default debug value as false (waiting to read it from server)
 	this.isDebug = new ReactiveVar(false);
@@ -99,6 +101,10 @@ Template.main.helpers({
 		}
 		return FULLY_GAMIFIED;
 	},
+	/**
+	 * Gets the current progress bar value to show
+	 * @return {Int} Progress bar value for current state
+	 */
 	currentProgress() {
 		var doneMemory = userDoneMemoryGame();
 		var doneSurvey1 = userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY);
@@ -113,8 +119,15 @@ Template.main.helpers({
 		if (doneSurvey2) {
 			progressTask += 2;
 		}
-		var progress = 100 / 5 * progressTask;
+		var progress = 100 / TOTAL_PROGRESS * progressTask;
 		return progress;
+	},
+	/**
+	 * Gets the total progress (namely the max count of user steps for experiment)
+	 * @return {[type]} [description]
+	 */
+	totalProgress() {
+		return TOTAL_PROGRESS;
 	},
 	/**
 	 * Gets the personal data path for survey
