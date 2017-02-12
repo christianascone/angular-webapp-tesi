@@ -1,10 +1,10 @@
 /**
- * Check if the logged user has done memory game
- * @return {Boolean} If user has done memory game
+ * Gets number of memory game closed series for current user
+ * @return {Int} Number of closed series for player
  */
-userDoneMemoryGame = function() {
+userMemoryGameCount = function() {
   var user = Meteor.user();
-  if(!user){
+  if (!user) {
     return false;
   }
   var userId = user._id;
@@ -17,6 +17,26 @@ userDoneMemoryGame = function() {
   }
   // Find all closed series for logged player
   var closedSeries = loggedPlayer.closedScoreSeries().fetch();
+
+  return closedSeries;
+}
+
+/**
+ * Check if the logged user has done also the final memory game
+ * @return {Boolean} If user has done the final memory game
+ */
+userDoneFinalMemoryGame = function() {
+  var closedSeries = userMemoryGameCount();
+  // Check if player has closed more than 1 series
+  return closedSeries.length > 1;
+}
+
+/**
+ * Check if the logged user has done memory game
+ * @return {Boolean} If user has done memory game
+ */
+userDoneMemoryGame = function() {
+  var closedSeries = userMemoryGameCount();
   // Check if player has closed at least one score series
   return closedSeries.length > 0;
 }
@@ -28,7 +48,7 @@ userDoneMemoryGame = function() {
  */
 userDoneSurvey = function(surveyBias) {
   var user = Meteor.user();
-  if(!user){
+  if (!user) {
     return false;
   }
   // Find survey with index for logged user

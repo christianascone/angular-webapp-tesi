@@ -8,13 +8,15 @@
     "buttons": {
       "1": "Start test",
       "2": "Go to first survey",
-      "3": "Go to leaderboard"
+      "3": "Go to leaderboard",
+      "5": "Go to memory"
     },
     "tasks": {
       "1": "Play memory game",
       "2": "Submit the Memory game survey",
       "3": "Go to the leaderboard and watch your ranking",
-      "4": "Submit the final survey"
+      "4": "Submit the final survey",
+      "5": "Play final memory game"
     }
   },
   "memory": {

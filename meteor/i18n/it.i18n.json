@@ -8,13 +8,15 @@
     "buttons": {
       "1": "Inizia il test",
       "2": "Vai al primo questionario",
-      "3": "Vai alla leaderboard"
+      "3": "Vai alla leaderboard",
+      "5": "Vai al memory"
     },
     "tasks": {
       "1": "Gioca a Memory",
       "2": "Rispondi al questionario sul Memory",
       "3": "Vai alla leaderboard e osserva la tua posizione",
-      "4": "Rispondi al questionario finale"
+      "4": "Rispondi al questionario finale",
+      "5": "Gioca l'ultima partita"
     }
   },
   "memory": {

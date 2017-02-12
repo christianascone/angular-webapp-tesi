@@ -28,6 +28,13 @@ Template.welcome.helpers({
    */
   taskSurvey2IsDone() {
     return userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
+  },
+  /**
+   * Check if task 5 (final memory game) is already done
+   * @return {Boolean} True if task is done
+   */
+  taskFinalMemoryIsDone() {
+    return userDoneFinalMemoryGame();
   }
 });
 // Events for dialog template

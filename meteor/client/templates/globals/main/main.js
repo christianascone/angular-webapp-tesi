@@ -15,7 +15,7 @@ dialogPolyfill = require('dialog-polyfill');
 
 import './main.html';
 
-var TOTAL_PROGRESS = 4;
+var TOTAL_PROGRESS = 5;
 
 Template.main.onCreated(function mainOnCreated() {
 	// Set default debug value as false (waiting to read it from server)
@@ -109,6 +109,7 @@ Template.main.helpers({
 		var doneMemory = userDoneMemoryGame();
 		var doneSurvey1 = userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY);
 		var doneSurvey2 = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
+		var doneFinalMemory = userDoneFinalMemoryGame();
 		var progressTask = 0;
 		if (doneMemory) {
 			progressTask++;
@@ -118,6 +119,9 @@ Template.main.helpers({
 		}
 		if (doneSurvey2) {
 			progressTask += 2;
+		}
+		if (doneFinalMemory) {
+			progressTask++;
 		}
 		var progress = 100 / TOTAL_PROGRESS * progressTask;
 		return progress;

@@ -8,10 +8,12 @@ var FINAL_DIALOG_ID = "final_dialog";
 
 var INCREMENTAL = "INCREMENTAL";
 var DECREMENTAL = "DECREMENTAL";
+var MOCK = "MOCK";
 var SCORE_SERIES_ID = "SCORE_SERIES_ID";
 
 var INCREMENTAL_REWARD_KEY = "INCREMENTAL_REWARD_KEY";
 var DECREMENTAL_REWARD_KEY = "DECREMENTAL_REWARD_KEY";
+var MOCK_REWARD_KEY = "MOCK_REWARD_KEY";
 
 var PLAYING = "PLAYING";
 var END_GAME = "END_GAME";
@@ -259,6 +261,9 @@ Template.memory.helpers({
 				scoreValue = Session.get(INCREMENTAL_REWARD_KEY)[scores.length];
 			} else if (Session.get(GAME_TYPE) == DECREMENTAL) {
 				scoreValue = Session.get(DECREMENTAL_REWARD_KEY)[scores.length];
+			} else {
+				// Default for mock, final game
+				scoreValue = 50;
 			}
 
 			// So sorry, but I'm late. This fragment of code is dirty
@@ -441,6 +446,20 @@ function createDecrementalSeriesAndStartGame(loggedPlayer, instance) {
 	setupNewMemoryGame(instance, Session);
 }
 
+/**
+ * Create a mock final game series and setup a new game
+ * 
+ * @param  {Player} loggedPlayer Player of logged user
+ * @return {void}              
+ */
+function createMockSeriesAndStartGame(loggedPlayer, instance) {
+	Session.set(GAME_TYPE, MOCK);
+	var createdScoreSeriesId = ScoreSeries.createScoreSeriesMock(loggedPlayer._id);
+	Session.set(SCORE_SERIES_ID, createdScoreSeriesId);
+	console.log("Created ScoreSeries Mock with id: " + createdScoreSeriesId);
+	setupNewMemoryGame(instance, Session);
+}
+
 // Events for memory template
 Template.memory.events({
 	/**
@@ -503,11 +522,12 @@ Template.memory.events({
 
 		// Check if is in debug
 		Meteor.call("isDebug", function(err, response) {
-			// Find all closed series for logged player
-			var closedSeries = loggedPlayer.closedScoreSeries().fetch();
-			// If player has closed at least one score series and it's not in debug,
-			// show final dialog and prevent from playing
-			if (closedSeries.length > 0 && !response) {
+			var doneSurvey1 = userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY)
+			var doneSurvey2 = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
+			// Show final dialog and prevent from playing if,
+			// user did at least memory game AND (he hasn't completed the framing survey OR he hasn't completed the final memory game)
+			// Finally check it's not in debug
+			if (userDoneMemoryGame() && (!doneSurvey1 || (!doneSurvey2 && !userDoneFinalMemoryGame())) && !response) {
 				Logs.log("Try to start again memory game. Not permitted, due to already closed series.");
 				Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
 				return;
@@ -528,6 +548,13 @@ Template.memory.events({
 					setupNewMemoryGame(instance, Session);
 					return;
 				}
+				if (userDoneMemoryGame() && !userDoneFinalMemoryGame()){
+					Logs.log("Start final memory game: Mock");
+					
+					createMockSeriesAndStartGame(loggedPlayer, instance);
+					return;
+				}
+
 				var closedIncrementalCount = ScoreSeries.closedIncremental().fetch().length;
 				var closedDecrementalCount = ScoreSeries.closedDecremental().fetch().length;
 				// Start a new game with type which balance the difference

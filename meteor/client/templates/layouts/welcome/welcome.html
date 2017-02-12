@@ -34,11 +34,24 @@
 			<i class="material-icons task-done-icon mdl-color-text--green">done_all</i>
 			{{/if}}
 		</li>
+		<li>
+			<span id="task-5" class="{{#if taskFinalMemoryIsDone}}mdl-color-text--green task-done{{/if}}">
+				<span style='color:black'>{{_ "welcome.tasks.5"}}</span>
+			</span>
+			{{#if taskFinalMemoryIsDone}}
+			<i class="material-icons task-done-icon mdl-color-text--green">done_all</i>
+			{{/if}}
+		</li>
 	</ol>
 	{{#if taskMemoryIsDone}}
 		{{#if taskSurvey1IsDone}}
 			{{#if taskSurvey2IsDone}}
+				{{#if taskFinalMemoryIsDone}}
 				<!-- All tasks done -->
+				{{else}}
+					<!-- Button for task 5 -->
+					<button id="start-test-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent task-button" >{{_ "welcome.buttons.5"}}</button>
+				{{/if}}
 			{{else}}
 				<!-- Button for task 3 and 4 -->
 				<button id="leaderboard-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent task-button" >{{_ "welcome.buttons.3"}}</button>
