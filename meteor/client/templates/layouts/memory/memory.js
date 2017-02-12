@@ -177,11 +177,7 @@ Template.memory.onCreated(function memoryOnCreated() {
 	if (publicSettings.MAX_GAUGE_COUNTER) {
 		MAX_GAUGE_COUNTER = publicSettings.MAX_GAUGE_COUNTER;
 	}
-	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
-		FULLY_GAMIFIED = true;
-	} else {
-		FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
-	}
+	FULLY_GAMIFIED = isFullEnvironment();
 	// Set the new reactive var for moves counter
 	this.moves_counter = new ReactiveVar(0);
 	createRewards(Session);
@@ -525,9 +521,9 @@ Template.memory.events({
 			var doneSurvey1 = userDoneSurvey(SURVEY_FRAMING_EFFECT_KEY)
 			var doneSurvey2 = userDoneSurvey(SURVEY_CERTAINTY_EFFECT_KEY) || userDoneSurvey(SURVEY_REFLECTION_EFFECT_KEY);
 			// Show final dialog and prevent from playing if,
-			// user did at least memory game AND (he hasn't completed the framing survey OR he hasn't completed the final memory game)
+			// user did at least memory game AND (he hasn't completed the framing survey OR he hasn't completed the second survey OR he completed the final memory game)
 			// Finally check it's not in debug
-			if (userDoneMemoryGame() && (!doneSurvey1 || (!doneSurvey2 && !userDoneFinalMemoryGame())) && !response) {
+			if (userDoneMemoryGame() && (!doneSurvey1 || !doneSurvey2 || userDoneFinalMemoryGame()) && !response) {
 				Logs.log("Try to start again memory game. Not permitted, due to already closed series.");
 				Blaze._globalHelpers.showDialog(FINAL_DIALOG_ID);
 				return;

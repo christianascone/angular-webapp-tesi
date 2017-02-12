@@ -7,7 +7,7 @@ console.log("Init logs");
  * @return {Logs}             The new log object
  */
 Logs.log = function(description) {
-	Logs.logUserAgent(description, navigator.userAgent);
+	Logs.logUserAgent(description, navigator.userAgent, isFullEnvironment());
 };
 
 /**
@@ -16,7 +16,7 @@ Logs.log = function(description) {
  * @param  {String} userAgent UserAgent
  * @return {Logs}             The new log object
  */
-Logs.logUserAgent = function(description, userAgent) {
+Logs.logUserAgent = function(description, userAgent, isFullEnvironment) {
 	// Check if a logged user is available
 	var user = Meteor.user();
 	if (!user) {
@@ -26,7 +26,7 @@ Logs.logUserAgent = function(description, userAgent) {
 		userId: user._id,
 		userAgent: userAgent,
 		description: description,
-		fullyGamified: isFullEnvironment(),
+		fullyGamified: isFullEnvironment,
 		date: new Date()
 	};
 	Meteor.call("isLoggerEnabled", function(error, response) {
@@ -36,18 +36,3 @@ Logs.logUserAgent = function(description, userAgent) {
 		}
 	});
 };
-
-/**
- * Returns if it is the fully gamified environment or not
- * @return {Boolean} True, if the environment is full, or False if it's minimal
- */
-function isFullEnvironment() {
-	var FULLY_GAMIFIED = true;
-	var publicSettings = Meteor.settings.public;
-	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
-		FULLY_GAMIFIED = true;
-	} else {
-		FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
-	}
-	return FULLY_GAMIFIED;
-}
