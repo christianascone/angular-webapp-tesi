@@ -11,8 +11,10 @@ function updateProgressBar(id, amount, total) {
     display_text: 'center',
     use_percentage: false,
     amount_format: function(p, t) {
-      // Calculates the percentage of amount on total
-      return p * total / t + '/' + total;
+      // Calculates the percentage of amount on total and returns the amount text
+      // Ex. amount == 40, total = 5
+      // returns 2/5
+      return parseInt(p * total / t, 10) + '/' + total;
     }
   });
 }
