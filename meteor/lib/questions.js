@@ -7,22 +7,21 @@ SURVEY_REFLECTION_EFFECT_KEY = "REFLECTION";
 // Json object containing the questions for two final surveys
 survey_questions = {};
 
-var survey_personal_data = [
-{
+var survey_personal_data = [{
 	id: "firstname",
 	type: "TEXT",
 	options: [{
 		label_en: "First Name",
 		label_it: "Nome"
 	}]
-},{
+}, {
 	id: "lastname",
 	type: "TEXT",
 	options: [{
 		label_en: "Last Name",
 		label_it: "Cognome"
 	}]
-},{
+}, {
 	question_en: "What's your job?",
 	question_it: "Qual è la tua occupazione?",
 	id: "job",
@@ -31,7 +30,7 @@ var survey_personal_data = [
 		label_en: "Job",
 		label_it: "Occupazione"
 	}]
-},{
+}, {
 	question_en: "What's your education level?",
 	question_it: "Qual è il tuo titolo di studio?",
 	id: "education_level",
@@ -40,7 +39,7 @@ var survey_personal_data = [
 		label_en: "Education level",
 		label_it: "Titolo di studio"
 	}]
-},{
+}, {
 	id: "age",
 	type: "TEXT",
 	options: [{
@@ -92,25 +91,39 @@ var survey_personal_data = [
 }];
 survey_questions[SURVEY_PERSONAL_DATA_KEY] = survey_personal_data;
 var survey_framing = [{
-	question_en: "Question " + SURVEY_FRAMING_EFFECT_KEY + " 1: Text",
-	question_it: "Domanda " + SURVEY_FRAMING_EFFECT_KEY + " 1: Testo",
+	question_en: "At the end of games, do you think you're better than when you started?",
+	question_it: "Al termine delle partite svolte, ritieni di essere diventato più bravo rispetto a quando hai cominciato a giocare?",
 	id: 1,
 	type: "RADIO",
 	options: [{
-		label_en: "1",
-		label_it: "1",
-		value: "1"
+		label_en: "No",
+		label_it: "No",
+		value: "No"
 	}, {
-		label_en: "2",
-		label_it: "2",
-		value: "2"
+		label_en: "Yes",
+		label_it: "Sì",
+		value: "Yes"
 	}]
 }, {
-	question_en: "Question " + SURVEY_FRAMING_EFFECT_KEY + " 2: Text",
-	question_it: "Domanda " + SURVEY_FRAMING_EFFECT_KEY + " 2: Testo",
+	question_en: "Are you satisfied of the points distribution you gained while playing?",
+	question_it: "Sei soddisfatto della distribuzione dei punti che hai guadagnato durante le partite?",
 	id: 2,
 	type: "RADIO",
 	options: [{
+		label_en: "No",
+		label_it: "No",
+		value: "No"
+	}, {
+		label_en: "Yes",
+		label_it: "Sì",
+		value: "Yes"
+	}]
+}, {
+	question_en: "How satisfied are you with points distribution from 1 to 5?",
+	question_it: "Quanto sei soddisfatto della distribuzione dei punti da 1 a 5?",
+	id: 3,
+	type: "RADIO",
+	options: [{
 		label_en: "1",
 		label_it: "1",
 		value: "1"
@@ -118,66 +131,18 @@ var survey_framing = [{
 		label_en: "2",
 		label_it: "2",
 		value: "2"
+	}, {
+		label_en: "3",
+		label_it: "3",
+		value: "3"
+	}, {
+		label_en: "4",
+		label_it: "4",
+		value: "4"
+	}, {
+		label_en: "5",
+		label_it: "5",
+		value: "5"
 	}]
 }];
 survey_questions[SURVEY_FRAMING_EFFECT_KEY] = survey_framing;
-var survey_certainty = [{
-	question_en: "Question " + SURVEY_CERTAINTY_EFFECT_KEY + ": Text",
-	question_it: "Domanda " + SURVEY_CERTAINTY_EFFECT_KEY + ": Testo",
-	id: 3,
-	type: "RADIO",
-	options: [{
-		label_en: "3",
-		label_it: "3",
-		value: "3"
-	}, {
-		label_en: "4",
-		label_it: "4",
-		value: "4"
-	}]
-}, {
-	question_en: "Question " + SURVEY_CERTAINTY_EFFECT_KEY + " 2: Text",
-	question_it: "Domanda " + SURVEY_CERTAINTY_EFFECT_KEY + " 2: Testo",
-	id: 4,
-	type: "RADIO",
-	options: [{
-		label_en: "3",
-		label_it: "3",
-		value: "3"
-	}, {
-		label_en: "4",
-		label_it: "4",
-		value: "4"
-	}]
-}];
-survey_questions[SURVEY_CERTAINTY_EFFECT_KEY] = survey_certainty;
-var survey_reflection = [{
-	question_en: "Question " + SURVEY_REFLECTION_EFFECT_KEY + ": Text",
-	question_it: "Domanda " + SURVEY_REFLECTION_EFFECT_KEY + ": Testo",
-	id: 5,
-	type: "RADIO",
-	options: [{
-		label_en: "5",
-		label_it: "5",
-		value: "5"
-	}, {
-		label_en: "6",
-		label_it: "6",
-		value: "6"
-	}]
-}, {
-	question_en: "Question " + SURVEY_REFLECTION_EFFECT_KEY + " 2: Text",
-	question_it: "Domanda " + SURVEY_REFLECTION_EFFECT_KEY + " 2: Testo",
-	id: 6,
-	type: "RADIO",
-	options: [{
-		label_en: "5",
-		label_it: "5",
-		value: "5"
-	}, {
-		label_en: "6",
-		label_it: "6",
-		value: "6"
-	}]
-}];
-survey_questions[SURVEY_REFLECTION_EFFECT_KEY] = survey_reflection;
