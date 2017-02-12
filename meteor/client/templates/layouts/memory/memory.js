@@ -271,19 +271,17 @@ Template.memory.helpers({
 
 			if (Session.get(GAME_TYPE) == INCREMENTAL) {
 				if (100 / (MAX_GAME / scoreIndex) <= 20) {
-					//piccolo
+					//nothing
 				} else if (100 / (MAX_GAME / scoreIndex) <= 40) {
 					congratulation_dialog_width = "325px";
 					dialog_title_font_size = "3rem";
 					dialog_title_line_height = "36px";
 					dialog_message_font_size = "17px";
-
 				} else if (100 / (MAX_GAME / scoreIndex) <= 60) {
 					congratulation_dialog_width = "350px";
 					dialog_title_font_size = "3.5rem";
 					dialog_title_line_height = "50px";
 					dialog_message_font_size = "23px";
-
 				} else if (100 / (MAX_GAME / scoreIndex) <= 80) {
 					congratulation_dialog_width = "400px";
 					dialog_title_font_size = "4rem";
@@ -297,7 +295,6 @@ Template.memory.helpers({
 				}
 			} else {
 				if (100 / (MAX_GAME / scoreIndex) <= 20) {
-					//grande
 					congratulation_dialog_width = "500px";
 					dialog_title_font_size = "5rem";
 					dialog_title_line_height = "60px";
@@ -307,21 +304,18 @@ Template.memory.helpers({
 					dialog_title_font_size = "4rem";
 					dialog_title_line_height = "55px";
 					dialog_message_font_size = "25px";
-
 				} else if (100 / (MAX_GAME / scoreIndex) <= 60) {
 					congratulation_dialog_width = "350px";
 					dialog_title_font_size = "3.5rem";
 					dialog_title_line_height = "50px";
 					dialog_message_font_size = "23px";
-
 				} else if (100 / (MAX_GAME / scoreIndex) <= 80) {
 					congratulation_dialog_width = "325px";
 					dialog_title_font_size = "3rem";
 					dialog_title_line_height = "36px";
 					dialog_message_font_size = "17px";
-
 				} else if (100 / (MAX_GAME / scoreIndex) <= 100) {
-
+					//nothing
 				}
 			}
 

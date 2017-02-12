@@ -155,10 +155,10 @@ Meteor.methods({
 	 */
 	savePersonalUserDetail: function(user, SURVEY_KEY, results) {
 		Meteor.users.update(user._id, {
-		$set: {
-			'profile.data': results
-		}
-	})
+			$set: {
+				'profile.data': results
+			}
+		})
 	},
 	/**
 	 * Save survey data on db
@@ -190,12 +190,12 @@ Meteor.methods({
 		var publicSettings = Meteor.settings.public;
 		var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
 		var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
-		if(!recipientAddress || !senderAddress){
+		if (!recipientAddress || !senderAddress) {
 			console.warn("Recipient or Sender address not found.");
 			return;
 		}
-		var emailSubject = "Survey " + SURVEY_KEY + " results user: " + user._id;
-		var emailMessage = "<html>Attached survey " + SURVEY_KEY + " results of user " + user._id + ".<br>Fully gamified: "+isFullEnvironment()+"<br></html>";
+		var emailSubject = "Survey " + SURVEY_KEY + " results user: " + user._id + " with email: " + user.emails[0].address;
+		var emailMessage = "<html>Attached survey " + SURVEY_KEY + " results of user " + user._id + " with email " + user.emails[0].address + ".<br>Fully gamified: " + isFullEnvironment() + "<br></html>";
 		Meteor.call("sendEmail", recipientAddress, senderAddress, emailSubject, emailMessage, attachmentsArray);
 	}
 });
