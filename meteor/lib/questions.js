@@ -23,6 +23,24 @@ var survey_personal_data = [
 		label_it: "Cognome"
 	}]
 },{
+	question_en: "What's your job?",
+	question_it: "Qual è la tua occupazione?",
+	id: "job",
+	type: "TEXT",
+	options: [{
+		label_en: "Job",
+		label_it: "Occupazione"
+	}]
+},{
+	question_en: "What's your education level?",
+	question_it: "Qual è il tuo titolo di studio?",
+	id: "education_level",
+	type: "TEXT",
+	options: [{
+		label_en: "Education level",
+		label_it: "Titolo di studio"
+	}]
+},{
 	id: "age",
 	type: "TEXT",
 	options: [{
