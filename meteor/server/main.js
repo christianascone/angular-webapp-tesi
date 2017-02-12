@@ -59,10 +59,10 @@ Meteor.methods({
 			address: "scarletti@gmail.com"
 		});
 		var result6 = Players.createPlayer({
-			address: "lorenzo.ligregni@studio.unibo.it"
+			address: "samuele.larini@studio.unibo.it"
 		});
 		var result7 = Players.createPlayer({
-			address: "giuseppe.orizzonte@studio.unibo.it"
+			address: "antonio.orizzonte@studio.unibo.it"
 		});
 		var result8 = Players.createPlayer({
 			address: "bernardi.n@hotmail.it"
