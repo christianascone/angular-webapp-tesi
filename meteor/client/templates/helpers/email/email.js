@@ -5,11 +5,11 @@ Template.registerHelper(
 	 * settings.json, with private MAIL_URL
 	 * 
 	 * @param  {String} subject     Subject of the email
-	 * @param  {String} body        Body text of email
+	 * @param  {String} bodyHtml        Body html of email
 	 * @param  {Array} attachments (Optional) List of attachments in format {fileName: "file.txt", contents: "contents text"}
 	 * @return {void}             
 	 */
-	'sendMeEmail', (subject, body, attachments) => {
+	'sendMeEmail', (subject, bodyHtml, attachments) => {
 		var publicSettings = Meteor.settings.public;
 		var recipientAddress = publicSettings.RECIPIENT_MAIL_ADDRESS;
 		var senderAddress = publicSettings.SENDER_MAIL_ADDRESS;
@@ -17,6 +17,6 @@ Template.registerHelper(
 			console.warn("Recipient or Sender address not found.");
 			return;
 		}
-		Meteor.call("sendEmail", recipientAddress, senderAddress, subject, body, attachments);
+		Meteor.call("sendEmail", recipientAddress, senderAddress, subject, bodyHtml, attachments);
 	}
 );

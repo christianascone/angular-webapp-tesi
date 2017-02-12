@@ -28,6 +28,21 @@ Template.leaderboard.onRendered(function onRendered() {
 	}
 });
 
+/**
+ * Returns if it is the fully gamified environment or not
+ * @return {Boolean} True, if the environment is full, or False if it's minimal
+ */
+function isFullEnvironment() {
+	var FULLY_GAMIFIED = true;
+	var publicSettings = Meteor.settings.public;
+	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
+		FULLY_GAMIFIED = true;
+	} else {
+		FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
+	}
+	return FULLY_GAMIFIED;
+}
+
 // Helpers for leaderboard template
 Template.leaderboard.helpers({
 	/**
@@ -72,14 +87,7 @@ Template.leaderboard.helpers({
 	 * @return {Boolean} True, if the environment is full, or False if it's minimal
 	 */
 	isFullEnvironment() {
-		var FULLY_GAMIFIED = true;
-		var publicSettings = Meteor.settings.public;
-		if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
-			FULLY_GAMIFIED = true;
-		} else {
-			FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
-		}
-		return FULLY_GAMIFIED;
+		return isFullEnvironment();
 	},
 	/**
 	 * Check if the survey button must be showed or not
@@ -136,9 +144,11 @@ Template.leaderboard.helpers({
  */
 function saveFatalityData(usedBias, clicked) {
 	var user = Meteor.user();
+	var messageJsonObject = "leaderboard.fatality_dialog.message_" + usedBias + ".";
+	var messageHtml = TAPi18n.__(messageJsonObject + "1", {}, "en") + "<ul>" + "<li>" + TAPi18n.__(messageJsonObject + "2", {}, "en") + "</li>" + "<li>" + TAPi18n.__(messageJsonObject + "3", {}, "en") + "</li>" + "</ul>";
 	var results = {
 		id: usedBias,
-		question: TAPi18n.__("leaderboard.fatality_dialog.message_" + usedBias, {}, "en"),
+		question: messageHtml,
 		answer: TAPi18n.__("leaderboard.fatality_dialog." + clicked, {}, "en")
 	};
 	Meteor.call("saveSurveyDataOnDb", user, usedBias, results, navigator.userAgent);
@@ -162,6 +172,9 @@ Template.leaderboard.events({
 	 * Hover fatality button, set the new background for +2 or -2 positions
 	 */
 	'mouseenter #leaderboard_fatality_button' (event, instance) {
+		if(!isFullEnvironment()){
+			return;
+		}
 		if (!previousBackgroundColor) {
 			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
 		}
@@ -174,6 +187,9 @@ Template.leaderboard.events({
 	 * Hover mercy button, set the new background for +1 (certainty) or -1 (reflection)
 	 */
 	'mouseenter #leaderboard_mercy_button' (event, instance) {
+		if(!isFullEnvironment()){
+			return;
+		}
 		if (!previousBackgroundColor) {
 			previousBackgroundColor = $('.leaderboard-rank-card-1').css("background-color");
 		}
@@ -187,6 +203,9 @@ Template.leaderboard.events({
 	 * Leave fatality button, set the previous backround color
 	 */
 	'mouseleave #leaderboard_fatality_button' (event, instance) {
+		if(!isFullEnvironment()){
+			return;
+		}
 		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 2)).css("background-color", previousBackgroundColor);
 		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 1)).css("background-color", previousBackgroundColor);
 		$('.leaderboard-rank-card-' + (FINAL_USER_POSITION + 1)).css("background-color", previousBackgroundColor);
@@ -196,6 +215,9 @@ Template.leaderboard.events({
 	 * Leave mercy button, set the previous backround color
 	 */
 	'mouseleave #leaderboard_mercy_button' (event, instance) {
+		if(!isFullEnvironment()){
+			return;
+		}
 		if (usedBias == SURVEY_CERTAINTY_EFFECT_KEY) {
 			$('.leaderboard-rank-card-' + (FINAL_USER_POSITION - 1)).css("background-color", previousBackgroundColor);
 		} else {

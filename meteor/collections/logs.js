@@ -19,19 +19,35 @@ Logs.log = function(description) {
 Logs.logUserAgent = function(description, userAgent) {
 	// Check if a logged user is available
 	var user = Meteor.user();
-	if(!user){
+	if (!user) {
 		return;
 	}
 	var logData = {
 		userId: user._id,
 		userAgent: userAgent,
 		description: description,
+		fullyGamified: isFullEnvironment(),
 		date: new Date()
 	};
-	Meteor.call("isLoggerEnabled", function(error, response){
+	Meteor.call("isLoggerEnabled", function(error, response) {
 		// Logs only if logger is enabled in settings
-		if(response){
+		if (response) {
 			Logs.insert(logData);
 		}
 	});
 };
+
+/**
+ * Returns if it is the fully gamified environment or not
+ * @return {Boolean} True, if the environment is full, or False if it's minimal
+ */
+function isFullEnvironment() {
+	var FULLY_GAMIFIED = true;
+	var publicSettings = Meteor.settings.public;
+	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
+		FULLY_GAMIFIED = true;
+	} else {
+		FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
+	}
+	return FULLY_GAMIFIED;
+}

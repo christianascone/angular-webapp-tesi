@@ -101,11 +101,11 @@ Meteor.methods({
 	 * @param  {String} to      Recipient address
 	 * @param  {String} from    Sender address
 	 * @param  {String} subject Email subject
-	 * @param  {String} text    Mail body
+	 * @param  {String} html    Mail body
 	 * @return {void}
 	 */
-	sendEmail: function(to, from, subject, text, attachments) {
-		check([from, subject, text], [String]);
+	sendEmail: function(to, from, subject, html, attachments) {
+		check([from, subject, html], [String]);
 		check(to, [String]);
 		// Let other method calls from the same client start running,
 		// without waiting for the email sending to complete.
@@ -114,7 +114,7 @@ Meteor.methods({
 			to: to,
 			from: from,
 			subject: subject,
-			text: text,
+			html: html,
 			attachments: attachments
 		});
 
@@ -122,7 +122,7 @@ Meteor.methods({
 		if (attachments) {
 			attachmentsCount = attachments.length;
 		}
-		console.log("Sending email to: [" + to + "], from: [" + from + "], subject: [" + subject + "], text: [" + text + "], with [" + attachmentsCount + "] attachments");
+		console.log("Sending email to: [" + to + "], from: [" + from + "], subject: [" + subject + "], html: [" + html + "], with [" + attachmentsCount + "] attachments");
 	},
 	/**
 	 * Check if it's running in debug
@@ -168,6 +168,8 @@ Meteor.methods({
 	 * @return {void}            
 	 */
 	saveSurveyDataOnDb: function(user, SURVEY_KEY, results, userAgent) {
+		// Set full environment in results
+		results.fullyGamified = isFullEnvironment();
 		SurveyResults.createSurveyResult(user._id, SURVEY_KEY, results);
 		Logs.logUserAgent("Survey " + SURVEY_KEY + " completed.", userAgent);
 
@@ -192,6 +194,23 @@ Meteor.methods({
 			console.warn("Recipient or Sender address not found.");
 			return;
 		}
-		Meteor.call("sendEmail", recipientAddress, senderAddress, "Survey " + SURVEY_KEY + " results user: " + user._id, "Attached survey " + SURVEY_KEY + " results of user " + user._id, attachmentsArray);
+		var emailSubject = "Survey " + SURVEY_KEY + " results user: " + user._id;
+		var emailMessage = "<html>Attached survey " + SURVEY_KEY + " results of user " + user._id + ".<br>Fully gamified: "+isFullEnvironment()+"<br></html>";
+		Meteor.call("sendEmail", recipientAddress, senderAddress, emailSubject, emailMessage, attachmentsArray);
 	}
 });
+
+/**
+ * Returns if it is the fully gamified environment or not
+ * @return {Boolean} True, if the environment is full, or False if it's minimal
+ */
+function isFullEnvironment() {
+	var FULLY_GAMIFIED = true;
+	var publicSettings = Meteor.settings.public;
+	if (!publicSettings.ENVIRONMENT || publicSettings.ENVIRONMENT.FULL == undefined) {
+		FULLY_GAMIFIED = true;
+	} else {
+		FULLY_GAMIFIED = publicSettings.ENVIRONMENT.FULL;
+	}
+	return FULLY_GAMIFIED;
+}
