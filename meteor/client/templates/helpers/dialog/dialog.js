@@ -55,9 +55,9 @@ Template.registerHelper('showDialog', (id, message, title) => {
   if (message) {
     // Use id if provided
     if (id) {
-      $('#' + id + ' #dialog-message').text(message);
+      $('#' + id + ' #dialog-message').html(message);
     } else {
-      $('#dialog-message').text(message);
+      $('#dialog-message').html(message);
     }
   }
 

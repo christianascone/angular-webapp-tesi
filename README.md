@@ -96,7 +96,7 @@ Other settings provide default values, but they can be customized:
 
  - MAX_GAUGE_COUNTER is the maximum counter for Memory moves gauge. It's only a graphic value for gauge (**50 is default value**).
 
- - FINAL_USER_POSITION is the final user's position in leadeboard when tasks end (**3 is default value**).
+ - FINAL_USER_POSITION is the final user's position in leaderboard when tasks end (**3 is default value**).
    
  - ENVIRONMENT.FULL is the boolean value for fully gamified environment, or minimal (**true is default value**).
 

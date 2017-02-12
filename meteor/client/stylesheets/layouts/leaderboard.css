@@ -61,3 +61,7 @@
     margin-bottom: 50px;
     z-index: 900;
 }
+
+.fatality-dialog {
+  width: 430px !important;
+}

@@ -51,8 +51,16 @@
     },
     "fatality_dialog": {
       "title": "Colpo di grazia!",
-      "message_CERTAINTY": "Messaggio certainty",
-      "message_REFLECTION": "Messaggio reflection",
+      "message_CERTAINTY": {
+        "1": "Hai la possibilità di effettuare un colpo di grazia.<br>Puoi scegliere tra due opzioni:",
+        "2": "Se clicchi su 'Colpo di grazia', rischi di perdere 2 posizioni in classifica in caso di fallimento o di guadagnarne 2 in caso di successo.",
+        "3": "Se clicchi su 'Pietà', guadagni con certezza 1 posizione in classifica."
+      },
+      "message_REFLECTION": {
+        "1": "Hai la possibilità di effettuare un colpo di grazia.<br>Puoi scegliere tra due opzioni:",
+        "2": "Se clicchi su 'Colpo di grazia', rischi di perdere 2 posizioni in classifica in caso di fallimento o di guadagnarne 2 in caso di successo.",
+        "3": "Se clicchi su 'Pietà', perdi con certezza 1 posizione in classifica."
+      },
       "fatality": "Colpo di grazia",
       "mercy": "Pietà"
     }

@@ -224,7 +224,10 @@ Template.leaderboard.events({
 			// Save the used bias
 			usedBias = biasToUse;
 
-			Blaze._globalHelpers.showDialog(LEADERBOARD_FATALITY_DIALOG_ID, TAPi18n.__("leaderboard.fatality_dialog.message_" + biasToUse));
+			var messageJsonObject = "leaderboard.fatality_dialog.message_" + biasToUse + ".";
+
+			var messageHtml = TAPi18n.__(messageJsonObject + "1") + "<ul>" + "<li>" + TAPi18n.__(messageJsonObject + "2") + "</li>" + "<li>" + TAPi18n.__(messageJsonObject + "3") + "</li>" + "</ul>";
+			Blaze._globalHelpers.showDialog(LEADERBOARD_FATALITY_DIALOG_ID, messageHtml);
 		}
 	},
 	/**

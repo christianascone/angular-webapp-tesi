@@ -51,8 +51,16 @@
     },
     "fatality_dialog": {
       "title": "Deathblow!",
-      "message_CERTAINTY": "Message certainty",
-      "message_REFLECTION": "Message reflection",
+      "message_CERTAINTY": {
+        "1": "You can do a deathblow.<br>You can choose between two options.",
+        "2": "If you click 'Deathblow', you risk to lose 2 leaderboard positions, or to gain 2 positions.",
+        "3": "If you click 'Mercy', you gain with certainty 1 leadeboard position."
+      },
+      "message_REFLECTION": {
+        "1": "You can do a deathblow.<br>You can choose between two options.",
+        "2": "If you click 'Deathblow', you risk to lose 2 leaderboard positions, or to gain 2 positions.",
+        "3": "If you click 'Mercy', you lose with certainty 1 leadeboard position."
+      },
       "fatality": "Deathblow",
       "mercy": "Mercy"
     }

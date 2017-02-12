@@ -15,7 +15,7 @@ dialogPolyfill = require('dialog-polyfill');
 
 import './main.html';
 
-var TOTAL_PROGRESS = 5;
+var TOTAL_PROGRESS = 4;
 
 Template.main.onCreated(function mainOnCreated() {
 	// Set default debug value as false (waiting to read it from server)
