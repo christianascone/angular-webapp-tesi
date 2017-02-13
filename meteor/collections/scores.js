@@ -19,13 +19,15 @@ Scores.createScoreMock = function(score, scoreSeriesId) {
  * 
  * @param  {Int} 	Score value
  * @param  {String} Description String
+ * @param  {Int} 	Moves counter
  * @param  {Int} 	Id of father series
  * @return {Int} 	Final created object id
  */
-Scores.createScore = function(score, description, scoreSeriesId) {
+Scores.createScore = function(score, description, moves, scoreSeriesId) {
 	var scoreData = {
 		score: score,
 		description: description,
+		moves: moves,
 		scoreSeriesId: scoreSeriesId
 	};
 	return Scores.insert(scoreData);

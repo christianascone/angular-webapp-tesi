@@ -332,7 +332,7 @@ Template.memory.helpers({
 				points: scoreValue
 			}));
 
-			var newScoreId = Scores.createScore(scoreValue, "", scoreSeriesId);
+			var newScoreId = Scores.createScore(scoreValue, "", moves_counter, scoreSeriesId);
 
 			// Play coin sound only if the environment is fully gamified
 			if(FULLY_GAMIFIED){
