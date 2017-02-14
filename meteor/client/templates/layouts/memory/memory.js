@@ -257,8 +257,7 @@ Template.memory.helpers({
 				scoreValue = Session.get(INCREMENTAL_REWARD_KEY)[scores.length];
 			} else if (Session.get(GAME_TYPE) == DECREMENTAL) {
 				scoreValue = Session.get(DECREMENTAL_REWARD_KEY)[scores.length];
-			} else {
-				// Default for mock, final game
+			} else {	// Default for mock, final game
 				scoreValue = 50;
 			}
 
@@ -344,7 +343,8 @@ Template.memory.helpers({
 			scores = scoreSeries.scores().fetch();
 			Session.set(PLAYING, false);
 			// If scores length is greater than max game, the score series is closed
-			if (scores.length >= MAX_GAME) {
+			// OR if this is a Mock game (the fifth final task) the score series is closed
+			if (scores.length >= MAX_GAME || Session.get(GAME_TYPE) == MOCK) {
 				scoreSeries.close();
 				Session.set(SCORE_SERIES_ID, undefined);
 				Session.set(GAME_TYPE, undefined);
