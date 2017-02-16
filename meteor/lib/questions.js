@@ -106,7 +106,7 @@ var survey_framing = [{
 	}]
 }, {
 	question_en: "Are you satisfied of the points distribution you gained while playing?",
-	question_it: "Sei contento dei punti che hai guadagnato durante le partite?",
+	question_it: "Sei contento dei punti che hai guadagnato durante le partite? (Rispondi No se pensavi di meritarne di più)",
 	id: 2,
 	type: "RADIO",
 	options: [{
