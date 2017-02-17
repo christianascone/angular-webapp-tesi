@@ -11,7 +11,7 @@ var MOCK_USER = "MOCK_USER";
  * @return {Int}               Final created object id
  */
 Scores.createScoreMock = function(score, scoreSeriesId) {
-	Scores.createScore(score, MOCK_USER, scoreSeriesId);
+	Scores.createScore(score, MOCK_USER, 0, scoreSeriesId);
 };
 
 /**
