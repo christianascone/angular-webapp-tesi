@@ -76,7 +76,7 @@ var survey_personal_data = [{
 	}]
 }, {
 	question_en: "Have you played to money games, in the last year?",
-	question_it: "Hai svolto giochi a soldi nell'ultimo anno? (Gratta e vinci, poker online, fantacalcio, slot machine)",
+	question_it: "Hai svolto giochi a soldi nell'ultimo anno? (Gratta e vinci, scommesse, poker online, fantacalcio, slot machine)",
 	id: 6,
 	type: "RADIO",
 	options: [{
