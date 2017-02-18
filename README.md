@@ -110,10 +110,10 @@ meteor --settings settings.json
 
 ### Setup (Debug only)
 
-1. Register a new user in homepage and login.
-2. Click on **setup tab**
-3. Insert the preferred total score to use (meant as the final score the real player will gain after tasks)
-4. Click **Create new mock data**
+The mock players will be automatically set up at first launch, but they can also be cleaned and recreated manually.
+
+1. Click on **Debug tab**
+3. Click **Create new mock data**
 
 Mock users will be created and added to leaderboard, using the given score.
 
